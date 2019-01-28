@@ -76,6 +76,10 @@
 			sampler2D _NoiseTex;
 			sampler2D _ReflectionTex;
 
+			float4 _RippleCameraPosition;
+			float _RippleCamSize;
+			sampler2D _RippleTex;
+
 			// Data we tell unity to give us for the vertex shader
             struct vertInput
             {
@@ -99,6 +103,7 @@
             {
                 fragInput o;
 				UNITY_INITIALIZE_OUTPUT(fragInput, o); // Initializes everything to 0
+
 
 				// Raises each vertex in a wavy pattern
 				v.vertex.y += sin((_Time.y * _WaveSpeed) + (v.vertex.x + v.vertex.z) * _WaveFrequency) * _WaveHeight;
@@ -131,11 +136,21 @@
             {
 				fixed4 col = _WaterTint;
 
-				// TODO: Refraction intensity increase the closer the camera is to the water, please fix!
+				// Handle all ripples
+				float ripples = 0;
 
-				// Distort our uv coord a bit so we get a refracted effect
-				half2 bumpRefract = normalize(half2(sin(i.uvGrab.x + _Time.y * _WaveSpeed * 0.9), cos(i.uvGrab.y + _Time.y * _WaveSpeed)));
-				half2 bumpReflect = normalize(half2(cos(i.screenPos.x + _Time.y * _WaveSpeed * 0.9), sin(i.screenPos.y + _Time.y * _WaveSpeed))) * _ReflectDistortion;
+				float2 uv = i.worldPos.xz - _RippleCameraPosition.xz;
+				uv = uv / (_RippleCamSize * 2);
+				uv += 0.5;
+				ripples += tex2D(_RippleTex, uv).b;
+
+				ripples = step(0.99, ripples * 3);
+				float4 ripplesColored = ripples * _FoamColor;
+
+
+				// Distort our uv coord a bit so we get a refraction and reflection effect
+				half2 bumpRefract = normalize(half2(sin(i.uvGrab.x + _Time.y * _WaveSpeed * 0.9 + ripples), cos(i.uvGrab.y + _Time.y * _WaveSpeed + ripples)));
+				half2 bumpReflect = normalize(half2(cos(i.screenPos.x + _Time.y * _WaveSpeed * 0.9 + ripples), sin(i.screenPos.y + _Time.y * _WaveSpeed + ripples))) * _ReflectDistortion;
 				i.uvGrab.xy = i.uvGrab.xy + bumpRefract * i.vertex.z * _RefractDistortion;
 
 				fixed4 refract = tex2Dproj(_GrabTexture, UNITY_PROJ_COORD(i.uvGrab)); // Faked refracted view behind plane
@@ -144,6 +159,7 @@
 				fixed noise = tex2D(_NoiseTex, i.worldPos.xz * 0.1 + _Time.y * _WaveSpeed * 0.05).r; // Get a random value from noise map
 				float depth = LinearEyeDepth(SAMPLE_DEPTH_TEXTURE_PROJ(_CameraDepthTexture, UNITY_PROJ_COORD(i.screenPos)));
 				float diff = depth - i.screenPos.w; // Difference in depth from the plane verus the object behind it
+
 				
 				col = lerp(col, col+refract, saturate(diff * 0.8)); // Blend in refraction when difference in depth is high
 				col += reflection * _ReflectIntensity; // Reflection is additive
@@ -154,7 +170,7 @@
 
                 UNITY_APPLY_FOG(i.fogCoord, col); // Unity applies the fog for us
 
-                return col;
+                return saturate(col + ripplesColored);
             }
 
             ENDCG

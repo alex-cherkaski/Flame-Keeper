@@ -8,58 +8,69 @@ using UnityEngine;
 /// </summary>
 public class Water : MonoBehaviour
 {
+    static bool recursiveGuard;
+
+    private Camera mainCamera;
+    private float lastRender;
+    private Renderer waterRenderer;
+
+    public Camera reflectionCamera;
+    public Camera rippleCamera;
+    public RenderTexture reflectionTexture;
+    public RenderTexture rippleTexture;
+    public RippleEmitter ripplePrefab;
+
     public bool disablePixelLights = true;
-    public int textureSize = 1028;
     public float clipPlaneOffset = 0.07f;
     public LayerMask reflectLayers = -1;
 
-    private bool initalized = false;
-
-    private Dictionary<Camera, Camera> reflCams = new Dictionary<Camera, Camera>();
-    private RenderTexture reflTex = null;
-    private int oldReflTexSize;
-    private Dictionary<Camera, float> camState = new Dictionary<Camera, float>();
-
-    static bool recursiveGuard;
-
-    public void Init()
+    private void Start()
     {
-        initalized = true;
+        mainCamera = Camera.main; // This operation is real slow so you should only ever do it once
+        waterRenderer = GetComponent<Renderer>();
+        waterRenderer.sharedMaterial.SetTexture("_RippleTex", rippleTexture);
+        waterRenderer.sharedMaterial.SetFloat("_RippleCamSize", rippleCamera.orthographicSize);
+    }
+
+    private void Update()
+    {
+        // Set positions of all ripple objects
+        Vector3 p = rippleCamera.transform.position;
+        waterRenderer.sharedMaterial.SetVector("_RippleCameraPosition", new Vector4(p.x, p.y, p.z));
+    }
+
+   void OnTriggerEnter(Collider other)
+    {
+        RippleEmitter ripples = RippleEmitter.Instantiate(ripplePrefab, other.transform);
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        RippleEmitter[] ripples = other.GetComponentsInChildren<RippleEmitter>();
+        int length = ripples.Length;
+        for (int i = 0; i < length; i++)
+        {
+            ripples[i].StopEmitting();
+            Destroy(ripples[i].gameObject, ripples[i].GetMaxLifetime()); // Destory in a little bit, so ripples have time to fade out
+        }
     }
 
     public void OnWillRenderObject()
     {
-        if (!initalized)
-        {
-            Init();
-        }
-
         if (!enabled || !GetComponent<Renderer>() || !GetComponent<Renderer>().sharedMaterial || !GetComponent<Renderer>().enabled)
         {
             return;
         }
 
-        Camera cam = Camera.current;
-        if (!cam) return;
+        if (Camera.current != mainCamera) return;
 
         // Render only once per camera
-        float lastRender;
-        if (camState.TryGetValue(cam, out lastRender))
-        {
-            if (Mathf.Approximately(Time.time, lastRender) && Application.isPlaying) return;
-            camState[cam] = Time.time;
-        }
-        else
-        {
-            camState.Add(cam, Time.time);
-        }
+        if (Mathf.Approximately(Time.time, lastRender) && Application.isPlaying) return;
+        lastRender = Time.time;
 
         // Safeguard from recursive water reflections.
         if (recursiveGuard) return;
         recursiveGuard = true;
-
-        Camera reflectionCamera;
-        CreateWaterObjects(cam, out reflectionCamera);
 
         // find out the reflection plane: position and normal in world space
         Vector3 pos = transform.position;
@@ -72,7 +83,7 @@ public class Water : MonoBehaviour
             QualitySettings.pixelLightCount = 0;
         }
 
-        UpdateCameraModes(cam, reflectionCamera);
+        UpdateCameraModes(mainCamera, reflectionCamera);
 
         // Reflect camera around reflection plane
         float d = -Vector3.Dot(normal, pos) - clipPlaneOffset;
@@ -80,25 +91,25 @@ public class Water : MonoBehaviour
 
         Matrix4x4 reflection = Matrix4x4.zero;
         CalculateReflectionMatrix(ref reflection, reflectionPlane);
-        Vector3 oldpos = cam.transform.position;
+        Vector3 oldpos = mainCamera.transform.position;
         Vector3 newpos = reflection.MultiplyPoint(oldpos);
-        reflectionCamera.worldToCameraMatrix = cam.worldToCameraMatrix * reflection;
+        reflectionCamera.worldToCameraMatrix = mainCamera.worldToCameraMatrix * reflection;
 
         // Setup oblique projection matrix so that near plane is our reflection
         // plane. This way we clip everything below/above it for free.
         Vector4 clipPlane = CameraSpacePlane(reflectionCamera, pos, normal, 1.0f);
-        reflectionCamera.projectionMatrix = cam.CalculateObliqueMatrix(clipPlane);
+        reflectionCamera.projectionMatrix = mainCamera.CalculateObliqueMatrix(clipPlane);
 
         reflectionCamera.cullingMask = ~(1 << 4) & reflectLayers.value; // never render water layer
-        reflectionCamera.targetTexture = reflTex;
+        reflectionCamera.targetTexture = reflectionTexture;
         GL.invertCulling = true;
         reflectionCamera.transform.position = newpos;
-        Vector3 euler = cam.transform.eulerAngles;
+        Vector3 euler = mainCamera.transform.eulerAngles;
         reflectionCamera.transform.eulerAngles = new Vector3(-euler.x, euler.y, euler.z);
         reflectionCamera.Render();
         reflectionCamera.transform.position = oldpos;
         GL.invertCulling = false;
-        GetComponent<Renderer>().sharedMaterial.SetTexture("_ReflectionTex", reflTex);
+        GetComponent<Renderer>().sharedMaterial.SetTexture("_ReflectionTex", reflectionTexture);
 
         // Restore pixel light count
         if (disablePixelLights)
@@ -107,33 +118,6 @@ public class Water : MonoBehaviour
         }
 
         recursiveGuard = false;
-    }
-
-    void OnDisable()
-    {
-        if (reflTex != null)
-        {
-            Destroy_(reflTex);
-            reflTex = null;
-        }
-
-        foreach (var kvp in reflCams)
-        {
-            if (kvp.Value != null)
-            {
-                Destroy_((kvp.Value).gameObject);
-            }
-        }
-
-        reflCams.Clear();
-
-        camState.Clear();
-    }
-
-    public void Destroy_(Object o)
-    {
-        if (Application.isPlaying) Destroy(o);
-        else DestroyImmediate(o);
     }
 
     void UpdateCameraModes(Camera src, Camera dest)
@@ -150,40 +134,6 @@ public class Water : MonoBehaviour
         dest.fieldOfView = src.fieldOfView;
         dest.aspect = src.aspect;
         dest.orthographicSize = src.orthographicSize;
-    }
-
-
-    // On-demand create any objects we need for water
-    void CreateWaterObjects(Camera currentCamera, out Camera reflectionCamera)
-    {
-
-        reflectionCamera = null;
-
-        // Reflection render texture
-        if (!reflTex || oldReflTexSize != textureSize)
-        {
-            if (reflTex)
-            {
-                DestroyImmediate(reflTex);
-            }
-            reflTex = new RenderTexture(textureSize, textureSize, 16);
-            reflTex.name = "__WaterReflection" + GetInstanceID();
-            reflTex.isPowerOfTwo = true;
-            oldReflTexSize = textureSize;
-        }
-
-        // Camera for reflection
-        reflCams.TryGetValue(currentCamera, out reflectionCamera);
-        if (!reflectionCamera) // catch both not-in-dictionary and in-dictionary-but-deleted-GO
-        {
-            GameObject go = new GameObject("Water Refl Camera id" + GetInstanceID() + " for " + currentCamera.GetInstanceID(), typeof(Camera));
-            reflectionCamera = go.GetComponent<Camera>();
-            reflectionCamera.enabled = false;
-            reflectionCamera.transform.position = transform.position;
-            reflectionCamera.transform.rotation = transform.rotation;
-            reflectionCamera.gameObject.AddComponent<FlareLayer>();
-            reflCams[currentCamera] = reflectionCamera;
-        }
     }
 
     // Given position/normal of the plane, calculates plane in camera space.
