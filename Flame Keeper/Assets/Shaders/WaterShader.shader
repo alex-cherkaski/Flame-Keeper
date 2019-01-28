@@ -34,6 +34,7 @@
 		{
 			"RenderType" = "Transparent"
 			"Queue" = "Transparent"
+			"LightMode" = "ForwardBase"
 		}
 
 		LOD 100
@@ -52,6 +53,7 @@
 			CGPROGRAM
 
 			#include "UnityCG.cginc"
+			#include "UnityLightingCommon.cginc" 
 
 			// Tells unity which functions we want to use for the vertex / fragment shaders
 			#pragma vertex vert
@@ -138,13 +140,12 @@
 
 				// Handle all ripples
 				float ripples = 0;
-
 				float2 uv = i.worldPos.xz - _RippleCameraPosition.xz;
 				uv = uv / (_RippleCamSize * 2);
 				uv += 0.5;
 				ripples += tex2D(_RippleTex, uv).b;
 
-				ripples = step(0.99, ripples * 3);
+				ripples = step(0.99, ripples * 2);
 				float4 ripplesColored = ripples * _FoamColor;
 
 
@@ -170,7 +171,10 @@
 
                 UNITY_APPLY_FOG(i.fogCoord, col); // Unity applies the fog for us
 
-                return saturate(col + ripplesColored);
+				// Lighting
+				half nl = max(0, dot(half3(0, 1, 0), _WorldSpaceLightPos0.xyz));
+
+                return saturate(col + ripplesColored) * _LightColor0 * nl;
             }
 
             ENDCG
