@@ -81,12 +81,10 @@ public class ObjectBuilderEditor : Editor
         }
 
         // Use this as a quick fix if for some reason the automatic mesh rebuild breaks / doesn't trigger
-        /*
         if (GUILayout.Button("Create Mesh"))
         {
             wireScript.CreateMesh();
         }
-        */
 
         needToRebuildMesh = false;
     }

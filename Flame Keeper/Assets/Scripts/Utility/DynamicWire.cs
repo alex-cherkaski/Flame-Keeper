@@ -1,25 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
+
+using UnityEditor;
+using UnityEditor.SceneManagement;
+
 
 [RequireComponent(typeof(MeshFilter))]
 [RequireComponent(typeof(MeshRenderer))]
 public class DynamicWire : MonoBehaviour
 {
-
-    [SerializeField]
     public List<Vector3> wirePoints = new List<Vector3>();
-
-    [SerializeField]
     public float radius = 1.0f;
-
-    [SerializeField]
     public int ringSegments = 6;
-
-    [SerializeField]
     public float radialOffset = 0.0f;
-
-
 
     [SerializeField]
     public Color gizmoColor = Color.red;
@@ -64,6 +59,9 @@ public class DynamicWire : MonoBehaviour
 
     public void CreateMesh()
     {
+        EditorUtility.SetDirty(this);
+        EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
+
         if (wirePoints.Count < 2)
         {
             Debug.LogError("Must define at least two wire points!");
@@ -73,11 +71,12 @@ public class DynamicWire : MonoBehaviour
         Mesh wireMesh = new Mesh();
         List<Vector3> vertices = new List<Vector3>();
         List<Vector3> normals = new List<Vector3>();
+        List<Vector2> uvs = new List<Vector2>();
         List<int> triangles = new List<int>();
 
         float radianDelta = Mathf.PI * 2.0f / ringSegments;
 
-        // Create all the verts
+        // Create all the verts / normals / uvs
         for (int i = 0; i < wirePoints.Count; i++)
         {
             if (i == 0)
@@ -95,6 +94,7 @@ public class DynamicWire : MonoBehaviour
                     Vector3 vertPos = firstPoint + axis1 * Mathf.Sin(radialOffset + j * radianDelta) * radius + axis2 * Mathf.Cos(radialOffset + j * radianDelta) * radius;
                     vertices.Add(vertPos);
                     normals.Add(Vector3.Normalize(vertPos - firstPoint));
+                    uvs.Add(new Vector2(j / (ringSegments - 1.0f), i / (wirePoints.Count - 1.0f)));
                 }
             }
             else if (i == wirePoints.Count - 1)
@@ -112,6 +112,7 @@ public class DynamicWire : MonoBehaviour
                     Vector3 vertPos = secondPoint + axis1 * Mathf.Sin(radialOffset + j * radianDelta) * radius + axis2 * Mathf.Cos(radialOffset + j * radianDelta) * radius;
                     vertices.Add(vertPos);
                     normals.Add(Vector3.Normalize(vertPos - secondPoint));
+                    uvs.Add(new Vector2(j / (ringSegments - 1.0f), i / (wirePoints.Count - 1.0f)));
                 }
             }
             else
@@ -132,6 +133,7 @@ public class DynamicWire : MonoBehaviour
                     Vector3 vertPos = secondPoint + axis1 * Mathf.Sin(radialOffset + j * radianDelta) * radius + axis2 * Mathf.Cos(radialOffset + j * radianDelta) * radius;
                     vertices.Add(vertPos);
                     normals.Add(Vector3.Normalize(vertPos - secondPoint));
+                    uvs.Add(new Vector2(j / (ringSegments - 1.0f), i / (wirePoints.Count - 1.0f)));
                 }
             }
         }
@@ -154,6 +156,7 @@ public class DynamicWire : MonoBehaviour
         wireMesh.SetVertices(vertices);
         wireMesh.SetNormals(normals);
         wireMesh.SetTriangles(triangles, 0);
+        wireMesh.SetUVs(0, uvs);
 
         this.GetComponent<MeshFilter>().mesh = wireMesh;
     }
