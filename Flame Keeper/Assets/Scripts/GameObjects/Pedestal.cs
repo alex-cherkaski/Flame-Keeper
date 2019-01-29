@@ -111,7 +111,7 @@ public class Pedestal : MonoBehaviour
 
         foreach (ActivatableObject obj in connectedTriggers)
         {
-            obj.OnActivate();
+            obj.OnPedestalActivate(this);
         }
 
         activated = true;
@@ -124,7 +124,7 @@ public class Pedestal : MonoBehaviour
 
         foreach (ActivatableObject obj in connectedTriggers)
         {
-            obj.OnDeactivate();
+            obj.OnPedestalDeactivate(this);
         }
 
         activated = false;
