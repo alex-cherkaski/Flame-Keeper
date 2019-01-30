@@ -13,4 +13,10 @@ public class StringConstants
     {
         public const string TutorialSceneName = "TutorialScene";
     }
+
+    public class Input
+    {
+        public const string ActivateButton = "Activate";
+        public const string DeactivateButton = "Deactivate";
+    }
 }
