@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
     public float forwardSpeed;
     public float sidewaysSpeed;
     public float jumpForce;
+    public float warmth = 50;   // 0 to 100
 
     public int startingLanternUses = 3;
     public int maxLanternUses = 3;
@@ -131,5 +132,14 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionStay(Collision collision)
     {
         isGrounded = true;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Crystal"))
+        {
+            warmth += other.gameObject.GetComponent<CrystalScript>().GetWarmth();
+            other.gameObject.SetActive(false);
+        }
     }
 }
