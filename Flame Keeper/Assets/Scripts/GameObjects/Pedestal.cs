@@ -34,7 +34,7 @@ public class Pedestal : MonoBehaviour
     public Color wireActivatedColor;
 
     [Header("Testing, should delete later")]
-    public GameObject player;
+    public PlayerController player;
     public float activateDistance = 2.0f;
 
     private bool activated = false;
@@ -64,20 +64,19 @@ public class Pedestal : MonoBehaviour
 
     private void Update()
     {
-        // TODO: Not the responsibility of the pedestal, should move the input logic out of this
-        float playerDistance = Vector3.Distance(emitter.transform.position, player.transform.position);
+        float playerDistance = Vector3.Distance(emitter.transform.position, player.transform.position); // TODO: Should have a level controller or whatever where we get the player reference
         if (Input.GetButtonDown(StringConstants.Input.ActivateButton) && playerDistance < activateDistance)
         {
-            if (currLevel < maxLevel)
+            if (currLevel < maxLevel && player.RequestLanternUse())
             {
                 currLevel++;
+                ActivatePedestal();
+                currLightRange = activatedLightRange + (lightIncrement * currLevel);
             }
-            ActivatePedestal();
-            currLightRange = activatedLightRange + (lightIncrement * currLevel);
         }
         if (Input.GetButtonDown(StringConstants.Input.DeactivateButton) && playerDistance < activateDistance)
         {
-            if (activated)
+            if (activated && player.RequestLanternAddition())
             {
                 currLevel--;
                 if (currLevel <= 0)
