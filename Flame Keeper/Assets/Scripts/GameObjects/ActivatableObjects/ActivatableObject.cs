@@ -5,25 +5,31 @@ using UnityEngine;
 public abstract class ActivatableObject : MonoBehaviour
 {
     protected HashSet<Pedestal> activeSources = new HashSet<Pedestal>();
+    public int maxLevel;
 
     public void OnPedestalActivate(Pedestal source)
     {
-        bool firstActive = activeSources.Count == 0;
-
         if (!activeSources.Contains(source))
         {
             activeSources.Add(source);
         }
 
-        if (firstActive)
+        int level = 0;
+        foreach(Pedestal pedestal in activeSources)
         {
-            OnPowered();
+            level += pedestal.GetCurrLevel();
+            Debug.LogError(this + "'s level is " + level.ToString());
+        }
+        
+        if (level <= maxLevel)
+        {
+            OnPowered(level);
         }
     }
 
     public void OnPedestalDeactivate(Pedestal source)
     {
-        if (activeSources.Contains(source))
+        if (source.GetCurrLevel() <= 0 && activeSources.Contains(source))
         {
             activeSources.Remove(source);
         }
@@ -38,6 +44,6 @@ public abstract class ActivatableObject : MonoBehaviour
         }
     }
 
-    protected abstract void OnPowered(); // Called when the object receives its first power source
+    protected abstract void OnPowered(int level); // Called when the object receives its first power source
     protected abstract void OnDepowered(); // Called when the object loses its last power source
 }

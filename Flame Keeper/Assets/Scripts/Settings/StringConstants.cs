@@ -17,5 +17,6 @@ public class StringConstants
     public class Input
     {
         public const string ActivateButton = "Activate";
+        public const string DeactivateButton = "Deactivate";
     }
 }

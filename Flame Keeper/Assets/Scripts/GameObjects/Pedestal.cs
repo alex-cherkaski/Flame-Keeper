@@ -19,6 +19,7 @@ public class Pedestal : MonoBehaviour
     public Light pointLight;
     public float deactivatedLightRange;
     public float activatedLightRange;
+    public float lightIncrement;
 
     [Header("Particles")]
     public ParticleSystem particles;
@@ -40,10 +41,16 @@ public class Pedestal : MonoBehaviour
     private MeshRenderer wireRenderer;
     private MeshRenderer emitterRenderer;
 
+    public int maxLevel;
+    private int currLevel;
+    private float currLightRange; //only a vague indicator of how much fire is currently used, we should change this
+
     private void Start()
     {
         wireRenderer = wire.GetComponent<MeshRenderer>();
         emitterRenderer = emitter.GetComponent<MeshRenderer>();
+        currLevel = 0;
+        currLightRange = deactivatedLightRange;
 
         if (activated)
         {
@@ -61,14 +68,29 @@ public class Pedestal : MonoBehaviour
         float playerDistance = Vector3.Distance(emitter.transform.position, player.transform.position);
         if (Input.GetButtonDown(StringConstants.Input.ActivateButton) && playerDistance < activateDistance)
         {
+            if (currLevel < maxLevel)
+            {
+                currLevel++;
+            }
+            ActivatePedestal();
+            currLightRange = activatedLightRange + (lightIncrement * currLevel);
+        }
+        if (Input.GetButtonDown(StringConstants.Input.DeactivateButton) && playerDistance < activateDistance)
+        {
             if (activated)
             {
-                DeactivatePedestal();
+                currLevel--;
+                if (currLevel <= 0)
+                {
+                    DeactivatePedestal();
+                    currLevel = 0;
+                }
+                else
+                {
+                    ActivatePedestal();
+                }
             }
-            else
-            {
-                ActivatePedestal();
-            }
+            currLightRange = activatedLightRange + (lightIncrement * currLevel);
         }
 
         ParticleSystem.MainModule main = particles.main;
@@ -76,7 +98,7 @@ public class Pedestal : MonoBehaviour
         if (activated)
         {
             wireRenderer.material.color = Color.Lerp(wireRenderer.material.color, wireActivatedColor, Time.deltaTime * activateAnimationSpeed);
-            pointLight.range = Mathf.Lerp(pointLight.range, activatedLightRange, Time.deltaTime * activateAnimationSpeed);
+            pointLight.range = Mathf.Lerp(pointLight.range, currLightRange, Time.deltaTime * activateAnimationSpeed);
             emitterRenderer.material.SetVector("_EmissionColor", emitterRenderer.material.color * activatedEmitterIntensity * activatedEmitterIntensity * Mathf.Sign(activatedEmitterIntensity));
             main.startColor = activatedParticleColor;
             particleEmission.rateOverTime = activatedParticleEmissionRate;
@@ -106,27 +128,25 @@ public class Pedestal : MonoBehaviour
 
     public void ActivatePedestal()
     {
-        if (activated)
-            return;
-
+        activated = true;
         foreach (ActivatableObject obj in connectedTriggers)
         {
             obj.OnPedestalActivate(this);
         }
-
-        activated = true;
     }
 
     public void DeactivatePedestal()
     {
-        if (!activated)
-            return;
-
         foreach (ActivatableObject obj in connectedTriggers)
         {
             obj.OnPedestalDeactivate(this);
         }
 
         activated = false;
+    }
+
+    public int GetCurrLevel()
+    {
+        return currLevel;
     }
 }
