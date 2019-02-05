@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     public float sidewaysSpeed;
     public float jumpForce;
     public float warmth = 50;   // 0 to 100
+    public LayerMask ground;
 
     public int startingLanternUses = 3;
     public int maxLanternUses = 3;
@@ -20,7 +21,16 @@ public class PlayerController : MonoBehaviour
     private int currentLanternUses;
 
     private Rigidbody rb;
-    private bool isGrounded;
+    private SphereCollider collider;
+
+    // Input Axis
+    private string moveInputAxis = "Vertical";
+    private string turnInputAxis = "Horizontal";
+
+   
+    public float rotationRate = 90;
+
+    public float moveSpeed = 0.1f;
 
     void Start()
     {
@@ -31,7 +41,7 @@ public class PlayerController : MonoBehaviour
         postProcessing.vignette.settings = vignette;
 
         rb = GetComponent<Rigidbody>();
-        isGrounded = true;
+        collider = GetComponent<SphereCollider>();
     }
 
     private void OnApplicationQuit()
@@ -53,6 +63,7 @@ public class PlayerController : MonoBehaviour
         vignette.intensity = Mathf.Lerp(vignette.intensity, targetVignetteIntensity, Time.deltaTime * vignetteAnimSpeed);
         postProcessing.vignette.settings = vignette;
     }
+
 
     // TODO:
     // Delete this, not the responsibility of the player. We should have a controller
@@ -108,7 +119,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKey("d"))
         {
-            this.rb.AddForce(0, 0,-forwardSpeed);
+            this.rb.AddForce(0, 0, -forwardSpeed);
         }
         if (Input.GetKey("a"))
         {
@@ -122,16 +133,15 @@ public class PlayerController : MonoBehaviour
         {
             this.rb.AddForce(-sidewaysSpeed, 0, 0);
         }
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) && Grounded())
         {
             rb.AddForce(0, jumpForce, 0, ForceMode.Impulse);
-            isGrounded = false;
         }
     }
 
-    private void OnCollisionStay(Collision collision)
+    private bool Grounded()
     {
-        isGrounded = true;
+        return Physics.CheckSphere(transform.position, collider.radius, ground);
     }
 
     private void OnTriggerEnter(Collider other)
