@@ -172,7 +172,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     {
         return Physics.CheckCapsule(capsuleCollider.bounds.center,
                                     new Vector3(capsuleCollider.bounds.center.x, capsuleCollider.bounds.min.y, capsuleCollider.center.z),
-                                    capsuleCollider.radius * 1.1f,
+                                    capsuleCollider.radius,
                                     ground);
     }
 }
