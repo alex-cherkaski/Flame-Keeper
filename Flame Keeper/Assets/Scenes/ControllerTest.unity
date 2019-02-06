@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -112,30 +112,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &44498995 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1455143111631705496, guid: 2d71c2ba1fa1eb14d95a6999b63cfe0e,
-    type: 3}
-  m_PrefabInstance: {fileID: 1455143111863908199}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &44498996
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 44498995}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42b0b34b0d9d01d42a21336b4ca177bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocity: 5
-  turnSpeed: 10
-  jumpForce: 1.5
-  ground:
-    serializedVersion: 2
-    m_Bits: 1024
 --- !u!1 &215702344
 GameObject:
   m_ObjectHideFlags: 0
@@ -536,6 +512,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1455143111631705190, guid: 2d71c2ba1fa1eb14d95a6999b63cfe0e, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d71c2ba1fa1eb14d95a6999b63cfe0e, type: 3}

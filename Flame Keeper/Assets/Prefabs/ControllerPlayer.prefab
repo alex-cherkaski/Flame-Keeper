@@ -193,9 +193,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1455143111631705191}
-  - component: {fileID: 1455143111631705190}
   - component: {fileID: 1455143111631705189}
   - component: {fileID: 1455143111631705188}
+  - component: {fileID: 44498996}
   m_Layer: 0
   m_Name: ControllerPlayer
   m_TagString: Untagged
@@ -221,24 +221,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1455143111631705190
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1455143111631705496}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86810efabe9de9e4496cc5df5afac83e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocity: 5
-  turnSpeed: 10
-  jumpForce: 1
-  ground:
-    serializedVersion: 2
-    m_Bits: 1024
 --- !u!54 &1455143111631705189
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -253,7 +235,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!136 &1455143111631705188
 CapsuleCollider:
@@ -269,6 +251,25 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &44498996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1455143111631705496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42b0b34b0d9d01d42a21336b4ca177bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocity: 5
+  turnSpeed: 10
+  jumpForce: 1.5
+  gravityModifier: 1
+  ground:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!1 &1455143111935879375
 GameObject:
   m_ObjectHideFlags: 0
