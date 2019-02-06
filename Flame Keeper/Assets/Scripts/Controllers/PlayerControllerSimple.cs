@@ -10,8 +10,8 @@ public class PlayerControllerSimple : MonoBehaviour
     private Quaternion targetRotation;
     private Transform levelCamera;
 
-    //
-    public float jumpForce = 1;
+    public float jumpForce = 1.0f;
+    public float gravityModifier = 1.0f;
     public LayerMask ground;
 
     private Rigidbody rb;
@@ -42,8 +42,8 @@ public class PlayerControllerSimple : MonoBehaviour
 
     private void GetInput()
     {
-        input.x = Input.GetAxisRaw("Horizontal");
-        input.y = Input.GetAxisRaw("Vertical");
+        input.x = Input.GetAxisRaw(StringConstants.Input.HorizontalMovement);
+        input.y = Input.GetAxisRaw(StringConstants.Input.VerticalMovement);
     }
 
     private void CalculateDirection()
@@ -66,7 +66,12 @@ public class PlayerControllerSimple : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (Input.GetAxisRaw("Controller_A") == 1 && Grounded())
+        if (rb.useGravity)
+        {
+            rb.AddForce(Physics.gravity * rb.mass * gravityModifier);
+        }
+
+        if (Input.GetButton(StringConstants.Input.JumpButton) && Grounded())
         {
             Debug.Log("Pressed A");
             rb.AddForce(0, jumpForce, 0, ForceMode.Impulse);
