@@ -2,10 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public interface DynamicLightSource
+{
+    void OnLightSourceValueChange(int newValue);
+    int GetLightSourceValue();
+}
+
 /// <summary>
 /// Responsible for controlling the light / illumination of the player
 /// </summary>
-public class PlayerLightController : MonoBehaviour
+public class DynamicLightController : MonoBehaviour
 {
     [System.Serializable]
     public struct PointLightConfig
@@ -14,7 +20,7 @@ public class PlayerLightController : MonoBehaviour
         public float intensity;
     }
 
-    private PlayerControllerSimple m_parentController;
+    private DynamicLightSource m_parentController;
     private PointLightConfig m_targetConfig;
     private bool m_setup = false;
 
@@ -22,10 +28,15 @@ public class PlayerLightController : MonoBehaviour
     public List<PointLightConfig> lightConfigs = new List<PointLightConfig>();
     public float updateSpeed = 1.0f;
 
-    public void Setup(PlayerControllerSimple parentController)
+    public void Setup(DynamicLightSource parentController)
     {
         m_parentController = parentController;
-        CalculateLightTargets(m_parentController.GetLanternUsesLeft());
+        CalculateLightTargets(m_parentController.GetLightSourceValue());
+
+        // On setup, immediately go to starting values:
+        pointLight.intensity = m_targetConfig.intensity;
+        pointLight.range = m_targetConfig.range;
+
         m_setup = true;
     }
 

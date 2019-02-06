@@ -1,16 +1,31 @@
 ﻿using UnityEngine;
 
-public class PlayerControllerSimple : MonoBehaviour
+public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
 {
     [Header("Parameters")]
     public int startingLanternUses = 3;
+    public int maxLanternUses = 6;
     public float velocity = 5;
     public float turnSpeed = 10;
 
     [Header("Child Controllers")]
-    public PlayerLightController playerLightController;
+    public DynamicLightController playerLightController;
 
-    private int lanternUses;
+    int _lanternUses;
+    private int lanternUses
+    {
+        get
+        {
+            return _lanternUses;
+        }
+        set
+        {
+            _lanternUses = value;
+
+            if (playerLightController && playerLightController.IsSetup())
+                OnLightSourceValueChange(_lanternUses);
+        }
+    }
     private Vector2 input;
     private float angle;
     private Quaternion targetRotation;
@@ -53,10 +68,67 @@ public class PlayerControllerSimple : MonoBehaviour
         Move();
     }
 
-    public int GetLanternUsesLeft()
+
+
+    #region LanternFunctions
+
+    /// <summary>
+    /// Notifies light controller of new value
+    /// </summary>
+    public void OnLightSourceValueChange(int newValue)
+    {
+        playerLightController.CalculateLightTargets(newValue);
+    }
+
+    /// <summary>
+    /// Returns the number of lantern uses the player currently has
+    /// </summary>
+    /// <returns></returns>
+    public int GetLightSourceValue()
     {
         return lanternUses;
     }
+
+    /// <summary>
+    /// Returns the number of lantern uses the player currently has
+    /// </summary>
+    /// <returns></returns>
+    public int GetCurrentLanternUsesLeft()
+    {
+        return lanternUses;
+    }
+
+    /// <summary>
+    /// Uses the lantern and returns true if possible, otherwise, false;
+    /// </summary>
+    public bool RequestLanternUse()
+    {
+        if (lanternUses == 0)
+        {
+            return false;
+        }
+
+        lanternUses--;
+        return true;
+    }
+
+    /// <summary>
+    /// Adds to the lantern uses and returns true if possible, otherwise, false;
+    /// </summary>
+    public bool RequestLanternAddition()
+    {
+        if (lanternUses == maxLanternUses)
+        {
+            return false;
+        }
+
+        lanternUses++;
+        return true;
+    }
+
+    #endregion
+
+
 
     private void GetInput()
     {
