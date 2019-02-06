@@ -2,9 +2,15 @@
 
 public class PlayerControllerSimple : MonoBehaviour
 {
+    [Header("Parameters")]
+    public int startingLanternUses = 3;
     public float velocity = 5;
     public float turnSpeed = 10;
 
+    [Header("Child Controllers")]
+    public PlayerLightController playerLightController;
+
+    private int lanternUses;
     private Vector2 input;
     private float angle;
     private Quaternion targetRotation;
@@ -22,6 +28,13 @@ public class PlayerControllerSimple : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         capsuleCollider = GetComponent<CapsuleCollider>();
         levelCamera = Camera.main.transform;
+
+        lanternUses = startingLanternUses;
+
+        if (playerLightController)
+        {
+            playerLightController.Setup(this);
+        }
     }
 
 
@@ -38,6 +51,11 @@ public class PlayerControllerSimple : MonoBehaviour
         CalculateDirection();
         Rotate();
         Move();
+    }
+
+    public int GetLanternUsesLeft()
+    {
+        return lanternUses;
     }
 
     private void GetInput()
@@ -82,7 +100,7 @@ public class PlayerControllerSimple : MonoBehaviour
     {
         return Physics.CheckCapsule(capsuleCollider.bounds.center,
                                     new Vector3(capsuleCollider.bounds.center.x, capsuleCollider.bounds.min.y, capsuleCollider.center.z),
-                                    capsuleCollider.radius,
+                                    capsuleCollider.radius * 1.1f,
                                     ground);
     }
 }
