@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pedestal : MonoBehaviour
+public class Pedestal : MonoBehaviour, DynamicLightSource
 {
     public float activateAnimationSpeed;
 
@@ -16,17 +16,7 @@ public class Pedestal : MonoBehaviour
     public List<MeshRenderer> renderersInEmission = new List<MeshRenderer>();
 
     [Header("Lights")]
-    public Light pointLight;
-    public float deactivatedLightRange;
-    public float activatedLightRange;
-    public float lightIncrement;
-
-    [Header("Particles")]
-    public ParticleSystem particles;
-    public float deactivatedParticleEmissionRate;
-    public float activatedParticleEmissionRate;
-    public Color deactivatedParticleColor;
-    public Color activatedParticleColor;
+    public DynamicLightController pointLightController;
 
     [Header("Wire")]
     public GameObject wire;
@@ -34,7 +24,7 @@ public class Pedestal : MonoBehaviour
     public Color wireActivatedColor;
 
     [Header("Testing, should delete later")]
-    public PlayerController player;
+    public PlayerControllerSimple player;
     public float activateDistance = 2.0f;
 
     private bool activated = false;
@@ -42,15 +32,29 @@ public class Pedestal : MonoBehaviour
     private MeshRenderer emitterRenderer;
 
     public int maxLevel;
-    private int currLevel;
-    private float currLightRange; //only a vague indicator of how much fire is currently used, we should change this
+    int _currLevel;
+    private int currLevel
+    {
+        get
+        {
+            return _currLevel;
+        }
+        set
+        {
+            _currLevel = value;
+
+            if (pointLightController && pointLightController.IsSetup())
+                OnLightSourceValueChange(_currLevel);
+        }
+    }
 
     private void Start()
     {
         wireRenderer = wire.GetComponent<MeshRenderer>();
         emitterRenderer = emitter.GetComponent<MeshRenderer>();
         currLevel = 0;
-        currLightRange = deactivatedLightRange;
+
+        pointLightController.Setup(this);
 
         if (activated)
         {
@@ -71,7 +75,6 @@ public class Pedestal : MonoBehaviour
             {
                 currLevel++;
                 ActivatePedestal();
-                currLightRange = activatedLightRange + (lightIncrement * currLevel);
             }
         }
         if (Input.GetButtonDown(StringConstants.Input.DeactivateButton) && playerDistance < activateDistance)
@@ -89,26 +92,17 @@ public class Pedestal : MonoBehaviour
                     ActivatePedestal();
                 }
             }
-            currLightRange = activatedLightRange + (lightIncrement * currLevel);
         }
 
-        ParticleSystem.MainModule main = particles.main;
-        ParticleSystem.EmissionModule particleEmission = particles.emission;
         if (activated)
         {
             wireRenderer.material.color = Color.Lerp(wireRenderer.material.color, wireActivatedColor, Time.deltaTime * activateAnimationSpeed);
-            pointLight.range = Mathf.Lerp(pointLight.range, currLightRange, Time.deltaTime * activateAnimationSpeed);
             emitterRenderer.material.SetVector("_EmissionColor", emitterRenderer.material.color * activatedEmitterIntensity * activatedEmitterIntensity * Mathf.Sign(activatedEmitterIntensity));
-            main.startColor = activatedParticleColor;
-            particleEmission.rateOverTime = activatedParticleEmissionRate;
         }
         else
         {
             wireRenderer.material.color = Color.Lerp(wireRenderer.material.color, wireDeactivatedColor, Time.deltaTime * activateAnimationSpeed);
-            pointLight.range = Mathf.Lerp(pointLight.range, deactivatedLightRange, Time.deltaTime * activateAnimationSpeed);
             emitterRenderer.material.SetVector("_EmissionColor", emitterRenderer.material.color * deactivatedEmitterIntensity * deactivatedEmitterIntensity * Mathf.Sign(deactivatedEmitterIntensity));
-            main.startColor = deactivatedParticleColor;
-            particleEmission.rateOverTime = deactivatedParticleEmissionRate;
         }
 
         // If we are updating an emission intensity, we have to tell all materials that it touches
@@ -119,6 +113,24 @@ public class Pedestal : MonoBehaviour
             rend.UpdateGIMaterials();
         }
     }
+
+    /// <summary>
+    /// Notifies light controller of new value
+    /// </summary>
+    public void OnLightSourceValueChange(int newValue)
+    {
+        pointLightController.CalculateLightTargets(newValue);
+    }
+
+    /// <summary>
+    /// Returns the number of lantern uses the player currently has
+    /// </summary>
+    /// <returns></returns>
+    public int GetLightSourceValue()
+    {
+        return GetCurrLevel();
+    }
+
 
     public bool IsActive()
     {
