@@ -3,6 +3,8 @@
 	// These are exposed in the unity inspector
 	Properties
 	{
+		[MaterialToggle] _OrthographicCamera("Is Camera Orthographic?", Float) = 0
+
 		_WaterTint("Water Tint", Color) = (0,0,1,1)
 
 		_WaveHeight("Wave Height", float) = 0.2
@@ -11,7 +13,10 @@
 
 		_RefractDistortion("Refraction Distortion", float) = 1.0
 		_ReflectDistortion("Reflection Distortion", float) = 0.1
+		_RefractIntensity("Refraction Intensity", float) = 1.0
 		_ReflectIntensity("Reflection Intensity", float) = 0.5
+
+		_FresnelNoseScale("Fresnel Noise", float) = 4.0
 
 		_FoamDistance("Foam Distance", float) = 1.0
 		_FoamColor("Foam Color", Color) = (1,1,1,1)
@@ -19,11 +24,13 @@
 
 		_NoiseTex("Noise Map", 2D) = "white" {}
 
+		_AmbientLightFactor("Ambient Light Factor", Range(0, 1)) = 0.2
+
 		[HideInInspector]
 		_ReflectionTex("Reflection Texture", 2D) = "clear" {}
 	}
 
-	SubShader
+		SubShader
 	{
 
 		// Make sure we render this along with other transparent objects.
@@ -63,6 +70,8 @@
 			#pragma multi_compile_fog
 
 			// Have to define all our properties as variables for each pass
+			float _OrthographicCamera;
+
 			sampler2D _GrabTexture;
 			sampler2D _CameraDepthTexture; // Pre-set by unity
 			half4 _WaterTint;
@@ -71,12 +80,15 @@
 			float _WaveFrequency;
 			float _RefractDistortion;
 			float _ReflectDistortion;
+			float _RefractIntensity;
 			float _ReflectIntensity;
+			float _FresnelNoseScale;
 			float _FoamDistance;
 			half4 _FoamColor;
 			float _FoamNoiseScale;
 			sampler2D _NoiseTex;
 			sampler2D _ReflectionTex;
+			float _AmbientLightFactor;
 
 			float4 _RippleCameraPosition;
 			float _RippleCamSize;
@@ -138,43 +150,70 @@
             {
 				fixed4 col = _WaterTint;
 
+				// Get a random value from noise map
+				fixed noise = tex2D(_NoiseTex, i.worldPos.xz * 0.1 + _Time.y * _WaveSpeed * 0.05).r;
+				fixed fnoise = noise * _FresnelNoseScale; // Noise for fresnel dependent effects (reflection / refraction)
+				fixed snoise = noise * _FoamNoiseScale; // Noise for shore effect
+
 				// Handle all ripples
-				float ripples = 0;
+				float ripplesTex = 0;
 				float2 uv = i.worldPos.xz - _RippleCameraPosition.xz;
 				uv = uv / (_RippleCamSize * 2);
 				uv += 0.5;
-				ripples += tex2D(_RippleTex, uv).b;
+				ripplesTex += tex2D(_RippleTex, uv).b; // Ripple texture is always orthographic
 
-				ripples = step(0.99, ripples * 2);
+				float ripples = step(0.99, ripplesTex * 2);
 				float4 ripplesColored = ripples * _FoamColor;
 
-
 				// Distort our uv coord a bit so we get a refraction and reflection effect
-				half2 bumpRefract = normalize(half2(sin(i.uvGrab.x + _Time.y * _WaveSpeed * 0.9 + ripples), cos(i.uvGrab.y + _Time.y * _WaveSpeed + ripples)));
-				half2 bumpReflect = normalize(half2(cos(i.screenPos.x + _Time.y * _WaveSpeed * 0.9 + ripples), sin(i.screenPos.y + _Time.y * _WaveSpeed + ripples))) * _ReflectDistortion;
-				i.uvGrab.xy = i.uvGrab.xy + bumpRefract * i.vertex.z * _RefractDistortion;
+				half2 bumpRefract = normalize(half2(sin(_Time.y * _WaveSpeed * 0.9 + (ripplesTex * 10.0) + fnoise), cos(_Time.y * _WaveSpeed + (ripplesTex * 10.0) + fnoise))) * _RefractDistortion;
+				half2 bumpReflect = normalize(half2(cos(_Time.y * _WaveSpeed * 0.9 + (ripplesTex * 10.0) + fnoise), sin(_Time.y * _WaveSpeed + (ripplesTex * 10.0) + fnoise))) * _ReflectDistortion;
+				i.uvGrab.xy += bumpRefract * i.vertex.z;
 
-				fixed4 refract = tex2Dproj(_GrabTexture, UNITY_PROJ_COORD(i.uvGrab)); // Faked refracted view behind plane
-				fixed4 reflection = tex2Dproj(_ReflectionTex, UNITY_PROJ_COORD(i.screenPos + half4(bumpReflect,0,0))); // Sample our reflection texture that was passed in
+				// Sample our refraction texture (whats already rendered to the screen)
+				// Sample out reflection texture (whatever our reflection camera is giving us)
+				fixed4 refract = fixed4(0, 0, 0, 0);
+				fixed4 reflection = fixed4(0, 0, 0, 0);
+				if (_OrthographicCamera)
+				{
+					refract = tex2D(_GrabTexture, UNITY_PROJ_COORD(i.uvGrab));
+					reflection = tex2D(_ReflectionTex, UNITY_PROJ_COORD(i.screenPos + half4(bumpReflect, 0, 0)));
+				}
+				else
+				{
+					refract = tex2Dproj(_GrabTexture, UNITY_PROJ_COORD(i.uvGrab));
+					reflection = tex2Dproj(_ReflectionTex, UNITY_PROJ_COORD(i.screenPos + half4(bumpReflect, 0, 0)));
+				}
+				col += refract * _RefractIntensity;
+				col += reflection * _ReflectIntensity;
 
-				fixed noise = tex2D(_NoiseTex, i.worldPos.xz * 0.1 + _Time.y * _WaveSpeed * 0.05).r; // Get a random value from noise map
-				float depth = LinearEyeDepth(SAMPLE_DEPTH_TEXTURE_PROJ(_CameraDepthTexture, UNITY_PROJ_COORD(i.screenPos)));
-				float diff = depth - i.screenPos.w; // Difference in depth from the plane verus the object behind it
+				if (_OrthographicCamera)
+				{
+					float depth = SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, i.screenPos).r;
+					float diff = (1 - i.screenPos.w / 1000.0) - depth; // The "1000" here is the far plane of the othographic camera, will want to set from code if we change it a bunch
 
-				
-				col = lerp(col, col+refract, saturate(diff * 0.8)); // Blend in refraction when difference in depth is high
-				col += reflection * _ReflectIntensity; // Reflection is additive
+					float foamStep = step(_FoamDistance, diff - (snoise * _FoamDistance));
+					col = lerp(_FoamColor, col, foamStep);
+				}
+				else
+				{
+					float depth = LinearEyeDepth(SAMPLE_DEPTH_TEXTURE_PROJ(_CameraDepthTexture, UNITY_PROJ_COORD(i.screenPos)));
+					float diff = depth - i.screenPos.w; // Difference in depth from the plane verus the object behind it
 
-				// foamStep is either 0 (close to shore) or 1 (not close to shore) based on some noisy threshold
-				float foamStep = step(_FoamDistance, diff - noise * _FoamNoiseScale); 
-				col = lerp(_FoamColor, col, foamStep); // Set foam color
+					// foamStep is either 0 (close to shore) or 1 (not close to shore) based on some noisy threshold
+					float foamStep = step(_FoamDistance, diff - snoise);
+					col = lerp(_FoamColor, col, foamStep); // Set foam color
+				}
 
-                UNITY_APPLY_FOG(i.fogCoord, col); // Unity applies the fog for us
+
+				UNITY_APPLY_FOG(i.fogCoord, col); // Unity applies the fog for us
 
 				// Lighting
-				half nl = max(0, dot(half3(0, 1, 0), _WorldSpaceLightPos0.xyz));
+				half nl = max(0, dot(half3(0, 1, 0), _WorldSpaceLightPos0.xyz)); // Directional light source
 
-                return saturate(col + ripplesColored) * _LightColor0 * nl;
+				fixed4 ambient = _AmbientLightFactor * saturate(col + ripplesColored); // ambient light
+				fixed4 diffuse = (1-_AmbientLightFactor) * saturate(col + ripplesColored) * _LightColor0 * nl;
+				return ambient + diffuse;
             }
 
             ENDCG

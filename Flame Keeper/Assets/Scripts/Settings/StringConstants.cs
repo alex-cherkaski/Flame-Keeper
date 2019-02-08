@@ -16,7 +16,10 @@ public class StringConstants
 
     public class Input
     {
-        public const string ActivateButton = "Activate";
-        public const string DeactivateButton = "Deactivate";
+        public const string ActivateButton = "Controller_X";
+        public const string DeactivateButton = "Controller_B";
+        public const string JumpButton = "Controller_A";
+        public const string HorizontalMovement = "Horizontal";
+        public const string VerticalMovement = "Vertical";
     }
 }
