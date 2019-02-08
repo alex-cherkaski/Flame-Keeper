@@ -1,10 +1,25 @@
-﻿Shader "Testing/3_RampWithIntensity"
+﻿Shader "Testing/5_RampWithIntensityToneMap"
 {
 	Properties
 	{
 		_Color("Color", color) = (0.5, 0.2, 0.3, 1.0)
 		_MainTex("Albedo (RGB)", 2D) = "white" {}
 		_RampTex("Ramp Texture", 2D) = "clear" {}
+
+		[Header(Standard Parameters)]
+		_Emission("Emission Color", color) = (0,0,0,0)
+		_EmissionIntensity("Emission Intensity", float) = 1
+		_Metallic("Metallic", Range(0, 1)) = 0
+		_Smoothness("Smoothness", Range(0,1)) = 0
+
+		[Header(Normal Mapping)]
+		_NormalMap("Normal Map", 2D) = "bump" {}
+		_NormalMapIntensity("Normal Map Intensity", Range(0,1)) = 1.0
+
+		[Header(Tone Mapping)]
+		_Gain("Lightmap tone-mapping Gain", Float) = 1
+		_Knee("Lightmap tone-mapping Knee", Float) = 0.5
+		_Compress("Lightmap tone-mapping Compress", Float) = 0.33
 	}
 
 	SubShader
@@ -21,9 +36,22 @@
 		sampler2D _MainTex;
 		sampler2D _RampTex;
 
+		half4 _Emission;
+		half _EmissionIntensity;
+		half _Metallic;
+		half _Smoothness;
+
+		sampler2D _NormalMap;
+		half _NormalMapIntensity;
+
+		half _Gain;
+		half _Knee;
+		half _Compress;		
+
 		struct Input
 		{
 			float2 uv_MainTex;
+			float2 uv_NormalMap;
 			float3 worldPos; // Get world position of our vertex
 		};
 
@@ -59,7 +87,7 @@
 
 			// Need to pass in world position here! But we can't do it through surface shaders!
 			// Soultion: Genereate the vert frag shader from this and manually pass it in
-			float distance = length(float3(_WorldSpaceLightPos0.xyz)); 
+			float distance = length(float3(_WorldSpaceLightPos0.xyz));
 
 			float RANGE_OF_LIGHT = 1.0 / _LightPositionRange.w;
 			float falloff = 1.0 - (distance / RANGE_OF_LIGHT);
@@ -77,17 +105,41 @@
 			return c;
 		}
 
+		inline half3 TonemapLight(half3 i) 
+		{
+			i *= _Gain;
+			return (i > _Knee) ? (((i - _Knee)*_Compress) + _Knee) : i;
+		}
+
 		inline void LightingRampByDistance_GI(
 			SurfaceOutputStandard s,
 			UnityGIInput data,
 			inout UnityGI gi)
 		{
 			LightingStandard_GI(s, data, gi);
+
+			gi.light.color = TonemapLight(gi.light.color);
+			#ifdef DIRLIGHTMAP_SEPARATE
+			#ifdef LIGHTMAP_ON
+				gi.light2.color = TonemapLight(gi.light2.color);
+			#endif
+			#ifdef DYNAMICLIGHTMAP_ON
+				gi.light3.color = TonemapLight(gi.light3.color);
+			#endif
+			#endif
+			gi.indirect.diffuse = TonemapLight(gi.indirect.diffuse);
+			gi.indirect.specular = TonemapLight(gi.indirect.specular);
 		}
 
 		void surf(Input IN, inout SurfaceOutputStandard o) 
 		{
 			o.Albedo = tex2D(_MainTex, IN.uv_MainTex).rgb * _Color;
+
+			o.Metallic = _Metallic;
+			o.Smoothness = _Smoothness;
+			o.Emission = _Emission.rgb * _EmissionIntensity;
+
+			o.Normal = lerp(o.Normal, UnpackNormal(tex2D(_NormalMap, IN.uv_NormalMap)), _NormalMapIntensity);
 		}
 
 		ENDCG
