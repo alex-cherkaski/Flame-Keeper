@@ -1133,8 +1133,13 @@ Shader "Testing/5_RampWithIntensityToneMapVertFrag"
 										  // ---------------
 										  float isPointLight = _WorldSpaceLightPos0.w;
 										  float distance = length(float3(_WorldSpaceLightPos0.xyz - worldPos));
-										  float RANGE_OF_LIGHT = 1.0 / _LightPositionRange.w;
-										  float falloff = 1.0 - (distance / RANGE_OF_LIGHT);
+
+										  // NOTE: I don't actually use this because 
+										  // 1.) _LightPositionRange is just the range of the most important light and NOT the one we are currently rendering (thanks unity)
+										  // 2.) I actually kind of like the animation of hardcoding a value for the falloff calculation
+										  float RANGE_OF_LIGHT = 1.0 / _LightPositionRange.w; 
+
+										  float falloff = 1.0 - (distance / 10);
 										  float rampedFalloff = tex2D(_RampTex, half2(falloff, falloff)).r * isPointLight;
 
 										  half3 color = BRDF3_Direct(o.Albedo, specColor, rlPow4, o.Smoothness) * rampedFalloff;
