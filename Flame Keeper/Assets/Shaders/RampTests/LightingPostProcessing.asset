@@ -43,7 +43,7 @@ MonoBehaviour:
   ambientOcclusion:
     m_Enabled: 1
     m_Settings:
-      intensity: 0.22
+      intensity: 1.2
       radius: 0.81
       sampleCount: 10
       downsampling: 1
@@ -323,8 +323,8 @@ MonoBehaviour:
       mode: 0
       color: {r: 0, g: 0, b: 0, a: 1}
       center: {x: 0.5, y: 0.5}
-      intensity: 0.403
-      smoothness: 0.2
+      intensity: 0.35
+      smoothness: 1
       roundness: 1
       mask: {fileID: 0}
       opacity: 1
