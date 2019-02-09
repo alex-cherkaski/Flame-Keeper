@@ -1,4 +1,10 @@
-﻿// Upgrade NOTE: replaced 'defined FOG_COMBINED_WITH_WORLD_POS' with 'defined (FOG_COMBINED_WITH_WORLD_POS)'
+﻿// Upgrade NOTE: replaced '_LightMatrix0' with 'unity_WorldToLight'
+
+// Upgrade NOTE: replaced '_LightMatrix0' with 'unity_WorldToLight'
+
+// Upgrade NOTE: replaced '_LightMatrix0' with 'unity_WorldToLight'
+
+// Upgrade NOTE: replaced 'defined FOG_COMBINED_WITH_WORLD_POS' with 'defined (FOG_COMBINED_WITH_WORLD_POS)'
 
 Shader "Testing/5_RampWithIntensityToneMapVertFrag"
 {
@@ -1134,12 +1140,15 @@ Shader "Testing/5_RampWithIntensityToneMapVertFrag"
 										  float isPointLight = _WorldSpaceLightPos0.w;
 										  float distance = length(float3(_WorldSpaceLightPos0.xyz - worldPos));
 
-										  // NOTE: I don't actually use this because 
-										  // 1.) _LightPositionRange is just the range of the most important light and NOT the one we are currently rendering (thanks unity)
-										  // 2.) I actually kind of like the animation of hardcoding a value for the falloff calculation
-										  float RANGE_OF_LIGHT = 1.0 / _LightPositionRange.w; 
+										  // Calculates the range of the current light
+										  float3 lightPos = mul(unity_WorldToLight, float4(worldPos, 1)).xyz;
+										  float3 toLight = _WorldSpaceLightPos0.xyz - worldPos.xyz;
+										  float RANGE_OF_LIGHT = length(toLight) / length(lightPos);
 
-										  float falloff = 1.0 - (distance / 10);
+										  // _LightPositionRange doesnt work lmao thanks unity
+										  //float RANGE_OF_LIGHT = 1.0 / _LightPositionRange.w; 
+
+										  float falloff = 1.0 - (distance / RANGE_OF_LIGHT);
 										  float rampedFalloff = tex2D(_RampTex, half2(falloff, falloff)).r * isPointLight;
 
 										  half3 color = BRDF3_Direct(o.Albedo, specColor, rlPow4, o.Smoothness) * rampedFalloff;
