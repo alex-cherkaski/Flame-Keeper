@@ -7,23 +7,28 @@ public abstract class ActivatableObject : MonoBehaviour
     protected HashSet<Pedestal> activeSources = new HashSet<Pedestal>();
     public int maxLevel;
 
-    public void OnPedestalActivate(Pedestal source)
+    private int GetLevel()
     {
-        if (!activeSources.Contains(source))
-        {
-            activeSources.Add(source);
-        }
-
         int level = 0;
-        foreach(Pedestal pedestal in activeSources)
+        foreach (Pedestal pedestal in activeSources)
         {
             level += pedestal.GetCurrLevel();
-            Debug.LogError(this + "'s level is " + level.ToString());
         }
-        
+        return level;
+    }
+
+    public void OnPedestalActivate(Pedestal source)
+    {
+        int level = GetLevel();
+
         if (level <= maxLevel)
         {
-            OnPowered(level);
+            if (!activeSources.Contains(source))
+            {
+                activeSources.Add(source);
+            }
+
+            OnPowered(source, GetLevel());
         }
     }
 
@@ -38,12 +43,10 @@ public abstract class ActivatableObject : MonoBehaviour
             Debug.LogError("Activatable Object did not reference active pedestal! " + this);
         }
 
-        if (activeSources.Count == 0)
-        {
-            OnDepowered();
-        }
+        int level = GetLevel();
+        OnDepowered(source, GetLevel());
     }
 
-    protected abstract void OnPowered(int level); // Called when the object receives its first power source
-    protected abstract void OnDepowered(); // Called when the object loses its last power source
+    protected abstract void OnPowered(Pedestal pedestal, int newLevel); // Called when the object receives a power source
+    protected abstract void OnDepowered(Pedestal pedestal, int newLevel); // Called when the object loses a power source
 }

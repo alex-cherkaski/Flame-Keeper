@@ -12,14 +12,17 @@ public class ChangePositionAO : ActivatableObject
     private Vector3 startingPosition;
     private Vector3 targetPosition;
 
-    protected override void OnPowered(int level)
+    protected override void OnPowered(Pedestal pedestal, int newLevel)
     {
-        targetPosition = startingPosition + (incrementPosition * level);
+        targetPosition = startingPosition + (incrementPosition * newLevel);
     }
 
-    protected override void OnDepowered()
+    protected override void OnDepowered(Pedestal pedestal, int newLevel)
     {
-        targetPosition = startingPosition;
+        if (newLevel == 0)
+        {
+            targetPosition = startingPosition;
+        }
     }
 
     private void Start()
