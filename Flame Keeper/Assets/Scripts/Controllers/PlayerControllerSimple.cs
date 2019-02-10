@@ -56,16 +56,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     // Update is called once per frame
     void Update()
     {
-        GetInput();
 
-        if (Mathf.Abs(input.x) == 0 && Mathf.Abs(input.y) == 0)
-        {
-            return;
-        }
-
-        CalculateDirection();
-        Rotate();
-        Move();
     }
 
 
@@ -156,6 +147,17 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
 
     void FixedUpdate()
     {
+        GetInput();
+
+        if (Mathf.Abs(input.x) == 0 && Mathf.Abs(input.y) == 0)
+        {
+            return;
+        }
+
+        CalculateDirection();
+        Rotate();
+        Move();
+
         if (rb.useGravity)
         {
             rb.AddForce(Physics.gravity * rb.mass * gravityModifier);
