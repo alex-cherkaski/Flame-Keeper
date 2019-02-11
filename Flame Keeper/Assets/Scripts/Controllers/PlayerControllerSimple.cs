@@ -191,4 +191,14 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     {
         rb.angularVelocity = new Vector3(0, 0, 0);
     }
+
+    public float GetVelocity()
+    {
+        return velocity;
+    }
+
+    public void SetVelocity(float newVelocity)
+    {
+        velocity = newVelocity;
+    }
 }

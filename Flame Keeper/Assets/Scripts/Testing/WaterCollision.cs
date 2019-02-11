@@ -6,18 +6,25 @@ public class WaterCollision : MonoBehaviour
 {
     
     public float waitTime = 3f;
-    public int inWaterSpeed;
-    private int outOfWaterSpeed;
+    public float inWaterSpeed;
+    private float outOfWaterSpeed;
     private bool playerTouching;
     private bool playerAlive;
     float timer;
+
+    [Header("Colour Effect (Test)")]
+    public string colourComponent;
+    private Color originalColour;
+    private GameObject coloured;
 
     // Start is called before the first frame update
     void Start()
     {
         playerTouching = false;
         playerAlive = true;
-        outOfWaterSpeed = this.GetComponent<Player>().forceMagnitude;
+        outOfWaterSpeed = this.GetComponent<PlayerControllerSimple>().velocity;
+        coloured = this.gameObject.transform.Find(colourComponent).gameObject;
+        originalColour = coloured.GetComponent<Renderer>().material.GetColor("_Color");
     }
 
     // Update is called once per frame
@@ -26,10 +33,10 @@ public class WaterCollision : MonoBehaviour
         if (playerTouching && playerAlive)
         {
             timer += Time.deltaTime;
-            this.GetComponent<Renderer>().material.color = Color.blue;
+            coloured.GetComponent<Renderer>().material.color = Color.blue;
             if (timer > waitTime)
             {
-                this.GetComponent<Renderer>().material.color = Color.red;
+                coloured.GetComponent<Renderer>().material.color = Color.white;
                 playerAlive = false;
                 timer = 0f;
             }
@@ -48,7 +55,7 @@ public class WaterCollision : MonoBehaviour
         }
         playerTouching = true;
 
-        this.GetComponent<Player>().SetSpeed(inWaterSpeed);
+        this.GetComponent<PlayerControllerSimple>().SetVelocity(inWaterSpeed);
     }
 
     private void OnTriggerExit(Collider other)
@@ -59,7 +66,7 @@ public class WaterCollision : MonoBehaviour
         }
         playerTouching = false;
         playerAlive = true;
-        this.GetComponent<Renderer>().material.color = Color.white;
-        this.GetComponent<Player>().SetSpeed(outOfWaterSpeed);
+        coloured.GetComponent<Renderer>().material.color = Color.red;
+        this.GetComponent<PlayerControllerSimple>().SetVelocity(outOfWaterSpeed);
     }
 }

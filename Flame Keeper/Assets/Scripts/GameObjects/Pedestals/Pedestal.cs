@@ -32,6 +32,7 @@ public class Pedestal : MonoBehaviour, DynamicLightSource
     private MeshRenderer emitterRenderer;
 
     public int maxLevel;
+    public int startLevel;
     int _currLevel;
     private int currLevel
     {
@@ -52,7 +53,11 @@ public class Pedestal : MonoBehaviour, DynamicLightSource
     {
         wireRenderer = wire.GetComponent<MeshRenderer>();
         emitterRenderer = emitter.GetComponent<MeshRenderer>();
-        currLevel = 0;
+        currLevel = startLevel;
+        if (currLevel > 0)
+        {
+            activated = true;
+        }
 
         pointLightController.Setup(this);
 
