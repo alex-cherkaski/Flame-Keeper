@@ -15,11 +15,6 @@ public class LevelController : BaseController
         SceneManager.sceneLoaded += OnNewLevel;
     }
 
-    public PlayerControllerSimple GetCurrentPlayer()
-    {
-        return m_currentLevelConfig.player;
-    }
-
     void OnNewLevel(Scene scene, LoadSceneMode mode)
     {
         // Find the config that exists for this level somewhere in the scene
@@ -29,10 +24,12 @@ public class LevelController : BaseController
         if (count == 0)
         {
             Debug.LogError("No level config found in the scene!");
+            return;
         }
         else if (count > 1)
         {
             Debug.LogError("Multiple level configs found in the scene!");
+            return;
         }
         else
         {
@@ -40,5 +37,32 @@ public class LevelController : BaseController
             m_currentLevelConfig = foundConfigs[0];
             m_currentLevelConfig.transform.SetParent(this.transform);
         }
+
+        // Setup all our objects in the right positions and what not
+        ResetLevel();
+    }
+
+    private void ResetLevel()
+    {
+        if (!m_currentLevelConfig)
+        {
+            Debug.LogError("No level configuration to set up!");
+            return;
+        }
+
+        // Set up the player according the level parameters
+        m_currentLevelConfig.player.Setup(m_currentLevelConfig.playerStartingPosition,
+            m_currentLevelConfig.startingLanternUses,
+            m_currentLevelConfig.maxLanternUses);
+    }
+
+    public PlayerControllerSimple GetLevelPlayer()
+    {
+        return m_currentLevelConfig.player;
+    }
+
+    public List<Pedestal> GetLevelPedestals()
+    {
+        return m_currentLevelConfig.GetAllPedestals();
     }
 }

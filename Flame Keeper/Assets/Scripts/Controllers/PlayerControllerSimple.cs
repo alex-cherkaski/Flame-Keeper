@@ -3,8 +3,6 @@
 public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
 {
     [Header("Parameters")]
-    public int startingLanternUses = 3;
-    public int maxLanternUses = 6;
     public float velocity = 5;
     public float turnSpeed = 10;
 
@@ -26,6 +24,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
                 OnLightSourceValueChange(_lanternUses);
         }
     }
+    private int maxLanternUses = 6;
     private Vector2 input;
     private float angle;
     private Quaternion targetRotation;
@@ -38,18 +37,23 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     private Rigidbody rb;
     private CapsuleCollider capsuleCollider;
 
-    private void Start()
+    public void Setup(Vector3 startingPosition, int startingLanternUses, int maxLanternUses)
     {
-        rb = GetComponent<Rigidbody>();
-        capsuleCollider = GetComponent<CapsuleCollider>();
-        levelCamera = Camera.main.transform;
-
-        lanternUses = startingLanternUses;
+        this.transform.position = startingPosition;
+        this.lanternUses = startingLanternUses;
+        this.maxLanternUses = Mathf.Max(startingLanternUses, maxLanternUses);
 
         if (playerLightController)
         {
             playerLightController.Setup(this);
         }
+    }
+
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+        capsuleCollider = GetComponent<CapsuleCollider>();
+        levelCamera = Camera.main.transform;
     }
 
 

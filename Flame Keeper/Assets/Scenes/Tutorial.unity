@@ -2717,6 +2717,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 972267032}
+  playerStartingPosition: {x: -0.879, y: 1.24, z: 0.215}
+  startingLanternUses: 3
+  maxLanternUses: 3
 --- !u!4 &1673866664
 Transform:
   m_ObjectHideFlags: 0
