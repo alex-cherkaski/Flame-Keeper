@@ -181,4 +181,14 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
                                     capsuleCollider.radius,
                                     ground);
     }
+    
+    private void OnCollisionEnter(Collision collision)
+    {
+        rb.angularVelocity = new Vector3(0, 0, 0);
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        rb.angularVelocity = new Vector3(0, 0, 0);
+    }
 }
