@@ -20,9 +20,12 @@ public class FlameKeeper : MonoBehaviour
         _instance = this;
         DontDestroyOnLoad(this);
 
-        gameControllers.Add((int)ControllerType.TutorialController, new TutorialController());
+        controllersList.Add(levelController);
 
-        controllersList.AddRange(gameControllers.Values);
+        foreach (BaseController controller in controllersList)
+        {
+            controller.Initialize();
+        }
     }
 
     /// <summary>
@@ -35,32 +38,11 @@ public class FlameKeeper : MonoBehaviour
         return _instance;
     }
 
-
-    /// Game Controllers:
-    /// Add controllers here as opposed to adding specific methods to this class, just keeps
-    /// everything a bit more organized.
-    public enum ControllerType
-    {
-        TutorialController
-    }
-
-    private Dictionary<int, BaseController> gameControllers = new Dictionary<int, BaseController>(); // Dictionary of all controllers so look ups are fast
     private List<BaseController> controllersList = new List<BaseController>(); // List of all controllers so looping over all of them is fast
 
-    public TutorialController tutorialController { get { return gameControllers[(int)ControllerType.TutorialController] as TutorialController;  } }
-
-    private void Update()
-    {
-        foreach (BaseController controller in controllersList)
-        {
-            try
-            {
-                controller.Update(Time.deltaTime);
-            }
-            catch (Exception ex)
-            {
-                Debug.LogError(ex);
-            }
-        }
-    }
+    /// <summary>
+    /// Game controllers:
+    /// Add controllers here as needed, and avoid adding functionality to this class directly.
+    /// </summary>
+    public LevelController levelController;
 }
