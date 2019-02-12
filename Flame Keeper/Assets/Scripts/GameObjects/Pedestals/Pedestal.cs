@@ -103,12 +103,12 @@ public class Pedestal : MonoBehaviour, DynamicLightSource
         if (activated)
         {
             wireRenderer.material.color = Color.Lerp(wireRenderer.material.color, wireActivatedColor, Time.deltaTime * activateAnimationSpeed);
-            emitterRenderer.material.SetVector("_EmissionColor", emitterRenderer.material.color * activatedEmitterIntensity * activatedEmitterIntensity * Mathf.Sign(activatedEmitterIntensity));
+            emitterRenderer.materials[1].SetVector("_EmissionColor", emitterRenderer.materials[1].color * activatedEmitterIntensity * activatedEmitterIntensity * Mathf.Sign(activatedEmitterIntensity));
         }
         else
         {
             wireRenderer.material.color = Color.Lerp(wireRenderer.material.color, wireDeactivatedColor, Time.deltaTime * activateAnimationSpeed);
-            emitterRenderer.material.SetVector("_EmissionColor", emitterRenderer.material.color * deactivatedEmitterIntensity * deactivatedEmitterIntensity * Mathf.Sign(deactivatedEmitterIntensity));
+            emitterRenderer.materials[1].SetVector("_EmissionColor", emitterRenderer.materials[1].color * deactivatedEmitterIntensity * deactivatedEmitterIntensity * Mathf.Sign(deactivatedEmitterIntensity));
         }
 
         // If we are updating an emission intensity, we have to tell all materials that it touches
