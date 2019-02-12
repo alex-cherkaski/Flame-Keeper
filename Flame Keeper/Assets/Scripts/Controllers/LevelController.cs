@@ -35,7 +35,6 @@ public class LevelController : BaseController
         {
             // Setup the current level's configuration
             m_currentLevelConfig = foundConfigs[0];
-            m_currentLevelConfig.transform.SetParent(this.transform);
         }
 
         // Setup all our objects in the right positions and what not
