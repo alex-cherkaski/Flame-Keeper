@@ -1124,7 +1124,11 @@ Shader "Testing/5_RampWithIntensityToneMapVertFrag"
 
 										  half3 reflDir = reflect(worldViewDir, o.Normal);
 
-										  half nl = saturate(dot(o.Normal, gi.light.dir));
+										  // ---------------
+										  // Our code here!
+										  // ---------------
+
+										  half nl = saturate(dot(o.Normal, gi.light.dir) + 0.5); // add in a constant for light to "wrap around" corners
 										  half nv = saturate(dot(o.Normal, worldViewDir));
 
 										  // Vectorize Pow4 to save instructions
@@ -1134,9 +1138,6 @@ Shader "Testing/5_RampWithIntensityToneMapVertFrag"
 
 										  half grazingTerm = saturate(o.Smoothness + (1 - oneMinusReflectivity));
 
-										  // ---------------
-										  // Our code here!
-										  // ---------------
 										  float isPointLight = _WorldSpaceLightPos0.w;
 										  float distance = length(float3(_WorldSpaceLightPos0.xyz - worldPos));
 
