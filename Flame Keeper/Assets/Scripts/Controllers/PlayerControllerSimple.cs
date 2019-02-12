@@ -168,7 +168,9 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
             return;
         }
 
-        if ((Grounded() || inWater) && Input.GetButton(StringConstants.Input.JumpButton))
+        // TODO: Player can just repeatedly jump out of water to bypass neagtive effect.
+        //       Later on, add some functionality so that the player can get out of water
+        if (Grounded() && Input.GetButton(StringConstants.Input.JumpButton))
         {
             Debug.Log("Pressed A");
             rb.AddForce(0, jumpForce, 0, ForceMode.Impulse);
