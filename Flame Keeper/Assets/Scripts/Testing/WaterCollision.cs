@@ -61,6 +61,7 @@ public class WaterCollision : MonoBehaviour
             return;
         }
         playerTouching = true;
+        playerController.inWater = true;
 
         playerController.SetVelocity(inWaterSpeed);
     }
@@ -75,5 +76,6 @@ public class WaterCollision : MonoBehaviour
         playerAlive = true;
         coloured.GetComponent<Renderer>().material.color = Color.red;
         playerController.SetVelocity(outOfWaterSpeed);
+        playerController.inWater = false;
     }
 }

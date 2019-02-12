@@ -30,10 +30,12 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     private Quaternion targetRotation;
     private Transform levelCamera;
 
+    public bool inWater = false; // TODO: Dont make public, bring WaterCollision.cs into this script
     public float jumpForce = 1.0f;
     public float gravityModifier = 1.0f;
     public LayerMask ground;
 
+    private float lockMovementTime = 0.0f;
     private Rigidbody rb;
     private CapsuleCollider capsuleCollider;
     private Vector3 lastGroundedPosition;
@@ -157,7 +159,13 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
             rb.AddForce(Physics.gravity * rb.mass * gravityModifier);
         }
 
-        if (Grounded() && Input.GetButton(StringConstants.Input.JumpButton))
+        if (lockMovementTime > 0.0f)
+        {
+            lockMovementTime -= Time.deltaTime;
+            return;
+        }
+
+        if ((Grounded() || inWater) && Input.GetButton(StringConstants.Input.JumpButton))
         {
             Debug.Log("Pressed A");
             rb.AddForce(0, jumpForce, 0, ForceMode.Impulse);
@@ -223,5 +231,6 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     public void GoToLastGroundedPosition()
     {
         this.transform.position = lastGroundedPosition;
+        lockMovementTime = 1.0f;
     }
 }
