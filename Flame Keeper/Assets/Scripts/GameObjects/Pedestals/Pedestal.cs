@@ -64,6 +64,7 @@ public class Pedestal : MonoBehaviour, DynamicLightSource
         if (activated)
         {
             wireRenderer.material.color = wireActivatedColor;
+            ActivatePedestal();
         }
         else
         {

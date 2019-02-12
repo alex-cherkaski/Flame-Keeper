@@ -7,13 +7,14 @@ public abstract class ActivatableObject : MonoBehaviour
     protected HashSet<Pedestal> activeSources = new HashSet<Pedestal>();
     public int maxLevel;
 
-    private int GetLevel()
+    public int GetLevel()
     {
         int level = 0;
         foreach (Pedestal pedestal in activeSources)
         {
             level += pedestal.GetCurrLevel();
         }
+        Debug.Log("Current level is " + level);
         return level;
     }
 
@@ -27,7 +28,6 @@ public abstract class ActivatableObject : MonoBehaviour
             {
                 activeSources.Add(source);
             }
-
             OnPowered(source, GetLevel());
         }
     }

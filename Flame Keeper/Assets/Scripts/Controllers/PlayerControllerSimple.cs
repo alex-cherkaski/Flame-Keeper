@@ -201,4 +201,14 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     {
         velocity = newVelocity;
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Crystal"))
+        {
+            lanternUses += (int) other.gameObject.GetComponent<CrystalScript>().GetWarmth();
+            //warmth += ;
+            other.gameObject.SetActive(false);
+        }
+    }
 }
