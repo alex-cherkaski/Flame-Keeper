@@ -1,4 +1,6 @@
-﻿Shader "Fluids/Water"
+﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
+
+Shader "Fluids/Water"
 {
 	// These are exposed in the unity inspector
 	Properties
@@ -30,7 +32,7 @@
 		_ReflectionTex("Reflection Texture", 2D) = "clear" {}
 	}
 
-		SubShader
+	SubShader
 	{
 
 		// Make sure we render this along with other transparent objects.
@@ -98,6 +100,7 @@
             struct vertInput
             {
                 float4 vertex : POSITION;
+				float3 normal : NORMAL;
                 float2 uv : TEXCOORD0;
             };
 
@@ -107,7 +110,8 @@
                 UNITY_FOG_COORDS(0)
 				float4 screenPos : TEXCOORD1;
 				float4 worldPos : TEXCOORD2;
-				float4 uvGrab : TEXCOORD3;
+				float3 normal : TEXCOORD3;
+				float4 uvGrab : TEXCOORD4;
 
                 float4 vertex : SV_POSITION;
             };
@@ -120,7 +124,8 @@
 
 
 				// Raises each vertex in a wavy pattern
-				v.vertex.y += sin((_Time.y * _WaveSpeed) + (v.vertex.x + v.vertex.z) * _WaveFrequency) * _WaveHeight;
+				float3 up = mul(unity_WorldToObject, v.normal);
+				v.vertex.xyz += up * (sin((_Time.y * _WaveSpeed) + (v.vertex.x + v.vertex.z) * _WaveFrequency) * _WaveHeight);
 
 				o.vertex = UnityObjectToClipPos(v.vertex); // Transform from object space to camera space
 				o.worldPos = mul(unity_ObjectToWorld, v.vertex); // Transform from object space to world space
@@ -141,6 +146,8 @@
 				// Compute UV coords of grab texture based on position of our shader object 
 				o.uvGrab.xy = (float2(o.vertex.x, o.vertex.y*flip) + o.vertex.w) * 0.5;
 				o.uvGrab.zw = o.vertex.zw;
+
+				o.normal = mul(unity_ObjectToWorld, v.normal);
 
                 return o;
             }
@@ -209,7 +216,7 @@
 				UNITY_APPLY_FOG(i.fogCoord, col); // Unity applies the fog for us
 
 				// Lighting
-				half nl = max(0, dot(half3(0, 1, 0), _WorldSpaceLightPos0.xyz)); // Directional light source
+				half nl = max(0, dot(i.normal, _WorldSpaceLightPos0.xyz)); // Directional light source
 
 				fixed4 ambient = _AmbientLightFactor * saturate(col + ripplesColored); // ambient light
 				fixed4 diffuse = (1-_AmbientLightFactor) * saturate(col + ripplesColored) * _LightColor0 * nl;

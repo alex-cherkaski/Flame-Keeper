@@ -59,4 +59,10 @@ public class DynamicLightController : MonoBehaviour
 
         m_targetConfig = lightConfigs[index];
     }
+
+    public void Scale(float percent)
+    {
+        pointLight.intensity = m_targetConfig.intensity * percent;
+        pointLight.range = m_targetConfig.range * percent;
+    }
 }

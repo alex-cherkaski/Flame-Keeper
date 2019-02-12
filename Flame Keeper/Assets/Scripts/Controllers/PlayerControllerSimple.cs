@@ -36,6 +36,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
 
     private Rigidbody rb;
     private CapsuleCollider capsuleCollider;
+    private Vector3 lastGroundedPosition;
 
     public void Setup(Vector3 startingPosition, int startingLanternUses, int maxLanternUses)
     {
@@ -151,6 +152,17 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
 
     void FixedUpdate()
     {
+        if (rb.useGravity)
+        {
+            rb.AddForce(Physics.gravity * rb.mass * gravityModifier);
+        }
+
+        if (Grounded() && Input.GetButton(StringConstants.Input.JumpButton))
+        {
+            Debug.Log("Pressed A");
+            rb.AddForce(0, jumpForce, 0, ForceMode.Impulse);
+        }
+
         GetInput();
 
         if (Mathf.Abs(input.x) == 0 && Mathf.Abs(input.y) == 0)
@@ -161,27 +173,18 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         CalculateDirection();
         Rotate();
         Move();
-
-        if (rb.useGravity)
-        {
-            rb.AddForce(Physics.gravity * rb.mass * gravityModifier);
-        }
-
-        if (Input.GetButton(StringConstants.Input.JumpButton) && Grounded())
-        {
-            Debug.Log("Pressed A");
-            rb.AddForce(0, jumpForce, 0, ForceMode.Impulse);
-        }
     }
 
     private bool Grounded()
     {
-        return Physics.CheckCapsule(capsuleCollider.bounds.center,
-                                    new Vector3(capsuleCollider.bounds.center.x, capsuleCollider.bounds.min.y, capsuleCollider.center.z),
-                                    capsuleCollider.radius,
-                                    ground);
+        bool grounded = Physics.Raycast(transform.position, -Vector3.up, 1.0f, ground);
+        if (grounded)
+        {
+            lastGroundedPosition = this.transform.position;
+        }
+        return grounded;
     }
-    
+
     private void OnCollisionEnter(Collision collision)
     {
         rb.angularVelocity = new Vector3(0, 0, 0);
@@ -210,5 +213,15 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
             //warmth += ;
             other.gameObject.SetActive(false);
         }
+    }
+
+    public void ScaleLightSource(float percent)
+    {
+        playerLightController.Scale(percent);
+    }
+
+    public void GoToLastGroundedPosition()
+    {
+        this.transform.position = lastGroundedPosition;
     }
 }
