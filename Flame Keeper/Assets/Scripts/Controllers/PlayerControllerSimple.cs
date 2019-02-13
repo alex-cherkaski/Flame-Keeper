@@ -157,9 +157,18 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
 
     void FixedUpdate()
     {
+        // Modify gravity when falling
         if (rb.useGravity)
         {
-            rb.AddForce(Physics.gravity * rb.mass * gravityModifier);
+            // Increase gravity on when falling, how most other platformers do it.
+            if (rb.velocity.y < -0.01f)
+            {
+                rb.AddForce(Physics.gravity * rb.mass * gravityModifier);
+            }
+            else
+            {
+                rb.AddForce(Physics.gravity * rb.mass);
+            }
         }
 
         if (lockMovementTime > 0.0f)
