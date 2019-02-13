@@ -3,11 +3,13 @@
 public class CrystalScript : MonoBehaviour
 {
     public float warmth = 10;
+    public float rotateSpeed = 1.0f;
 
     // Update is called once per frame
     void Update()
     {
-        this.transform.Rotate(45 * Time.deltaTime, 45 * Time.deltaTime, 45 * Time.deltaTime, Space.Self);
+        float angle = 45 * Time.deltaTime * rotateSpeed;
+        this.transform.Rotate(angle, angle, angle, Space.Self);
     }
 
     public float GetWarmth()

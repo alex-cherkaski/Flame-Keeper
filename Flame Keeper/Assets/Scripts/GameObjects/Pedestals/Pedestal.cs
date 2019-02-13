@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class Pedestal : MonoBehaviour, DynamicLightSource
@@ -10,7 +9,7 @@ public class Pedestal : MonoBehaviour, DynamicLightSource
     public List<ActivatableObject> connectedTriggers = new List<ActivatableObject>();
 
     [Header("Emissions")]
-    public GameObject emitter;
+    public List<MeshRenderer> emitters;
     public float deactivatedEmitterIntensity = -3.0f;
     public float activatedEmitterIntensity = 3.0f;
     public List<MeshRenderer> renderersInEmission = new List<MeshRenderer>();
@@ -28,8 +27,8 @@ public class Pedestal : MonoBehaviour, DynamicLightSource
     public float activateDistance = 2.0f;
 
     private bool activated = false;
+    private Color emissionColor;
     private MeshRenderer wireRenderer;
-    private MeshRenderer emitterRenderer;
 
     public int maxLevel;
     public int startLevel;
@@ -52,7 +51,6 @@ public class Pedestal : MonoBehaviour, DynamicLightSource
     private void Start()
     {
         wireRenderer = wire.GetComponent<MeshRenderer>();
-        emitterRenderer = emitter.GetComponent<MeshRenderer>();
         currLevel = startLevel;
         if (currLevel > 0)
         {
@@ -64,16 +62,22 @@ public class Pedestal : MonoBehaviour, DynamicLightSource
         if (activated)
         {
             wireRenderer.material.color = wireActivatedColor;
+            ActivatePedestal();
         }
         else
         {
             wireRenderer.material.color = wireDeactivatedColor;
         }
+
+        if (emitters.Count > 0)
+        {
+            emissionColor = emitters[0].materials[1].color;
+        }
     }
 
     private void Update()
     {
-        float playerDistance = Vector3.Distance(emitter.transform.position, player.transform.position); // TODO: Should have a level controller or whatever where we get the player reference
+        float playerDistance = Vector3.Distance(this.transform.position, player.transform.position); // TODO: Should have a level controller or whatever where we get the player reference
         if (Input.GetButtonDown(StringConstants.Input.ActivateButton) && playerDistance < activateDistance)
         {
             if (currLevel < maxLevel && player.RequestLanternUse())
@@ -99,15 +103,29 @@ public class Pedestal : MonoBehaviour, DynamicLightSource
             }
         }
 
+        int i = 0;
+        foreach (MeshRenderer emitter in emitters)
+        {
+            if (i < currLevel)
+            {
+                emitter.materials[1].SetVector("_Color", emissionColor);
+                emitter.materials[1].SetVector("_EmissionColor", emissionColor * activatedEmitterIntensity * activatedEmitterIntensity * Mathf.Sign(activatedEmitterIntensity));
+            }
+            else
+            {
+                emitter.materials[1].SetVector("_Color", emitter.materials[0].color);
+                emitter.materials[1].SetVector("_EmissionColor", emitter.materials[0].color * deactivatedEmitterIntensity * deactivatedEmitterIntensity * Mathf.Sign(deactivatedEmitterIntensity));
+            }
+            i++;
+        }
+
         if (activated)
         {
             wireRenderer.material.color = Color.Lerp(wireRenderer.material.color, wireActivatedColor, Time.deltaTime * activateAnimationSpeed);
-            emitterRenderer.material.SetVector("_EmissionColor", emitterRenderer.material.color * activatedEmitterIntensity * activatedEmitterIntensity * Mathf.Sign(activatedEmitterIntensity));
         }
         else
         {
             wireRenderer.material.color = Color.Lerp(wireRenderer.material.color, wireDeactivatedColor, Time.deltaTime * activateAnimationSpeed);
-            emitterRenderer.material.SetVector("_EmissionColor", emitterRenderer.material.color * deactivatedEmitterIntensity * deactivatedEmitterIntensity * Mathf.Sign(deactivatedEmitterIntensity));
         }
 
         // If we are updating an emission intensity, we have to tell all materials that it touches
