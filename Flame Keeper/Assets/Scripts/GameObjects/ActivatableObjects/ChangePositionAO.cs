@@ -31,8 +31,7 @@ public class ChangePositionAO : ActivatableObject
     private void Start()
     {
         startingPosition = moveableObject.transform.position;
-        level = GetLevel();
-        OnPowered(null, level);
+        targetPosition = startingPosition + (incrementPosition * GetLevel());
     }
 
     private void Update()
