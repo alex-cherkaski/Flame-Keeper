@@ -40,6 +40,8 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     private CapsuleCollider capsuleCollider;
     private Vector3 lastGroundedPosition;
 
+    private bool enableInput;
+
     public void Setup(Vector3 startingPosition, int startingLanternUses, int maxLanternUses)
     {
         this.transform.position = startingPosition;
@@ -57,6 +59,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         rb = GetComponent<Rigidbody>();
         capsuleCollider = GetComponent<CapsuleCollider>();
         levelCamera = Camera.main.transform;
+        enableInput = true;
     }
 
 
@@ -133,8 +136,17 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
 
     private void GetInput()
     {
-        input.x = Input.GetAxisRaw(StringConstants.Input.HorizontalMovement);
-        input.y = Input.GetAxisRaw(StringConstants.Input.VerticalMovement);
+        if (enableInput)
+        {
+            input.x = Input.GetAxisRaw(StringConstants.Input.HorizontalMovement);
+            input.y = Input.GetAxisRaw(StringConstants.Input.VerticalMovement);
+        }
+        else
+        {
+            input.x = 0.0f;
+            input.y = 0.0f;
+        }
+        
     }
 
     private void CalculateDirection()
@@ -179,7 +191,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
 
         // TODO: Player can just repeatedly jump out of water to bypass neagtive effect.
         //       Later on, add some functionality so that the player can get out of water
-        if (Grounded() && Input.GetButton(StringConstants.Input.JumpButton))
+        if (Grounded() && Input.GetButton(StringConstants.Input.JumpButton) && enableInput)
         {
             Debug.Log("Pressed A");
             rb.AddForce(0, jumpForce, 0, ForceMode.Impulse);
@@ -246,5 +258,15 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     {
         this.transform.position = lastGroundedPosition;
         lockMovementTime = 1.0f;
+    }
+
+    public void EnableInput()
+    {
+        enableInput = true;
+    }
+
+    public void DisableInput()
+    {
+        enableInput = false;
     }
 }

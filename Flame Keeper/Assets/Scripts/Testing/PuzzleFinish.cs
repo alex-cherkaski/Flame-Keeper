@@ -5,27 +5,32 @@ using UnityEngine.Events;
 
 public abstract class PuzzleFinish : MonoBehaviour
 {
+    public int waitTime;
+
     [Header("Events")]
     public List<UnityEvent> eventsToPlay;
 
     private bool played;
+    private GameObject player;
 
     void Start()
     {
         played = false;
+        player = GameObject.FindWithTag("Player");
     }
 
     void Update()
     {
         if (CheckIfFinished() && !played)
         {
-            OnFinish();
+            StartCoroutine(OnFinish());
             played = true;
         }
     }
 
-    protected void OnFinish()
+    IEnumerator OnFinish()
     {
+        player.GetComponent<PlayerControllerSimple>().DisableInput();
         foreach (UnityEvent events in eventsToPlay) 
         {
             if (events != null)
@@ -33,7 +38,8 @@ public abstract class PuzzleFinish : MonoBehaviour
                 events.Invoke();
             }
         }
-        
+        yield return new WaitForSeconds(waitTime);
+        player.GetComponent<PlayerControllerSimple>().EnableInput();
     }
 
     protected abstract bool CheckIfFinished();
