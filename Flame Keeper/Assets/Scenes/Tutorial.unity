@@ -4490,50 +4490,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6577923168870913197, guid: 3ff76766d9f0ae34c898209d01d2440f,
         type: 3}
-      propertyPath: m_SceneBindings.Array.size
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 6577923168870913197, guid: 3ff76766d9f0ae34c898209d01d2440f,
-        type: 3}
-      propertyPath: m_ExposedReferences.m_References.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6577923168870913197, guid: 3ff76766d9f0ae34c898209d01d2440f,
-        type: 3}
-      propertyPath: m_SceneBindings.Array.data[8].key
-      value: 
-      objectReference: {fileID: 114570183210337012, guid: f8741aff3e5fa7148916858d6d6dec1a,
-        type: 2}
-    - target: {fileID: 6577923168870913197, guid: 3ff76766d9f0ae34c898209d01d2440f,
-        type: 3}
       propertyPath: m_SceneBindings.Array.data[8].value
       value: 
       objectReference: {fileID: 331077955}
-    - target: {fileID: 6577923168870913197, guid: 3ff76766d9f0ae34c898209d01d2440f,
-        type: 3}
-      propertyPath: m_SceneBindings.Array.data[9].key
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6577923168870913197, guid: 3ff76766d9f0ae34c898209d01d2440f,
-        type: 3}
-      propertyPath: m_SceneBindings.Array.data[9].value
-      value: 
-      objectReference: {fileID: 331077952}
-    - target: {fileID: 6577923168870913197, guid: 3ff76766d9f0ae34c898209d01d2440f,
-        type: 3}
-      propertyPath: m_SceneBindings.Array.data[10].key
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6577923168870913197, guid: 3ff76766d9f0ae34c898209d01d2440f,
-        type: 3}
-      propertyPath: m_SceneBindings.Array.data[10].value
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6577923168870913197, guid: 3ff76766d9f0ae34c898209d01d2440f,
-        type: 3}
-      propertyPath: m_ExposedReferences.m_References.Array.data[0].first
-      value: 625caab38d5ad254b8cf865ed5f4db69
-      objectReference: {fileID: 0}
     - target: {fileID: 6577923168870913197, guid: 3ff76766d9f0ae34c898209d01d2440f,
         type: 3}
       propertyPath: m_ExposedReferences.m_References.Array.data[0].second
@@ -4541,19 +4500,9 @@ PrefabInstance:
       objectReference: {fileID: 381596956}
     - target: {fileID: 6577923168870913197, guid: 3ff76766d9f0ae34c898209d01d2440f,
         type: 3}
-      propertyPath: m_ExposedReferences.m_References.Array.data[1].first
-      value: 934cfbc9a42473843a78c5276bd21dd1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6577923168870913197, guid: 3ff76766d9f0ae34c898209d01d2440f,
-        type: 3}
       propertyPath: m_ExposedReferences.m_References.Array.data[1].second
       value: 
       objectReference: {fileID: 381596956}
-    - target: {fileID: 6577923168870913197, guid: 3ff76766d9f0ae34c898209d01d2440f,
-        type: 3}
-      propertyPath: m_ExposedReferences.m_References.Array.data[2].first
-      value: 2d12d03fd7d5ff6458898e0668a30d2f
-      objectReference: {fileID: 0}
     - target: {fileID: 6577923168870913197, guid: 3ff76766d9f0ae34c898209d01d2440f,
         type: 3}
       propertyPath: m_ExposedReferences.m_References.Array.data[2].second
@@ -4564,16 +4513,6 @@ PrefabInstance:
       propertyPath: pedestals.Array.data[0]
       value: 
       objectReference: {fileID: 1801734678}
-    - target: {fileID: 6600000523242364404, guid: 3ff76766d9f0ae34c898209d01d2440f,
-        type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 416640409}
-    - target: {fileID: 6600000523242364404, guid: 3ff76766d9f0ae34c898209d01d2440f,
-        type: 3}
-      propertyPath: waitTime
-      value: 9
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ff76766d9f0ae34c898209d01d2440f, type: 3}
 --- !u!1001 &757594194771331175
