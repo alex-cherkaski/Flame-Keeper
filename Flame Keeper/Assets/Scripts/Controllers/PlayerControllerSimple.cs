@@ -59,10 +59,12 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         levelCamera = Camera.main.transform;
     }
 
-
-    // Update is called once per frame
     void Update()
     {
+        // Pass in player's position to all materials which is used in lighting
+        Shader.SetGlobalFloat("_PlayerMaxLightRange", 15.0f);
+        Shader.SetGlobalFloat("_PlayerCurrentLightRange", playerLightController.pointLight.range);
+
         if (transform.position.y < -25)
         {
             transform.position = new Vector3(0, 0, 0);
