@@ -40,7 +40,9 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     private CapsuleCollider capsuleCollider;
     private Vector3 checkpointPosition;
 
-    /// <summary>
+    private bool enableInput;
+
+        /// <summary>
     /// Setup initial parameters for the character
     /// </summary>
     public void Setup(Vector3 startingPosition, int startingLanternUses, int maxLanternUses)
@@ -63,6 +65,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         rb = GetComponent<Rigidbody>();
         capsuleCollider = GetComponent<CapsuleCollider>();
         levelCamera = Camera.main.transform;
+        enableInput = true;
     }
 
     /// <summary>
@@ -136,8 +139,17 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     /// </summary>
     private void GetInput()
     {
-        input.x = Input.GetAxisRaw(StringConstants.Input.HorizontalMovement);
-        input.y = Input.GetAxisRaw(StringConstants.Input.VerticalMovement);
+        if (enableInput)
+        {
+            input.x = Input.GetAxisRaw(StringConstants.Input.HorizontalMovement);
+            input.y = Input.GetAxisRaw(StringConstants.Input.VerticalMovement);
+        }
+        else
+        {
+            input.x = 0.0f;
+            input.y = 0.0f;
+        }
+        
     }
 
     /// <summary>
@@ -192,7 +204,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
             return;
         }
 
-        if (Grounded() && Input.GetButton(StringConstants.Input.JumpButton))
+        if (Grounded() && Input.GetButton(StringConstants.Input.JumpButton) && enableInput)
         {
             rb.AddForce(0, jumpForce, 0, ForceMode.Impulse);
         }
@@ -295,5 +307,15 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
 
         // TODO: Either don't lock movement or have the player blink like a normal respawn mechanic
         lockMovementTime = 1.0f;
+    }
+
+    public void EnableInput()
+    {
+        enableInput = true;
+    }
+
+    public void DisableInput()
+    {
+        enableInput = false;
     }
 }
