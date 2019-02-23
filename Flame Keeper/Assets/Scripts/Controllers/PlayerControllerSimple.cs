@@ -73,8 +73,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         // Check if player has fallen out of the world
         if (transform.position.y < -25)
         {
-            // TODO: Don't start at (0,0,0), get the starting position from the level config
-            transform.position = new Vector3(0, 0, 0);
+            GoToLastCheckpoint();
         }
     }
 
@@ -248,6 +247,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     {
         velocity = newVelocity;
     }
+
 
     /// <summary>
     /// Checks if we have picked up a crystal
