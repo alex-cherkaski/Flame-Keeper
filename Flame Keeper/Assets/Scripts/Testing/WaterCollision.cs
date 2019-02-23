@@ -43,7 +43,7 @@ public class WaterCollision : MonoBehaviour
             if (timer > waitTime)
             {
                 coloured.GetComponent<Renderer>().material.color = Color.white;
-                playerController.GoToLastGroundedPosition();
+                playerController.GoToLastCheckpoint();
                 playerAlive = false;
                 timer = 0f;
             }

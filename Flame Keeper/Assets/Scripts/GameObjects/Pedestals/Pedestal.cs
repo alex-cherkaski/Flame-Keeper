@@ -17,15 +17,10 @@ public class Pedestal : MonoBehaviour, DynamicLightSource
     [Header("Lights")]
     public DynamicLightController pointLightController;
 
-    [Header("Wire")]
-    public GameObject wire;
-    public Color wireDeactivatedColor;
-    public Color wireActivatedColor;
-
     [Header("Testing, should delete later")]
-    public PlayerControllerSimple player;
     public float activateDistance = 2.0f;
 
+    public PlayerControllerSimple player;
     private bool activated = false;
     private Color emissionColor;
     private MeshRenderer wireRenderer;
@@ -48,25 +43,19 @@ public class Pedestal : MonoBehaviour, DynamicLightSource
         }
     }
 
+    /// <summary>
+    /// Assign gameobject references and initialize variables
+    /// </summary>
     private void Start()
     {
-        wireRenderer = wire.GetComponent<MeshRenderer>();
         currLevel = startLevel;
+        pointLightController.Setup(this);
+        player = FlameKeeper.Get().levelController.GetLevelPlayer();
+
         if (currLevel > 0)
         {
             activated = true;
-        }
-
-        pointLightController.Setup(this);
-
-        if (activated)
-        {
-            wireRenderer.material.color = wireActivatedColor;
             ActivatePedestal();
-        }
-        else
-        {
-            wireRenderer.material.color = wireDeactivatedColor;
         }
 
         if (emitters.Count > 0)
@@ -75,22 +64,31 @@ public class Pedestal : MonoBehaviour, DynamicLightSource
         }
     }
 
+    /// <summary>
+    /// Non physics based update
+    /// </summary>
     private void Update()
     {
-        float playerDistance = Vector3.Distance(this.transform.position, player.transform.position); // TODO: Should have a level controller or whatever where we get the player reference
+        float playerDistance = Vector3.Distance(this.transform.position, player.transform.position);
+
+        // Check for pedestal activation
         if (Input.GetButtonDown(StringConstants.Input.ActivateButton) && playerDistance < activateDistance)
         {
             if (currLevel < maxLevel && player.RequestLanternUse())
             {
                 currLevel++;
+                player.RecordCheckpoint();
                 ActivatePedestal();
             }
         }
+
+        // Check for pedestal deactivation
         if (Input.GetButtonDown(StringConstants.Input.DeactivateButton) && playerDistance < activateDistance)
         {
             if (activated && player.RequestLanternAddition())
             {
                 currLevel--;
+                player.RecordCheckpoint();
                 if (currLevel <= 0)
                 {
                     DeactivatePedestal();
@@ -106,6 +104,7 @@ public class Pedestal : MonoBehaviour, DynamicLightSource
         int i = 0;
         foreach (MeshRenderer emitter in emitters)
         {
+            // TODO: Should lerp these values to get a nice animation
             if (i < currLevel)
             {
                 emitter.materials[1].SetVector("_Color", emissionColor);
@@ -117,15 +116,6 @@ public class Pedestal : MonoBehaviour, DynamicLightSource
                 emitter.materials[1].SetVector("_EmissionColor", emitter.materials[0].color * deactivatedEmitterIntensity * deactivatedEmitterIntensity * Mathf.Sign(deactivatedEmitterIntensity));
             }
             i++;
-        }
-
-        if (activated)
-        {
-            wireRenderer.material.color = Color.Lerp(wireRenderer.material.color, wireActivatedColor, Time.deltaTime * activateAnimationSpeed);
-        }
-        else
-        {
-            wireRenderer.material.color = Color.Lerp(wireRenderer.material.color, wireDeactivatedColor, Time.deltaTime * activateAnimationSpeed);
         }
 
         // If we are updating an emission intensity, we have to tell all materials that it touches
@@ -154,7 +144,9 @@ public class Pedestal : MonoBehaviour, DynamicLightSource
         return GetCurrLevel();
     }
 
-
+    /// <summary>
+    /// Checks if the pedestal has any amount of charge in it
+    /// </summary>
     public bool IsActive()
     {
         return activated;
@@ -179,6 +171,9 @@ public class Pedestal : MonoBehaviour, DynamicLightSource
         activated = false;
     }
 
+    /// <summary>
+    /// Gets the current number of charges in the pedestal
+    /// </summary>
     public int GetCurrLevel()
     {
         return currLevel;
