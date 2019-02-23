@@ -4,9 +4,12 @@ using UnityEngine;
 
 public abstract class ActivatableObject : MonoBehaviour
 {
+    // Pedestals connected to this object that are currently powered
     protected HashSet<Pedestal> activeSources = new HashSet<Pedestal>();
-    public int maxLevel;
 
+    /// <summary>
+    /// Gets the current power level for this object
+    /// </summary>
     public int GetLevel()
     {
         int level = 0;
@@ -20,16 +23,12 @@ public abstract class ActivatableObject : MonoBehaviour
 
     public void OnPedestalActivate(Pedestal source)
     {
-        int level = GetLevel();
-
-        if (level <= maxLevel)
+        if (!activeSources.Contains(source))
         {
-            if (!activeSources.Contains(source))
-            {
-                activeSources.Add(source);
-            }
-            OnPowered(source, GetLevel());
+            activeSources.Add(source);
         }
+
+        OnPowered(source, GetLevel());
     }
 
     public void OnPedestalDeactivate(Pedestal source)

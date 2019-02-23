@@ -22,4 +22,9 @@ public class StringConstants
         public const string HorizontalMovement = "Horizontal";
         public const string VerticalMovement = "Vertical";
     }
+
+    public class Tags
+    {
+        public const string CrystalTag = "Crystal";
+    }
 }
