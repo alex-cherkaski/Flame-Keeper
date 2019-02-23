@@ -38,10 +38,13 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     private float lockMovementTime = 0.0f;
     private Rigidbody rb;
     private CapsuleCollider capsuleCollider;
-    private Vector3 lastGroundedPosition;
+    private Vector3 checkpointPosition;
 
     private bool enableInput;
 
+        /// <summary>
+    /// Setup initial parameters for the character
+    /// </summary>
     public void Setup(Vector3 startingPosition, int startingLanternUses, int maxLanternUses)
     {
         this.transform.position = startingPosition;
@@ -54,6 +57,9 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         }
     }
 
+    /// <summary>
+    /// Assigns GameObject references
+    /// </summary>
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -62,19 +68,17 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         enableInput = true;
     }
 
-
-    // Update is called once per frame
+    /// <summary>
+    /// Non-physics based update
+    /// </summary>
     void Update()
     {
+        // Check if player has fallen out of the world
         if (transform.position.y < -25)
         {
-            transform.position = new Vector3(0, 0, 0);
+            GoToLastCheckpoint();
         }
     }
-
-
-
-    #region LanternFunctions
 
     /// <summary>
     /// Notifies light controller of new value
@@ -130,10 +134,9 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         return true;
     }
 
-    #endregion
-
-
-
+    /// <summary>
+    /// Read movement axis and store it in the input variable
+    /// </summary>
     private void GetInput()
     {
         if (enableInput)
@@ -149,6 +152,9 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         
     }
 
+    /// <summary>
+    /// Calculates the current angle of movement relative to the camera
+    /// </summary>
     private void CalculateDirection()
     {
         angle = Mathf.Atan2(input.x, input.y);
@@ -156,23 +162,32 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         angle += levelCamera.eulerAngles.y;
     }
 
+    /// <summary>
+    /// Rotates the character transform
+    /// </summary>
     private void Rotate()
     {
         targetRotation = Quaternion.Euler(0, angle, 0);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
     }
 
+    /// <summary>
+    /// Moves the character transform with respect to its velocity
+    /// </summary>
     private void Move()
     {
         transform.position += transform.forward * velocity * Time.deltaTime;
     }
 
+    /// <summary>
+    /// Physics based update
+    /// </summary>
     void FixedUpdate()
     {
         // Modify gravity when falling
         if (rb.useGravity)
         {
-            // Increase gravity on when falling, how most other platformers do it.
+            // Increase gravity on when falling, how most other platformers do it (Mario, basically).
             if (rb.velocity.y < -0.01f)
             {
                 rb.AddForce(Physics.gravity * rb.mass * gravityModifier);
@@ -189,11 +204,8 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
             return;
         }
 
-        // TODO: Player can just repeatedly jump out of water to bypass neagtive effect.
-        //       Later on, add some functionality so that the player can get out of water
         if (Grounded() && Input.GetButton(StringConstants.Input.JumpButton) && enableInput)
         {
-            Debug.Log("Pressed A");
             rb.AddForce(0, jumpForce, 0, ForceMode.Impulse);
         }
 
@@ -209,54 +221,91 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         Move();
     }
 
+    /// <summary>
+    /// Checks if the player is on the ground by raycasting downwards and checking
+    /// if the hit object has a "Ground" layer
+    /// </summary>
     private bool Grounded()
     {
-        bool grounded = Physics.Raycast(transform.position, -Vector3.up, 1.0f, ground);
-        if (grounded)
-        {
-            lastGroundedPosition = this.transform.position;
-        }
-        return grounded;
+        return Physics.Raycast(transform.position, -Vector3.up, 1.0f, ground);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
+        // Stop angular velocity when colliding with an object or else the player
+        // will continue to rotate
         rb.angularVelocity = new Vector3(0, 0, 0);
     }
 
     private void OnCollisionStay(Collision collision)
     {
+        // Stop angular velocity when colliding with an object or else the player
+        // will continue to rotate
         rb.angularVelocity = new Vector3(0, 0, 0);
     }
 
+    /// <summary>
+    /// Gets the current velocity in the transform's forward direction
+    /// </summary>
     public float GetVelocity()
     {
         return velocity;
     }
 
+    /// <summary>
+    /// Sets the current velocity in the transform's forward direction
+    /// </summary>
     public void SetVelocity(float newVelocity)
     {
         velocity = newVelocity;
     }
 
+
+    /// <summary>
+    /// Checks if we have picked up a crystal
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Crystal"))
+        if (other.gameObject.CompareTag(StringConstants.Tags.CrystalTag))
         {
-            lanternUses += (int) other.gameObject.GetComponent<CrystalScript>().GetWarmth();
-            //warmth += ;
-            other.gameObject.SetActive(false);
+            CrystalScript crystalScript = other.gameObject.GetComponent<CrystalScript>();
+            if (crystalScript != null)
+            {
+                lanternUses += (int)crystalScript.GetWarmth();
+                other.gameObject.SetActive(false);
+            }
+            else
+            {
+                Debug.LogError("No Crystal Script attached to an object labeled as a crystal! " + other.name);
+            }
         }
     }
 
+    /// <summary>
+    /// Overrides light value for animations (eg, floating in water)
+    /// </summary>
     public void ScaleLightSource(float percent)
     {
         playerLightController.Scale(percent);
     }
 
-    public void GoToLastGroundedPosition()
+    /// <summary>
+    /// Sets the player's current position as the last checkpoint
+    /// </summary>
+    public void RecordCheckpoint()
     {
-        this.transform.position = lastGroundedPosition;
+        checkpointPosition = this.transform.position;
+    }
+
+    /// <summary>
+    /// Reset the player back to their last checkpoint (ie, last pedestal lit)
+    /// </summary>
+    public void GoToLastCheckpoint()
+    {
+        this.transform.position = checkpointPosition;
+
+        // TODO: Either don't lock movement or have the player blink like a normal respawn mechanic
         lockMovementTime = 1.0f;
     }
 
