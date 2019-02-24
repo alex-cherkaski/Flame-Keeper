@@ -3160,6 +3160,11 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3710884817278574291, guid: 944b6c3280b524d47ba629f87563276b,
+        type: 3}
+      propertyPath: m_Range
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 944b6c3280b524d47ba629f87563276b, type: 3}
 --- !u!95 &869407176 stripped
@@ -6217,11 +6222,6 @@ PrefabInstance:
     - target: {fileID: 3710884817278574291, guid: 944b6c3280b524d47ba629f87563276b,
         type: 3}
       propertyPath: m_Range
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3710884817278574291, guid: 944b6c3280b524d47ba629f87563276b,
-        type: 3}
-      propertyPath: m_Color.a
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
