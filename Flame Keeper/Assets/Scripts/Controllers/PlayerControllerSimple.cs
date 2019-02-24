@@ -38,6 +38,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     private float lockMovementTime = 0.0f;
     private Rigidbody rb;
     private CapsuleCollider capsuleCollider;
+    public MeshRenderer renderer;
     private Vector3 checkpointPosition;
 
     private bool enableInput;
@@ -153,7 +154,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
             input.x = 0.0f;
             input.y = 0.0f;
         }
-        
+
     }
 
     /// <summary>
@@ -205,6 +206,10 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         if (lockMovementTime > 0.0f)
         {
             lockMovementTime -= Time.deltaTime;
+
+            // Blink character, uncomment when player is in
+            //renderer.enabled = (Time.time % 0.35f < 0.175) || lockMovementTime < 0.0f;
+
             return;
         }
 
