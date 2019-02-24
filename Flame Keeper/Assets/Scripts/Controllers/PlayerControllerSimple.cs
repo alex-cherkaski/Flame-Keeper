@@ -76,6 +76,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         // Pass in player's position to all materials which is used in lighting
         Shader.SetGlobalFloat("_PlayerMaxLightRange", 15.0f);
         Shader.SetGlobalFloat("_PlayerCurrentLightRange", playerLightController.pointLight.range);
+        Shader.SetGlobalVector("_PlayerLightPosition", playerLightController.pointLight.transform.position);
 
         // Check if player has fallen out of the world
         if (transform.position.y < -25)

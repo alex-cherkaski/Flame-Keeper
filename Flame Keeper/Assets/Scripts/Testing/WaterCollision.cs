@@ -55,7 +55,11 @@ public class WaterCollision : MonoBehaviour
         else
         {
             // Make sure player has normal speed if we aren't calculating water stuff
+            coloured.GetComponent<Renderer>().material.color = originalColour;
+            checkWaterStatus = false;
+            playerTouching = false;
             playerController.SetVelocity(outOfWaterSpeed);
+            timer = 0.0f;
         }
     }
 

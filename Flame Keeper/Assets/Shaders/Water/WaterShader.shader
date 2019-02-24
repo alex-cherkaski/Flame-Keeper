@@ -74,6 +74,10 @@ Shader "Fluids/Water"
 			// Have to define all our properties as variables for each pass
 			float _OrthographicCamera;
 
+			// Player light parameters
+			float4 _PlayerLightPosition;
+			float _PlayerCurrentLightRange;
+
 			sampler2D _GrabTexture;
 			sampler2D _CameraDepthTexture; // Pre-set by unity
 			half4 _WaterTint;
@@ -218,8 +222,13 @@ Shader "Fluids/Water"
 				// Lighting
 				half nl = max(0, dot(i.normal, _WorldSpaceLightPos0.xyz)); // Directional light source
 
-				fixed4 ambient = _AmbientLightFactor * saturate(col + ripplesColored); // ambient light
-				fixed4 diffuse = (1-_AmbientLightFactor) * saturate(col + ripplesColored) * _LightColor0 * nl;
+				//float kA = min(_AmbientLightFactor, saturate(_AmbientLightFactor - step(1.0 - (length(_PlayerLightPosition - i.worldPos) / _PlayerCurrentLightRange), 0.0)));
+				float kA = _AmbientLightFactor;
+
+				kA += kA * step(length(_PlayerLightPosition - i.worldPos) / _PlayerCurrentLightRange, 1.0);
+
+				fixed4 ambient = kA * saturate(col + ripplesColored); // ambient light
+				fixed4 diffuse = (1-kA) * saturate(col + ripplesColored) * _LightColor0 * nl;
 				return ambient + diffuse;
             }
 
