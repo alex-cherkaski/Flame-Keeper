@@ -1,4 +1,4 @@
-﻿Shader "Testing/LightSurface"
+﻿Shader "FlameKeeperSurfaces/LightSurface"
 {
 	Properties
 	{
@@ -15,11 +15,6 @@
 		[Header(Normal Mapping)]
 		_NormalMap("Normal Map", 2D) = "bump" {}
 		_NormalMapIntensity("Normal Map Intensity", Range(0,1)) = 1.0
-
-		[Header(Tone Mapping)]
-		_Gain("Lightmap tone-mapping Gain", Float) = 1
-		_Knee("Lightmap tone-mapping Knee", Float) = 0.5
-		_Compress("Lightmap tone-mapping Compress", Float) = 0.33
 	}
 
 		SubShader
@@ -47,9 +42,6 @@
 			sampler2D _NormalMap;
 			half _NormalMapIntensity;
 
-			half _Gain;
-			half _Knee;
-			half _Compress;		
 
 			struct Input
 			{
