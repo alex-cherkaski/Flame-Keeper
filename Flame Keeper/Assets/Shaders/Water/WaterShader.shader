@@ -124,7 +124,7 @@ Shader "Fluids/Water"
 
 
 				// Raises each vertex in a wavy pattern
-				float3 up = mul(unity_WorldToObject, v.normal);
+				float3 up = mul(unity_WorldToObject, float3(0,1,0));
 				v.vertex.xyz += up * (sin((_Time.y * _WaveSpeed) + (v.vertex.x + v.vertex.z) * _WaveFrequency) * _WaveHeight);
 
 				o.vertex = UnityObjectToClipPos(v.vertex); // Transform from object space to camera space
