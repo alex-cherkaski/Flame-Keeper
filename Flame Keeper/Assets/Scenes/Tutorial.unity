@@ -2963,7 +2963,16 @@ PrefabInstance:
       propertyPath: m_Intensity
       value: 1.75
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 44498996, guid: 2d71c2ba1fa1eb14d95a6999b63cfe0e, type: 3}
+      propertyPath: inWaterSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 416640410, guid: 2d71c2ba1fa1eb14d95a6999b63cfe0e, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 416640410, guid: 2d71c2ba1fa1eb14d95a6999b63cfe0e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2d71c2ba1fa1eb14d95a6999b63cfe0e, type: 3}
 --- !u!1 &803069177 stripped
 GameObject:
