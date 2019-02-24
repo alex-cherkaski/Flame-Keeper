@@ -10,13 +10,14 @@ public class WaterCollision : MonoBehaviour
     public float inWaterSpeed;
     private float outOfWaterSpeed;
     private bool playerTouching;
-    private bool playerAlive;
     float timer;
 
     [Header("Colour Effect (Test)")]
     public string colourComponent;
     private Color originalColour;
     private GameObject coloured;
+
+    private bool checkWaterStatus = false;
 
     private PlayerControllerSimple playerController;
 
@@ -25,7 +26,6 @@ public class WaterCollision : MonoBehaviour
     {
         playerController = GetComponent<PlayerControllerSimple>();
         playerTouching = false;
-        playerAlive = true;
         outOfWaterSpeed = playerController.velocity;
         coloured = this.gameObject.transform.Find(colourComponent).gameObject;
         originalColour = coloured.GetComponent<Renderer>().material.GetColor("_Color");
@@ -34,24 +34,37 @@ public class WaterCollision : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playerTouching && playerAlive)
+        // If the player jumped into water, hasnt gotten out yet, and is still alive
+        if (checkWaterStatus && !OutOfWater() && timer <= waitTime)
         {
             timer += Time.deltaTime;
             coloured.GetComponent<Renderer>().material.color = Color.blue;
             float percentToDeath = Mathf.Clamp(timer / waitTime, 0.0f, 1.0f);
-            playerController.ScaleLightSource(1.0f-percentToDeath);
+            playerController.ScaleLightSource(1.0f - percentToDeath);
             if (timer > waitTime)
             {
-                coloured.GetComponent<Renderer>().material.color = Color.white;
+                // Reset properties and respawn player
                 playerController.GoToLastCheckpoint();
-                playerAlive = false;
-                timer = 0f;
+                coloured.GetComponent<Renderer>().material.color = originalColour;
+                checkWaterStatus = false;
+                playerTouching = false;
+                playerController.SetVelocity(outOfWaterSpeed);
+                timer = 0.0f;
             }
         }
         else
         {
-            timer = 0;
+            // Make sure player has normal speed if we aren't calculating water stuff
+            playerController.SetVelocity(outOfWaterSpeed);
         }
+    }
+
+    /// <summary>
+    /// Checks if the player is not touching the water and is grounded
+    /// </summary>
+    bool OutOfWater()
+    {
+        return !playerTouching && playerController.Grounded();
     }
 
     void OnTriggerEnter(Collider other)
@@ -60,8 +73,8 @@ public class WaterCollision : MonoBehaviour
         {
             return;
         }
+        checkWaterStatus = true;
         playerTouching = true;
-        playerController.inWater = true;
 
         playerController.SetVelocity(inWaterSpeed);
     }
@@ -73,9 +86,5 @@ public class WaterCollision : MonoBehaviour
             return;
         }
         playerTouching = false;
-        playerAlive = true;
-        coloured.GetComponent<Renderer>().material.color = Color.red;
-        playerController.SetVelocity(outOfWaterSpeed);
-        playerController.inWater = false;
     }
 }

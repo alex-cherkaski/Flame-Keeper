@@ -30,7 +30,6 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     private Quaternion targetRotation;
     private Transform levelCamera;
 
-    public bool inWater = false; // TODO: Dont make public, bring WaterCollision.cs into this script
     public float jumpForce = 1.0f;
     public float gravityModifier = 1.0f;
     public LayerMask ground;
@@ -234,7 +233,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     /// Checks if the player is on the ground by raycasting downwards and checking
     /// if the hit object has a "Ground" layer
     /// </summary>
-    private bool Grounded()
+    public bool Grounded()
     {
         return Physics.Raycast(transform.position, -Vector3.up, 1.0f, ground);
     }
@@ -313,6 +312,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     public void GoToLastCheckpoint()
     {
         this.transform.position = checkpointPosition;
+        this.rb.velocity = Vector3.zero;
 
         // TODO: Either don't lock movement or have the player blink like a normal respawn mechanic
         lockMovementTime = 1.0f;
