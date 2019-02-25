@@ -6,12 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class Totem : MonoBehaviour
 {
-    // lol good enough for the demo
+    public string nextSceneName;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            SceneManager.LoadScene("Tutorial");
+            SceneManager.LoadScene(nextSceneName);
         }
     }
 }
