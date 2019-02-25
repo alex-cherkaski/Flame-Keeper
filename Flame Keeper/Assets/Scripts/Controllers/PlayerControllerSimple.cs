@@ -3,7 +3,8 @@
 public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
 {
     [Header("Parameters")]
-    public float velocity = 5;
+    public float normalVelocity = 5;
+    private float currVelocity;
     public float turnSpeed = 10;
 
     [Header("Child Controllers")]
@@ -30,7 +31,6 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     private Quaternion targetRotation;
     private Transform levelCamera;
 
-    public bool inWater = false; // TODO: Dont make public, bring WaterCollision.cs into this script
     public float jumpForce = 1.0f;
     public float gravityModifier = 1.0f;
     public LayerMask ground;
@@ -43,7 +43,14 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
 
     private bool enableInput;
 
-        /// <summary>
+    [Header("Water Collision")]
+    public float waitTime = 3f;
+    public float inWaterSpeed;
+    private bool playerTouchingWater;
+    private bool checkWaterStatus = false;
+    private float timer;
+
+    /// <summary>
     /// Setup initial parameters for the character
     /// </summary>
     public void Setup(Vector3 startingPosition, int startingLanternUses, int maxLanternUses)
@@ -51,6 +58,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         this.transform.position = startingPosition;
         this.lanternUses = startingLanternUses;
         this.maxLanternUses = Mathf.Max(startingLanternUses, maxLanternUses);
+        currVelocity = normalVelocity;
 
         if (playerLightController)
         {
@@ -67,6 +75,10 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         capsuleCollider = GetComponent<CapsuleCollider>();
         levelCamera = Camera.main.transform;
         enableInput = true;
+
+        //water collision setup
+        playerTouchingWater = false;
+
     }
 
     /// <summary>
@@ -77,11 +89,37 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         // Pass in player's position to all materials which is used in lighting
         Shader.SetGlobalFloat("_PlayerMaxLightRange", 15.0f);
         Shader.SetGlobalFloat("_PlayerCurrentLightRange", playerLightController.pointLight.range);
+        Shader.SetGlobalVector("_PlayerLightPosition", playerLightController.pointLight.transform.position);
 
         // Check if player has fallen out of the world
         if (transform.position.y < -25)
         {
             GoToLastCheckpoint();
+        }
+
+        // If the player jumped into water, hasnt gotten out yet, and is still alive
+        if (checkWaterStatus && !OutOfWater() && timer <= waitTime)
+        {
+            timer += Time.deltaTime;
+            float percentToDeath = Mathf.Clamp(timer / waitTime, 0.0f, 1.0f);
+            this.ScaleLightSource(1.0f - percentToDeath);
+            if (timer > waitTime)
+            {
+                // Reset properties and respawn player
+                this.GoToLastCheckpoint();
+                checkWaterStatus = false;
+                playerTouchingWater = false;
+                this.SetVelocity(normalVelocity);
+                timer = 0.0f;
+            }
+        }
+        else
+        {
+            // Make sure player has normal speed if we aren't calculating water stuff
+            checkWaterStatus = false;
+            playerTouchingWater = false;
+            this.SetVelocity(normalVelocity);
+            timer = 0.0f;
         }
     }
 
@@ -181,7 +219,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     /// </summary>
     private void Move()
     {
-        transform.position += transform.forward * velocity * Time.deltaTime;
+        transform.position += transform.forward * currVelocity * Time.deltaTime;
     }
 
     /// <summary>
@@ -234,7 +272,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     /// Checks if the player is on the ground by raycasting downwards and checking
     /// if the hit object has a "Ground" layer
     /// </summary>
-    private bool Grounded()
+    public bool Grounded()
     {
         return Physics.Raycast(transform.position, -Vector3.up, 1.0f, ground);
     }
@@ -256,9 +294,9 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     /// <summary>
     /// Gets the current velocity in the transform's forward direction
     /// </summary>
-    public float GetVelocity()
+    public float GetCurrVelocity()
     {
-        return velocity;
+        return currVelocity;
     }
 
     /// <summary>
@@ -266,7 +304,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     /// </summary>
     public void SetVelocity(float newVelocity)
     {
-        velocity = newVelocity;
+        currVelocity = newVelocity;
     }
 
 
@@ -288,6 +326,23 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
             {
                 Debug.LogError("No Crystal Script attached to an object labeled as a crystal! " + other.name);
             }
+        }
+
+        //if the player is touching water
+        if (other.CompareTag("Water"))
+        {
+            checkWaterStatus = true;
+            playerTouchingWater = true;
+            this.SetVelocity(inWaterSpeed);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        //if the player is getting out of the water
+        if (other.CompareTag("Water"))
+        {
+            playerTouchingWater = false;
         }
     }
 
@@ -313,18 +368,35 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     public void GoToLastCheckpoint()
     {
         this.transform.position = checkpointPosition;
+        this.rb.velocity = Vector3.zero;
 
         // TODO: Either don't lock movement or have the player blink like a normal respawn mechanic
         lockMovementTime = 1.0f;
     }
 
+    /// <summary>
+    /// Allows movement that requires input (e.g after getting out of a cutscene)
+    /// </summary>
     public void EnableInput()
     {
         enableInput = true;
     }
 
+    /// <summary>
+    /// Disables movement that requires input (e.g during cutscenes)
+    /// </summary>
     public void DisableInput()
     {
         enableInput = false;
     }
+
+    /// <summary>
+    /// Checks if the player is not touching the water and is grounded
+    /// </summary>
+    bool OutOfWater()
+    {
+        return !playerTouchingWater && this.Grounded();
+    }
+
+
 }
