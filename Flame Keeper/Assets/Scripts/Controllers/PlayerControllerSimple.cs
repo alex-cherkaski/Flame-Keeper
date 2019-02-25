@@ -60,6 +60,8 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         this.maxLanternUses = Mathf.Max(startingLanternUses, maxLanternUses);
         currVelocity = normalVelocity;
 
+        RecordCheckpoint();
+
         if (playerLightController)
         {
             playerLightController.Setup(this);
