@@ -7,8 +7,8 @@ using Cinemachine;
 public class ExampleAnim : MonoBehaviour
 {
     public CinemachineVirtualCamera vc;
-    public int blendWait;
-    public int actionWait;
+    public float blendWait;
+    public float actionWait;
     public UnityEvent method;
     public string methodComponent;
 
