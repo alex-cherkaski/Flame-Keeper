@@ -4,6 +4,7 @@ using UnityEngine;
 public class Pedestal : MonoBehaviour, DynamicLightSource
 {
     public float activateAnimationSpeed;
+    public bool actAsCheckpoint = true;
 
     [Header("Connected Triggers")]
     public List<ActivatableObject> connectedTriggers = new List<ActivatableObject>();
@@ -20,7 +21,7 @@ public class Pedestal : MonoBehaviour, DynamicLightSource
     [Header("Testing, should delete later")]
     public float activateDistance = 2.0f;
 
-    public PlayerControllerSimple player;
+    private PlayerControllerSimple player;
     private bool activated = false;
     private Color emissionColor;
     private MeshRenderer wireRenderer;
@@ -77,7 +78,8 @@ public class Pedestal : MonoBehaviour, DynamicLightSource
             if (currLevel < maxLevel && player.RequestLanternUse())
             {
                 currLevel++;
-                player.RecordCheckpoint();
+                if (actAsCheckpoint)
+                    player.RecordCheckpoint();
                 ActivatePedestal();
             }
         }
@@ -88,7 +90,8 @@ public class Pedestal : MonoBehaviour, DynamicLightSource
             if (activated && player.RequestLanternAddition())
             {
                 currLevel--;
-                player.RecordCheckpoint();
+                if (actAsCheckpoint)
+                    player.RecordCheckpoint();
                 if (currLevel <= 0)
                 {
                     DeactivatePedestal();

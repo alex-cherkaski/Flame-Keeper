@@ -5,7 +5,6 @@ using UnityEngine;
 public class ChangePositionAO : ActivatableObject
 {
     public Transform moveableObject;
-    public Transform activatedPosition;
     public Vector3 incrementPosition;
     public float moveSpeed = 1.0f;
 
