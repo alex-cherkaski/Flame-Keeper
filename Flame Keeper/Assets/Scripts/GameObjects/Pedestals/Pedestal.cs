@@ -51,7 +51,7 @@ public class Pedestal : MonoBehaviour, DynamicLightSource
     {
         currLevel = startLevel;
         pointLightController.Setup(this);
-        player = FlameKeeper.Get().levelController.GetLevelPlayer();
+        player = FlameKeeper.Get().levelController.GetPlayer();
 
         if (currLevel > 0)
         {

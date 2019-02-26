@@ -16,7 +16,7 @@ public abstract class PuzzleFinish : MonoBehaviour
     void Start()
     {
         played = false;
-        player = FlameKeeper.Get().levelController.GetLevelPlayer();
+        player = FlameKeeper.Get().levelController.GetPlayer();
     }
 
     void Update()

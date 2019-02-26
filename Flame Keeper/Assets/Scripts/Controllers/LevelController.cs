@@ -55,12 +55,12 @@ public class LevelController : BaseController
             m_currentLevelConfig.maxLanternUses);
     }
 
-    public PlayerControllerSimple GetLevelPlayer()
+    public PlayerControllerSimple GetPlayer()
     {
         return m_currentLevelConfig.player;
     }
 
-    public List<Pedestal> GetLevelPedestals()
+    public List<Pedestal> GetAllPedestalsInLevel()
     {
         return m_currentLevelConfig.GetAllPedestals();
     }
