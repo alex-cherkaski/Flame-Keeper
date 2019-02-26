@@ -35,6 +35,15 @@ public class FlameKeeper : MonoBehaviour
     /// <returns> The benevolent game manager </returns>
     public static FlameKeeper Get()
     {
+        if (_instance == null)
+        {
+            // Game didn't start from root or the game manager got deleted.
+            // Warn that the game is in "simulator" mode and wasn't created organically
+            Debug.LogError("No game manager, creating one now (Simulation Mode)");
+            _instance = Resources.Load<FlameKeeper>(StringConstants.PrefabPaths.ManagerPath);
+            _instance.levelController.StartSimulationMode();
+        }
+
         return _instance;
     }
 

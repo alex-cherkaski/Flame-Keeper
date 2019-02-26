@@ -11,6 +11,9 @@ public class StringConstants
 {
     public class SceneNames
     {
+        public const string RootSceneName = "Root";
+        public const string MainMenuScene = "MainMenu";
+
         public const string TutorialSceneName = "Tutorial";
         public const string Level1 = "Level1";
     }
@@ -22,10 +25,17 @@ public class StringConstants
         public const string JumpButton = "Controller_A";
         public const string HorizontalMovement = "Horizontal";
         public const string VerticalMovement = "Vertical";
+        public const string Start = "Start";
     }
 
     public class Tags
     {
         public const string CrystalTag = "Crystal";
+        public const string Player = "Player";
+    }
+
+    public class PrefabPaths
+    {
+        public const string ManagerPath = "Prefabs/Manager/FlameKeeperManager";
     }
 }

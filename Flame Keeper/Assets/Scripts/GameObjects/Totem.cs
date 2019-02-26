@@ -10,7 +10,7 @@ public class Totem : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag(StringConstants.Tags.Player))
         {
             SceneManager.LoadScene(nextSceneName);
         }

@@ -4,26 +4,22 @@ using UnityEngine;
 
 public class LevelConfig : MonoBehaviour
 {
-    public PlayerControllerSimple player;
+    protected bool m_levelStarted = false;
 
-    [Header("Player parameters")]
-    public Vector3 playerStartingPosition;
-    public int startingLanternUses;
-    public int maxLanternUses;
-
-    private List<Pedestal> levelPedestals;
-    //private Totem levelTotem; or whatever, link this when we have the script
-
-    // Finds and stores all the important objects we want to reference in each level
-    // ie, pedestals, totems, etc
-    void GetSceneObjects()
+    /// <summary>
+    /// Called by a parent script when the config is first registered
+    /// </summary>
+    public void InitConfig()
     {
-        levelPedestals = new List<Pedestal>(FindObjectsOfType<Pedestal>());
-        //levelTotem = FindObjectOfType<Totem>();
+        m_levelStarted = true;
+        OnLevelStart();
     }
 
-    public List<Pedestal> GetAllPedestals()
+    /// <summary>
+    /// Called when the level starts
+    /// </summary>
+    protected virtual void OnLevelStart()
     {
-        return levelPedestals;
+        // Implement in inherited classes
     }
 }
