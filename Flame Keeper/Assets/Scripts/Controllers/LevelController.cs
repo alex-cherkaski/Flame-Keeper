@@ -8,6 +8,9 @@ public class LevelController : BaseController
 {
     private LevelConfig m_currentLevelConfig;
 
+    /// <summary>
+    /// Sets up callback for when a new level loads
+    /// </summary>
     public override void Initialize()
     {
         base.Initialize();
@@ -15,9 +18,28 @@ public class LevelController : BaseController
         SceneManager.sceneLoaded += OnNewLevel;
     }
 
+    /// <summary>
+    /// In the event the game start un-organically, load up the current
+    /// level config (since the level is already loaded)
+    /// </summary>
+    public void StartSimulationMode()
+    {
+        if (m_currentLevelConfig == null)
+        {
+            FindLevelConfigInScene();
+        }
+    }
+
     void OnNewLevel(Scene scene, LoadSceneMode mode)
     {
-        // Find the config that exists for this level somewhere in the scene
+        FindLevelConfigInScene();
+    }
+
+    /// <summary>
+    /// Find the config that exists for this level somewhere in the scene
+    /// </summary>
+    private void FindLevelConfigInScene()
+    {
         LevelConfig[] foundConfigs = FindObjectsOfType<LevelConfig>();
         int count = foundConfigs.Length;
 
@@ -35,33 +57,25 @@ public class LevelController : BaseController
         {
             // Setup the current level's configuration
             m_currentLevelConfig = foundConfigs[0];
+            m_currentLevelConfig.InitConfig();
         }
-
-        // Setup all our objects in the right positions and what not
-        ResetLevel();
     }
 
-    private void ResetLevel()
-    {
-        if (!m_currentLevelConfig)
-        {
-            Debug.LogError("No level configuration to set up!");
-            return;
-        }
-
-        // Set up the player according the level parameters
-        m_currentLevelConfig.player.Setup(m_currentLevelConfig.playerStartingPosition,
-            m_currentLevelConfig.startingLanternUses,
-            m_currentLevelConfig.maxLanternUses);
-    }
-
+    /// <summary>
+    /// Gets the player in the level, if it exists, otherwise null.
+    /// </summary>
     public PlayerControllerSimple GetPlayer()
     {
-        return m_currentLevelConfig.player;
-    }
-
-    public List<Pedestal> GetAllPedestalsInLevel()
-    {
-        return m_currentLevelConfig.GetAllPedestals();
+        // TODO, we should have a controller specifically for game level logic.
+        // This stuff shouldnt be shared across an abstract controller like this
+        TempleLevelConfig level = (m_currentLevelConfig as TempleLevelConfig);
+        if (level != null)
+        {
+            return level.player;
+        }
+        else
+        {
+            return null;
+        }
     }
 }

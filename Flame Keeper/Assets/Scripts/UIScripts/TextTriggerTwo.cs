@@ -7,7 +7,7 @@ public class TextTriggerTwo : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag(StringConstants.Tags.Player))
         {
             text1.SetActive(true);
             text2.SetActive(true);
@@ -16,7 +16,7 @@ public class TextTriggerTwo : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag(StringConstants.Tags.Player))
         {
             text1.GetComponent<TextScript>().FadeOut();
             text2.GetComponent<TextScript>().FadeOut();
