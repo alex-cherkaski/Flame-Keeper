@@ -11,12 +11,12 @@ public abstract class PuzzleFinish : MonoBehaviour
     public List<UnityEvent> eventsToPlay;
 
     private bool played;
-    private GameObject player;
+    private PlayerControllerSimple player;
 
     void Start()
     {
         played = false;
-        player = GameObject.FindWithTag("Player");
+        player = FlameKeeper.Get().levelController.GetLevelPlayer();
     }
 
     void Update()
@@ -30,7 +30,7 @@ public abstract class PuzzleFinish : MonoBehaviour
 
     IEnumerator OnFinish()
     {
-        player.GetComponent<PlayerControllerSimple>().DisableInput();
+        player.DisableInput();
         foreach (UnityEvent events in eventsToPlay) 
         {
             if (events != null)

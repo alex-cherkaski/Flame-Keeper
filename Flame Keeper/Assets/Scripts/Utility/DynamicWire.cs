@@ -3,9 +3,10 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
+#if UNITY_EDITOR
 using UnityEditor;
 using UnityEditor.SceneManagement;
-
+#endif
 
 [RequireComponent(typeof(MeshFilter))]
 [RequireComponent(typeof(MeshRenderer))]
@@ -57,6 +58,7 @@ public class DynamicWire : MonoBehaviour
         }
     }
 
+#if UNITY_EDITOR
     public void CreateMesh()
     {
         EditorUtility.SetDirty(this);
@@ -160,4 +162,5 @@ public class DynamicWire : MonoBehaviour
 
         this.GetComponent<MeshFilter>().mesh = wireMesh;
     }
+#endif
 }
