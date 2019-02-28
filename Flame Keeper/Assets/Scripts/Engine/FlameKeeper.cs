@@ -19,13 +19,7 @@ public class FlameKeeper : MonoBehaviour
 
         _instance = this;
         DontDestroyOnLoad(this);
-
-        controllersList.Add(levelController);
-
-        foreach (BaseController controller in controllersList)
-        {
-            controller.Initialize();
-        }
+        SetupControllers();
     }
 
     /// <summary>
@@ -41,10 +35,22 @@ public class FlameKeeper : MonoBehaviour
             // Warn that the game is in "simulator" mode and wasn't created organically
             Debug.LogError("No game manager, creating one now (Simulation Mode)");
             _instance = Resources.Load<FlameKeeper>(StringConstants.PrefabPaths.ManagerPath);
+            DontDestroyOnLoad(_instance);
+            _instance.SetupControllers();
             _instance.levelController.StartSimulationMode();
         }
 
         return _instance;
+    }
+
+    private void SetupControllers()
+    {
+        controllersList.Add(levelController);
+
+        foreach (BaseController controller in controllersList)
+        {
+            controller.Initialize();
+        }
     }
 
     private List<BaseController> controllersList = new List<BaseController>(); // List of all controllers so looping over all of them is fast
