@@ -352,7 +352,8 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     /// </summary>
     private void Move()
     {
-        transform.position += transform.forward * currVelocity * Time.deltaTime;
+        Vector3 moveDirection = targetRotation * Vector3.forward;
+        transform.position += moveDirection * currVelocity * Time.deltaTime;
     }
 
     private void OnCollisionEnter(Collision collision)
