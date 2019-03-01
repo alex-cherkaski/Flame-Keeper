@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18265615, g: 0.22836602, b: 0.30713457, a: 1}
+  m_IndirectSpecularColor: {r: 0.18265642, g: 0.22836664, b: 0.3071357, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5031,46 +5031,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 73587835, guid: 2d71c2ba1fa1eb14d95a6999b63cfe0e, type: 3}
-      propertyPath: lightConfigs.Array.data[3].intensity
-      value: 1.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 73587835, guid: 2d71c2ba1fa1eb14d95a6999b63cfe0e, type: 3}
-      propertyPath: lightConfigs.Array.data[2].intensity
-      value: 1.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 73587835, guid: 2d71c2ba1fa1eb14d95a6999b63cfe0e, type: 3}
-      propertyPath: lightConfigs.Array.data[1].intensity
-      value: 1.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 73587835, guid: 2d71c2ba1fa1eb14d95a6999b63cfe0e, type: 3}
-      propertyPath: lightConfigs.Array.data[0].intensity
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 73587835, guid: 2d71c2ba1fa1eb14d95a6999b63cfe0e, type: 3}
-      propertyPath: lightConfigs.Array.data[3].range
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 73587835, guid: 2d71c2ba1fa1eb14d95a6999b63cfe0e, type: 3}
-      propertyPath: lightConfigs.Array.data[0].range
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 73587835, guid: 2d71c2ba1fa1eb14d95a6999b63cfe0e, type: 3}
-      propertyPath: lightConfigs.Array.data[1].range
-      value: 3.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 73587835, guid: 2d71c2ba1fa1eb14d95a6999b63cfe0e, type: 3}
-      propertyPath: lightConfigs.Array.data[2].range
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 73587835, guid: 2d71c2ba1fa1eb14d95a6999b63cfe0e, type: 3}
-      propertyPath: updateSpeed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 73587835, guid: 2d71c2ba1fa1eb14d95a6999b63cfe0e, type: 3}
-      propertyPath: pointLight
-      value: 
-      objectReference: {fileID: 2015052744}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d71c2ba1fa1eb14d95a6999b63cfe0e, type: 3}
 --- !u!1 &1682156398
@@ -16011,12 +15971,6 @@ MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464,
     type: 3}
   m_PrefabInstance: {fileID: 871843072}
-  m_PrefabAsset: {fileID: 0}
---- !u!108 &2015052744 stripped
-Light:
-  m_CorrespondingSourceObject: {fileID: 1892779792, guid: 2d71c2ba1fa1eb14d95a6999b63cfe0e,
-    type: 3}
-  m_PrefabInstance: {fileID: 1666510778}
   m_PrefabAsset: {fileID: 0}
 --- !u!64 &2020807793
 MeshCollider:
