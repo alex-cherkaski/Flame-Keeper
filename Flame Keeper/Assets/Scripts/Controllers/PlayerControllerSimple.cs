@@ -31,9 +31,28 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     private Quaternion targetRotation;
     private Transform levelCamera;
 
+    // Jump Parameters
     public float jumpForce = 1.0f;
-    public float gravityModifier = 1.0f;
+    public float highJumpAdditionalForce = 1.0f;
+
+    public float ascensionGravityModifier; // Gravity modifier when player is moving upwards veritcally
+    public float descensionGravityModifier; // Gravity modifier when player is moving downwards veritcally
+    public float groundedVelocityThreshold; // If the player exceeds this vertical velocity, they can not be considered grounded
+    public float jumpDelay; // How long we wait before we honor another jump execution
+    public float jumpBufferTime; // How long we will wait after the player presses jump to see if they are grounded
+    public float highJumpBufferTime; // How long the player needs to hold the jump button to jump a high jump
+    private float lastJumpPress; // The last time the player pressed the jumped button
+    private float lastJumpExecute; // The last time we added the jump force to a player
+
+    public float jumpBoxHeightOffset;
+    public Vector3 jumpBoxDimensions;
+
     public LayerMask ground;
+
+    private bool validHighJump = false;
+    private bool trackApexTime = false; // Testing TODO: delete
+    private bool trackJumpTime = false; // Testing TODO: delete
+    // End jump parameters
 
     private float lockMovementTime = 0.0f;
     private Rigidbody rb;
@@ -49,6 +68,15 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     private bool playerTouchingWater;
     private bool checkWaterStatus = false;
     private float timer;
+
+    /// <summary>
+    /// Draws the box check for jumping
+    /// </summary>
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = new Color(0.0f, 1.0f, 0.0f, 1.0f);
+        Gizmos.DrawCube(transform.position + Vector3.up * jumpBoxHeightOffset, jumpBoxDimensions);
+    }
 
     /// <summary>
     /// Setup initial parameters for the character
@@ -123,6 +151,110 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
             this.SetVelocity(normalVelocity);
             timer = 0.0f;
         }
+
+        // Check for jump button (Note: this needs to be in update)
+        if (enableInput && Input.GetButtonDown(StringConstants.Input.JumpButton))
+        {
+            lastJumpPress = Time.fixedTime;
+        }
+    }
+
+
+    /// <summary>
+    /// Physics based update
+    /// </summary>
+    void FixedUpdate()
+    {
+        if (lockMovementTime > 0.0f)
+        {
+            lockMovementTime -= Time.deltaTime;
+
+            // Blink character, uncomment when player is in
+            //renderer.enabled = (Time.time % 0.35f < 0.175) || lockMovementTime < 0.0f;
+
+            return;
+        }
+
+        // Jump logic
+        bool jumpDelayed = (Time.fixedTime - lastJumpExecute) < jumpDelay;
+
+        // Check for jump execution
+        if (!jumpDelayed && Grounded() && (Time.fixedTime - lastJumpPress) < jumpBufferTime)
+        {
+            // Start the initial jump
+            lastJumpExecute = Time.fixedTime;
+            validHighJump = true;
+            trackApexTime = true;
+            trackJumpTime = true;
+            rb.AddForce(0, jumpForce, 0, ForceMode.Impulse);
+        }
+
+        // Check if they are holding down the jump button
+        if (validHighJump && !Input.GetButton(StringConstants.Input.JumpButton))
+        {
+            validHighJump = false;
+        }
+
+        // Check for a high jump (button held down after jump)
+        if (validHighJump && (Time.fixedTime - lastJumpExecute) > highJumpBufferTime)
+        {
+            // They held the button, do a high jump
+            Debug.LogError("Adding high jump force");
+            rb.AddForce(0, highJumpAdditionalForce, 0, ForceMode.Impulse);
+            validHighJump = false;
+        }
+
+        // Modify gravity when falling
+        if (rb.useGravity)
+        {
+            // Increase gravity on when falling, how most other platformers do it (Mario, basically).
+            if (rb.velocity.y < -0.01f)
+            {
+                rb.AddForce(Physics.gravity * rb.mass * descensionGravityModifier);
+            }
+            else
+            {
+                rb.AddForce(Physics.gravity * rb.mass * ascensionGravityModifier);
+            }
+        }
+
+        // Logging check
+        if (trackApexTime && rb.velocity.y < -0.01f)
+        {
+            trackApexTime = false;
+
+            Debug.Log("Apex time: " + (Time.time - lastJumpExecute));
+        }
+
+        GetInput();
+
+        if (Mathf.Abs(input.x) == 0 && Mathf.Abs(input.y) == 0)
+        {
+            return;
+        }
+
+        CalculateDirection();
+        Rotate();
+        Move();
+    }
+
+    /// <summary>
+    /// Checks if the player is on the ground by raycasting a box downwards and checking
+    /// if the hit object has a "Ground" layer
+    /// </summary>
+    public bool Grounded()
+    {
+        bool groundBelow = Physics.CheckBox(this.transform.position + Vector3.up * jumpBoxHeightOffset, jumpBoxDimensions, Quaternion.identity, ground);
+        bool isFalling = Mathf.Abs(rb.velocity.y) > groundedVelocityThreshold;
+        bool grounded = groundBelow && !isFalling;
+
+        if (grounded && trackJumpTime && (Time.time - lastJumpExecute) > 0.1f)
+        {
+            Debug.Log("Jump time: " + (Time.time - lastJumpExecute));
+            trackJumpTime = false;
+        }
+
+        return grounded;
     }
 
     /// <summary>
@@ -222,61 +354,6 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     private void Move()
     {
         transform.position += transform.forward * currVelocity * Time.deltaTime;
-    }
-
-    /// <summary>
-    /// Physics based update
-    /// </summary>
-    void FixedUpdate()
-    {
-        // Modify gravity when falling
-        if (rb.useGravity)
-        {
-            // Increase gravity on when falling, how most other platformers do it (Mario, basically).
-            if (rb.velocity.y < -0.01f)
-            {
-                rb.AddForce(Physics.gravity * rb.mass * gravityModifier);
-            }
-            else
-            {
-                rb.AddForce(Physics.gravity * rb.mass);
-            }
-        }
-
-        if (lockMovementTime > 0.0f)
-        {
-            lockMovementTime -= Time.deltaTime;
-
-            // Blink character, uncomment when player is in
-            //renderer.enabled = (Time.time % 0.35f < 0.175) || lockMovementTime < 0.0f;
-
-            return;
-        }
-
-        if (Grounded() && Input.GetButton(StringConstants.Input.JumpButton) && enableInput)
-        {
-            rb.AddForce(0, jumpForce, 0, ForceMode.Impulse);
-        }
-
-        GetInput();
-
-        if (Mathf.Abs(input.x) == 0 && Mathf.Abs(input.y) == 0)
-        {
-            return;
-        }
-
-        CalculateDirection();
-        Rotate();
-        Move();
-    }
-
-    /// <summary>
-    /// Checks if the player is on the ground by raycasting downwards and checking
-    /// if the hit object has a "Ground" layer
-    /// </summary>
-    public bool Grounded()
-    {
-        return Physics.Raycast(transform.position, -Vector3.up, 1.0f, ground);
     }
 
     private void OnCollisionEnter(Collision collision)
