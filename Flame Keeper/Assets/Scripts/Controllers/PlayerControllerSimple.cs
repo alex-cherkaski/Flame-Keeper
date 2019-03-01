@@ -199,7 +199,6 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         if (validHighJump && (Time.fixedTime - lastJumpExecute) > highJumpBufferTime)
         {
             // They held the button, do a high jump
-            Debug.LogError("Adding high jump force");
             rb.AddForce(0, highJumpAdditionalForce, 0, ForceMode.Impulse);
             validHighJump = false;
         }
