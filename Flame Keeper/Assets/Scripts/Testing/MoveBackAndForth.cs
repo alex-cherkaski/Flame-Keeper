@@ -15,6 +15,8 @@ public class MoveBackAndForth : MonoBehaviour
     public float distance = 1.0f;
     public float speed = 1.0f;
 
+    public Pedestal drainingWaterTrigger;
+
     private Vector3 startPosition;
 
     private void Start()
@@ -37,6 +39,10 @@ public class MoveBackAndForth : MonoBehaviour
                 pos.z += Mathf.Sin(Time.realtimeSinceStartup * speed) * distance;
                 break;
         }
-        this.transform.position = pos;
+        if (drainingWaterTrigger == null || (drainingWaterTrigger != null && drainingWaterTrigger.GetCurrLevel() == 0))
+        {
+            this.transform.position = pos;
+        }
+        
     }
 }
