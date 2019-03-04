@@ -7,6 +7,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     private float currVelocity;
     public float turnSpeed = 10;
 
+    [Space]
     [Header("Child Controllers")]
     public DynamicLightController playerLightController;
 
@@ -31,7 +32,8 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     private Quaternion targetRotation;
     private Transform levelCamera;
 
-    // Jump Parameters
+    [Space]
+    [Header("Jump Parameters")]
     public float jumpForce = 1.0f;
     public float highJumpAdditionalForce = 1.0f;
 
@@ -43,17 +45,20 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     public float highJumpBufferTime; // How long the player needs to hold the jump button to jump a high jump
     private float lastJumpPress; // The last time the player pressed the jumped button
     private float lastJumpExecute; // The last time we added the jump force to a player
-
     public float jumpBoxHeightOffset;
     public Vector3 jumpBoxDimensions;
-
     public LayerMask ground;
-
     private bool validHighJump = false;
-    private bool trackApexTime = false; // Testing TODO: delete
-    private bool trackJumpTime = false; // Testing TODO: delete
-    // End jump parameters
+    private bool trackApexTime = false;
+    private bool trackJumpTime = false;
 
+    [Space]
+    [Header("Global Light Source Parameters")]
+    public float surfaceAttenuationFactor = 0.2f;
+    public float surfaceNormalFactor = 0.2f;
+    public Texture surfaceRampTex;
+
+    [Space]
     private float lockMovementTime = 0.0f;
     private Rigidbody rb;
     private CapsuleCollider capsuleCollider;
@@ -93,6 +98,9 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         if (playerLightController)
         {
             playerLightController.Setup(this);
+            Shader.SetGlobalFloat("_AttenutaionIntensity", surfaceAttenuationFactor);
+            Shader.SetGlobalFloat("_NormalLightIntensity", surfaceNormalFactor);
+            Shader.SetGlobalTexture("_PlayerRampTex", surfaceRampTex);
         }
     }
 
