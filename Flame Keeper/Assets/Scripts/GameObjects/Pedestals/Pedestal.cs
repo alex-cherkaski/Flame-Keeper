@@ -6,6 +6,8 @@ public class Pedestal : MonoBehaviour, DynamicLightSource
     public float activateAnimationSpeed;
     public bool actAsCheckpoint = true;
 
+    public GameObject audioController;
+
     [Header("Connected Triggers")]
     public List<ActivatableObject> connectedTriggers = new List<ActivatableObject>();
 
@@ -81,6 +83,7 @@ public class Pedestal : MonoBehaviour, DynamicLightSource
                 if (actAsCheckpoint)
                     player.RecordCheckpoint();
                 ActivatePedestal();
+                audioController.GetComponent<AudioController>().PlayAudioClip(AudioController.AudioClips.fire5);
             }
         }
 
@@ -96,6 +99,7 @@ public class Pedestal : MonoBehaviour, DynamicLightSource
                 {
                     DeactivatePedestal();
                     currLevel = 0;
+                    audioController.GetComponent<AudioController>().PlayAudioClip(AudioController.AudioClips.fire1);
                 }
                 else
                 {
