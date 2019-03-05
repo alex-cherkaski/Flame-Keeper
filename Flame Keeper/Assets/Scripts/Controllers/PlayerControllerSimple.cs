@@ -167,24 +167,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
             {
                 audioController.GetComponent<AudioController>().PlayAudioClip(AudioController.AudioClips.jumpNormal);
             }
-            
-            /*
-            if (Grounded())
-            {
-                audioController.GetComponent<AudioController>().PlayAudioClip(AudioController.AudioClips.jumpNormal);
-                pastGroundedState = false;
-            }
-            */
         }
-
-        /*
-        // Play landing sound effect if landing
-        if (Grounded() && pastGroundedState)
-        {
-            audioController.GetComponent<AudioController>().PlayAudioClip(AudioController.AudioClips.reverbJump);
-            pastGroundedState = true;
-        }
-        */
     }
 
 
