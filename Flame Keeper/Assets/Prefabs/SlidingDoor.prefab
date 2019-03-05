@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 798308900}
   m_Layer: 0
   m_Name: SlidingDoor
-  m_TagString: Untagged
+  m_TagString: SlidingDoor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -76,8 +76,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveableObject: {fileID: 5782897503381115017}
-  activatedPosition: {fileID: 1648686559}
+  incrementPosition: {x: 0, y: 0, z: 0}
   moveSpeed: 2
+  audioController: {fileID: 0}
 --- !u!1 &5782897503381114994
 GameObject:
   m_ObjectHideFlags: 0

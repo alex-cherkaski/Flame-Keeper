@@ -48,6 +48,9 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     public float jumpBoxHeightOffset;
     public Vector3 jumpBoxDimensions;
     public LayerMask ground;
+
+    public GameObject audioController;
+    
     private bool validHighJump = false;
     private bool trackApexTime = false;
     private bool trackJumpTime = false;
@@ -73,6 +76,9 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     private bool playerTouchingWater;
     private bool checkWaterStatus = false;
     private float timer;
+
+    private bool currentGroundedState;
+    private bool pastGroundedState;
 
     /// <summary>
     /// Draws the box check for jumping
@@ -117,6 +123,8 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         //water collision setup
         playerTouchingWater = false;
 
+        currentGroundedState = Grounded();
+        pastGroundedState = Grounded();
     }
 
     /// <summary>
@@ -164,6 +172,11 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         if (enableInput && Input.GetButtonDown(StringConstants.Input.JumpButton))
         {
             lastJumpPress = Time.fixedTime;
+
+            if (!playerTouchingWater)
+            {
+                audioController.GetComponent<AudioController>().PlayAudioClip(AudioController.AudioClips.jumpNormal);
+            }
         }
     }
 
@@ -413,6 +426,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
             {
                 Debug.LogError("No Crystal Script attached to an object labeled as a crystal! " + other.name);
             }
+            audioController.GetComponent<AudioController>().PlayAudioClip(AudioController.AudioClips.fire2);
         }
 
         //if the player is touching water
@@ -421,6 +435,8 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
             checkWaterStatus = true;
             playerTouchingWater = true;
             this.SetVelocity(inWaterSpeed);
+            Debug.Log("About to Play WATER1");
+            audioController.GetComponent<AudioController>().PlayAudioClip(AudioController.AudioClips.water4);
         }
     }
 
@@ -430,6 +446,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         if (other.CompareTag("Water"))
         {
             playerTouchingWater = false;
+            audioController.GetComponent<AudioController>().PlayAudioClip(AudioController.AudioClips.water2);
         }
     }
 
@@ -454,6 +471,8 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     /// </summary>
     public void GoToLastCheckpoint()
     {
+        FlameKeeper.Get().dataminingController.OnPlayerRespawn();
+
         this.transform.position = checkpointPosition;
         this.rb.velocity = Vector3.zero;
 
