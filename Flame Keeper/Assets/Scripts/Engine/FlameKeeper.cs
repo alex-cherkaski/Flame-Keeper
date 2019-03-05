@@ -45,7 +45,10 @@ public class FlameKeeper : MonoBehaviour
 
     private void SetupControllers()
     {
-        controllersList.Add(levelController);
+        if (levelController)
+            controllersList.Add(levelController);
+        if (dataminingController)
+            controllersList.Add(dataminingController);
 
         foreach (BaseController controller in controllersList)
         {
@@ -60,4 +63,5 @@ public class FlameKeeper : MonoBehaviour
     /// Add controllers here as needed, and avoid adding functionality to this class directly.
     /// </summary>
     public LevelController levelController;
+    public DataminingController dataminingController;
 }

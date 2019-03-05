@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18265642, g: 0.22836664, b: 0.3071357, a: 1}
+  m_IndirectSpecularColor: {r: 0.18265615, g: 0.22836602, b: 0.30713457, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -189,6 +189,7 @@ MonoBehaviour:
   moveableObject: {fileID: 47670996}
   incrementPosition: {x: -2.19, y: 0, z: 0}
   moveSpeed: 5
+  audioController: {fileID: 0}
 --- !u!64 &47670993
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -294,6 +295,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activateAnimationSpeed: 0
   actAsCheckpoint: 0
+  audioController: {fileID: 0}
   connectedTriggers:
   - {fileID: 1921200163}
   emitters:
@@ -1295,6 +1297,7 @@ MonoBehaviour:
   playerStartingPosition: {x: 0.66, y: 2.93, z: 43.47}
   startingLanternUses: 3
   maxLanternUses: 3
+  scene: 1
 --- !u!4 &440551722
 Transform:
   m_ObjectHideFlags: 0
@@ -1943,6 +1946,7 @@ MonoBehaviour:
   moveableObject: {fileID: 523761131}
   incrementPosition: {x: 0, y: 2.25, z: 0}
   moveSpeed: 1
+  audioController: {fileID: 0}
 --- !u!114 &523761133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2046,6 +2050,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activateAnimationSpeed: 0
   actAsCheckpoint: 1
+  audioController: {fileID: 0}
   connectedTriggers:
   - {fileID: 693816282}
   - {fileID: 1259410720}
@@ -2647,6 +2652,7 @@ MonoBehaviour:
   moveableObject: {fileID: 693816286}
   incrementPosition: {x: 0, y: 3.91, z: 0}
   moveSpeed: 1
+  audioController: {fileID: 0}
 --- !u!64 &693816283
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4110,6 +4116,7 @@ MonoBehaviour:
   moveableObject: {fileID: 1259410724}
   incrementPosition: {x: 0, y: 1.2, z: 0}
   moveSpeed: 1
+  audioController: {fileID: 0}
 --- !u!64 &1259410721
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4257,6 +4264,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activateAnimationSpeed: 0
   actAsCheckpoint: 1
+  audioController: {fileID: 0}
   connectedTriggers:
   - {fileID: 450771719}
   - {fileID: 2085928588}
@@ -5149,6 +5157,7 @@ MonoBehaviour:
   moveableObject: {fileID: 1682156399}
   incrementPosition: {x: -2.19, y: 0, z: 0}
   moveSpeed: 5
+  audioController: {fileID: 0}
 --- !u!1 &1704301488
 GameObject:
   m_ObjectHideFlags: 0
@@ -15465,6 +15474,7 @@ MonoBehaviour:
   moveableObject: {fileID: 1921200167}
   incrementPosition: {x: 0, y: 0, z: 2.91}
   moveSpeed: 1
+  audioController: {fileID: 0}
 --- !u!64 &1921200164
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -15924,6 +15934,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activateAnimationSpeed: 0
   actAsCheckpoint: 0
+  audioController: {fileID: 0}
   connectedTriggers:
   - {fileID: 1682156403}
   - {fileID: 47670992}
@@ -16637,11 +16648,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 521052407014330822, guid: 339f256b9c55c5448abe6eb701ccb457,
-        type: 3}
-      propertyPath: m_Name
-      value: Water
-      objectReference: {fileID: 0}
     - target: {fileID: 521052407014330818, guid: 339f256b9c55c5448abe6eb701ccb457,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -16701,6 +16707,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.x
       value: 6.795
+      objectReference: {fileID: 0}
+    - target: {fileID: 521052407014330822, guid: 339f256b9c55c5448abe6eb701ccb457,
+        type: 3}
+      propertyPath: m_Name
+      value: Water
       objectReference: {fileID: 0}
     - target: {fileID: 7282981949286722888, guid: 339f256b9c55c5448abe6eb701ccb457,
         type: 3}
@@ -16793,6 +16804,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activateAnimationSpeed: 0
   actAsCheckpoint: 1
+  audioController: {fileID: 0}
   connectedTriggers:
   - {fileID: 1971074197}
   - {fileID: 496382039}

@@ -471,6 +471,8 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     /// </summary>
     public void GoToLastCheckpoint()
     {
+        FlameKeeper.Get().dataminingController.OnPlayerRespawn();
+
         this.transform.position = checkpointPosition;
         this.rb.velocity = Vector3.zero;
 
