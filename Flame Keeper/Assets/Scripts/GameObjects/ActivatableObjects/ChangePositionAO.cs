@@ -52,7 +52,7 @@ public class ChangePositionAO : ActivatableObject
         }
     }
 
-    private void Start()
+    void Start()
     {
         startingPosition = moveableObject.transform.position;
         targetPosition = startingPosition + (incrementPosition * GetLevel());

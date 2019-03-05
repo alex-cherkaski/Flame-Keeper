@@ -37,6 +37,7 @@ public class ExampleAnim : MonoBehaviour
         {
             comp.enabled = true;
         }
+        yield return new WaitForSeconds(0.1f);
         method.Invoke();
         yield return new WaitForSeconds(actionWait);
         vc.Priority -= 100;

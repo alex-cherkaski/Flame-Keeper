@@ -27,8 +27,14 @@ public abstract class ActivatableObject : MonoBehaviour
         {
             activeSources.Add(source);
         }
-
-        OnPowered(source, GetLevel());
+        
+        if (this.enabled)
+        {
+            OnPowered(source, GetLevel());
+        }
+         
+        
+        
     }
 
     public void OnPedestalDeactivate(Pedestal source)
@@ -43,7 +49,13 @@ public abstract class ActivatableObject : MonoBehaviour
         }
 
         int level = GetLevel();
-        OnDepowered(source, GetLevel());
+        
+        if (this.enabled)
+        {
+            OnDepowered(source, GetLevel());
+        }
+        
+        
     }
 
     protected abstract void OnPowered(Pedestal pedestal, int newLevel); // Called when the object receives a power source
