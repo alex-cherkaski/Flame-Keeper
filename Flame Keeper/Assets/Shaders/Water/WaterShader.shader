@@ -74,9 +74,10 @@ Shader "Fluids/Water"
 			// Have to define all our properties as variables for each pass
 			float _OrthographicCamera;
 
-			// Player light parameters
+			// Globals
 			float4 _PlayerLightPosition;
 			float _PlayerCurrentLightRange;
+			sampler2D _PlayerRampTex;
 
 			sampler2D _GrabTexture;
 			sampler2D _CameraDepthTexture; // Pre-set by unity
@@ -198,22 +199,20 @@ Shader "Fluids/Water"
 				col += refract * _RefractIntensity;
 				col += reflection * _ReflectIntensity;
 
+				float foamStep = 1.0f; // FoamStep is either 0 (close to shore) or 1 (not close to shore) based on some noisy threshold
 				if (_OrthographicCamera)
 				{
 					float depth = SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, i.screenPos).r;
 					float diff = (1 - i.screenPos.w / 1000.0) - depth; // The "1000" here is the far plane of the othographic camera, will want to set from code if we change it a bunch
 
-					float foamStep = step(_FoamDistance, diff - (snoise * _FoamDistance));
-					col = lerp(_FoamColor, col, foamStep);
+					foamStep = step(_FoamDistance, diff - (snoise * _FoamDistance));
 				}
 				else
 				{
 					float depth = LinearEyeDepth(SAMPLE_DEPTH_TEXTURE_PROJ(_CameraDepthTexture, UNITY_PROJ_COORD(i.screenPos)));
 					float diff = depth - i.screenPos.w; // Difference in depth from the plane verus the object behind it
 
-					// foamStep is either 0 (close to shore) or 1 (not close to shore) based on some noisy threshold
-					float foamStep = step(_FoamDistance, diff - snoise);
-					col = lerp(_FoamColor, col, foamStep); // Set foam color
+					foamStep = step(_FoamDistance, diff - snoise);
 				}
 
 
@@ -225,10 +224,15 @@ Shader "Fluids/Water"
 				//float kA = min(_AmbientLightFactor, saturate(_AmbientLightFactor - step(1.0 - (length(_PlayerLightPosition - i.worldPos) / _PlayerCurrentLightRange), 0.0)));
 				float kA = _AmbientLightFactor;
 
-				kA += kA * step(length(_PlayerLightPosition - i.worldPos) / _PlayerCurrentLightRange, 1.0);
+				float distance = length(float3(_PlayerLightPosition.xyz - i.worldPos));
+				float falloff = 1.0 - (distance / 8.0);
+				float cutoff = saturate(1.0 - floor(distance / _PlayerCurrentLightRange));
+				float rampedFalloff = tex2D(_PlayerRampTex, half2(falloff, falloff)).r * 1.5;
 
-				fixed4 ambient = kA * saturate(col + ripplesColored); // ambient light
-				fixed4 diffuse = (1-kA) * saturate(col + ripplesColored) * _LightColor0 * nl;
+				kA += kA * rampedFalloff * cutoff;
+
+				fixed4 ambient = kA * saturate(lerp(_FoamColor, col + ripplesColored, foamStep)); // ambient light
+				fixed4 diffuse = (1-kA) * saturate(lerp(_FoamColor, col + ripplesColored, foamStep)) * _LightColor0 * nl;
 				return ambient + diffuse;
             }
 
