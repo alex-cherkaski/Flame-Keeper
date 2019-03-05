@@ -5,9 +5,14 @@ using UnityEngine;
 public class BurnableObject : MonoBehaviour
 {
     public float burnTime;
+    public bool automaticReset;
+    public GameObject resetObject;
+    public Vector3 resetTransform;
+    public Quaternion resetRotation;
 
     private float timer;
     private bool isBurning;
+    private bool finishedBurning;
 
     private Color colorStart;
     private Color colorEnd;
@@ -36,21 +41,49 @@ public class BurnableObject : MonoBehaviour
         {
             Debug.Log("im burning");
             timer += Time.deltaTime;
-            this.GetComponent<Renderer>().material.color = Color.blue;
             this.GetComponent<Renderer>().material.color = Color.Lerp(colorStart, colorEnd, burnTime);
 
             if (timer > burnTime)
             {
-                // Reset properties and respawn player
-                Object.Destroy(this.gameObject);
+                // destroy the object after the specified wait time
+                Burn();
+                if (automaticReset)
+                {
+                    ResetThis();
+                }
             }
         }
         else
         {
-            // Make sure player has normal speed if we aren't calculating water stuff
             this.GetComponent<Renderer>().material.SetColor("_Color", colorStart);
+            
             timer = 0.0f;
         }
+    }
+
+    private void Burn()
+    {
+        isBurning = false;
+        currBurner = null;
+        timer = 0.0f;
+        finishedBurning = true;
+        this.gameObject.GetComponent<MeshRenderer>().enabled = false;
+        this.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+        this.transform.position = resetTransform;
+        this.transform.rotation = resetRotation;
+    }
+
+    public void ResetThis()
+    {
+        this.GetComponent<Renderer>().material.SetColor("_Color", colorStart);
+        finishedBurning = false;
+        this.gameObject.GetComponent<MeshRenderer>().enabled = true;
+        this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+    }
+
+    public bool CanBeReset()
+    {
+        return finishedBurning;
     }
 
     private void OnTriggerEnter(Collider other)
