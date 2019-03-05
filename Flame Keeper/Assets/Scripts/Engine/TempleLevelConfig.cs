@@ -11,6 +11,9 @@ public class TempleLevelConfig : LevelConfig
     public int startingLanternUses;
     public int maxLanternUses;
 
+    [Header("Datamining parameters")]
+    public DataminingController.DataScenes scene;
+
     private List<Pedestal> levelPedestals;
     //private Totem levelTotem; or whatever, link this when we have the script
 
@@ -24,10 +27,17 @@ public class TempleLevelConfig : LevelConfig
             return;
         }
 
+        FlameKeeper.Get().dataminingController.StartTrackingScene(scene);
+
         // Set up the player according the level parameters
         player.Setup(playerStartingPosition,
             startingLanternUses,
             maxLanternUses);
+    }
+
+    private void OnDestroy()
+    {
+        FlameKeeper.Get().dataminingController.StopTrackingScene();
     }
 
     // Finds and stores all the important objects we want to reference in each level
