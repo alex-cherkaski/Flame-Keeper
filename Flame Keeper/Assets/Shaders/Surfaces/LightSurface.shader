@@ -4,7 +4,6 @@
 	{
 		_Color("Color", color) = (0.5, 0.2, 0.3, 1.0)
 		_MainTex("Albedo (RGB)", 2D) = "white" {}
-		_RampTex("Ramp Texture", 2D) = "clear" {}
 
 		[Header(Standard Parameters)]
 		_Emission("Emission Color", color) = (0,0,0,0)
@@ -15,9 +14,6 @@
 		[Header(Normal Mapping)]
 		_NormalMap("Normal Map", 2D) = "bump" {}
 		_NormalMapIntensity("Normal Map Intensity", Range(0,1)) = 1.0
-
-		_AttenutaionIntensity("Attenuation", Range(0,1)) = 0.2
-		_NormalLightIntensity("Normal Light Intensity", Range(0,1)) = 0.2
 	}
 
 	SubShader
@@ -30,13 +26,16 @@
 		#include "UnityPBSLighting.cginc"
 		#include "AutoLight.cginc"
 
+		// Globals
 		float3 _PlayerLightPosition;
 		float _PlayerMaxLightRange;
 		float _PlayerCurrentLightRange;
+		float _AttenutaionIntensity;
+		float _NormalLightIntensity;
+		sampler2D _PlayerRampTex;
 
 		half4 _Color;
 		sampler2D _MainTex;
-		sampler2D _RampTex;
 
 		half4 _Emission;
 		half _EmissionIntensity;
@@ -45,9 +44,6 @@
 
 		sampler2D _NormalMap;
 		half _NormalMapIntensity;
-
-		float _AttenutaionIntensity;
-		float _NormalLightIntensity;
 
 		struct Input
 		{
@@ -111,7 +107,7 @@
 				// Use ramped lighting for this light
 				float falloff = 1.0 - (distance / 8.0); // Divide by max range of player light
 				float cutoff = saturate(1.0 - floor(distance / _PlayerCurrentLightRange)); // Divide by current light range, should smooth this out
-				float rampedFalloff = tex2D(_RampTex, half2(falloff, falloff)).r;
+				float rampedFalloff = tex2D(_PlayerRampTex, half2(falloff, falloff)).r;
 
 				half3 lightColor = lerp(_LightColor0.rgb, gi.light.color, _AttenutaionIntensity);
 				float normalIntensity = lerp(1.0, nl, _NormalLightIntensity);
