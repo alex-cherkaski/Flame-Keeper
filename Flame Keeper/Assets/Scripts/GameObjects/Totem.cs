@@ -12,6 +12,7 @@ public class Totem : MonoBehaviour
     {
         if (other.CompareTag(StringConstants.Tags.Player))
         {
+            FlameKeeper.Get().dataminingController.StopTrackingScene();
             SceneManager.LoadScene(nextSceneName);
         }
     }

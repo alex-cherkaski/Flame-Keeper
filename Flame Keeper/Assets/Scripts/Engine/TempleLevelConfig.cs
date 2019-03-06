@@ -35,11 +35,6 @@ public class TempleLevelConfig : LevelConfig
             maxLanternUses);
     }
 
-    private void OnDestroy()
-    {
-        FlameKeeper.Get().dataminingController.StopTrackingScene();
-    }
-
     // Finds and stores all the important objects we want to reference in each level
     // ie, pedestals, totems, etc
     void GetSceneObjects()

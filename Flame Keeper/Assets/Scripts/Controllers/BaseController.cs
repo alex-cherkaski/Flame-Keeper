@@ -15,4 +15,10 @@ public abstract class BaseController : MonoBehaviour
     {
         m_bInitialized = true;
     }
+
+    // Called when we reset the game
+    public virtual void OnReset()
+    {
+
+    }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioController : BaseController
+public class AudioController : MonoBehaviour
 {
     // The source audio file.
     public AudioClip audioClip;
