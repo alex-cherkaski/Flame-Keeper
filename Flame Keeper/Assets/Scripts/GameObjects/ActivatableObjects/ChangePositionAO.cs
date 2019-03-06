@@ -8,7 +8,7 @@ public class ChangePositionAO : ActivatableObject
     public Vector3 incrementPosition;
     public float moveSpeed = 1.0f;
 
-    public AudioController audioController;
+    private GameObject audioController;
 
     private Vector3 startingPosition;
     private Vector3 targetPosition;
@@ -56,6 +56,8 @@ public class ChangePositionAO : ActivatableObject
     {
         startingPosition = moveableObject.transform.position;
         targetPosition = startingPosition + (incrementPosition * GetLevel());
+        audioController = (GameObject)Instantiate(Resources.Load("audioController"), this.transform.position, this.transform.rotation);
+        audioController.transform.SetParent(this.transform);
     }
 
     private void Update()
