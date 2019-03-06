@@ -23,8 +23,11 @@ public class DataminingController : BaseController
 
     public void Start()
     {
-        string timeAtStartup = DateTime.Now.ToString("yyyy_MM_dd_hh_mm");
-        filePath = Application.dataPath  + "/" + timeAtStartup + ".txt";
+        string timeAtStartup = DateTime.Now.ToString("yyyy_MM_dd___hh_mm_ss");
+
+        string directoryPrefix = Application.dataPath + "/../PlaytestData";
+        System.IO.Directory.CreateDirectory(directoryPrefix); // Make sure our directory exists
+        filePath = directoryPrefix  + "/" + timeAtStartup + ".txt";
         textWriter = new StreamWriter(filePath, true);
         textWriter.WriteLine("Playtest report for " + DateTime.Now.ToString("yyyy/MM/dd hh:mm tt") + ":");
         textWriter.WriteLine("");
@@ -41,6 +44,9 @@ public class DataminingController : BaseController
     // Call when you want to stop tracking data in a scene (ie, when a user completes the level)
     public void StopTrackingScene()
     {
+        if (textWriter == null)
+            return;
+
         textWriter.WriteLine("=== User completed " + DataSceneToString(currentScene) + " ===");
         textWriter.WriteLine("--- Scene statistics ---");
         textWriter.WriteLine("Completion time: " + (Time.time - levelStartTime) + " seconds");
@@ -72,6 +78,9 @@ public class DataminingController : BaseController
     // (ie, application exits)
     public void OnDestroy()
     {
+        if (textWriter == null)
+            return;
+
         textWriter.Close();
     }
 }
