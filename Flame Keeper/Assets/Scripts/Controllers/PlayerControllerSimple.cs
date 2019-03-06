@@ -49,7 +49,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     public Vector3 jumpBoxDimensions;
     public LayerMask ground;
 
-    public GameObject audioController;
+    private GameObject audioController;
     
     private bool validHighJump = false;
     private bool trackApexTime = false;
@@ -125,6 +125,10 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
 
         currentGroundedState = Grounded();
         pastGroundedState = Grounded();
+
+        // Sound controller for player
+        audioController = (GameObject)Instantiate(Resources.Load("audioController"), transform.position, transform.rotation);
+        audioController.transform.SetParent(this.transform);
     }
 
     /// <summary>
