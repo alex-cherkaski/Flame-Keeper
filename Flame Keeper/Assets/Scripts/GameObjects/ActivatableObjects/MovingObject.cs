@@ -22,6 +22,8 @@ public class MovingObject : ActivatableObject
     private int count;
     private GameObject moveableObject;
 
+    private GameObject audioController;
+
     protected override void OnPowered(Pedestal pedestal, int newLevel)
     {
         if (newLevel == 1)
@@ -66,6 +68,9 @@ public class MovingObject : ActivatableObject
         forward = true;
         moveableObject = this.gameObject;
         targetPosition = positions[0];
+
+        //audioController = (GameObject)Instantiate(Resources.Load("audioController"), this.transform.position, this.transform.rotation);
+        //audioController.transform.SetParent(this.transform);
     }
 
     private void Update()
@@ -101,6 +106,7 @@ public class MovingObject : ActivatableObject
                 {
                     minStep = (positions[count] - positions[count-1]) * 0.001f;
                 }
+                //audioController.GetComponent<AudioController>().PlayAudioClip(AudioController.AudioClips.Scrape3);
             }
             else
             {
@@ -116,6 +122,7 @@ public class MovingObject : ActivatableObject
                 {
                     minStep = (positions[count] - positions[count + 1]) * 0.001f;
                 }
+                //audioController.GetComponent<AudioController>().PlayAudioClip(AudioController.AudioClips.Scrape3);
             }
             //switch targetposition to next on list
             targetPosition = positions[count];

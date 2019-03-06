@@ -6,8 +6,6 @@ public class Pedestal : MonoBehaviour, DynamicLightSource
     public float activateAnimationSpeed;
     public bool actAsCheckpoint = true;
 
-    public GameObject audioController;
-
     [Header("Connected Triggers")]
     public List<ActivatableObject> connectedTriggers = new List<ActivatableObject>();
 
@@ -46,6 +44,8 @@ public class Pedestal : MonoBehaviour, DynamicLightSource
         }
     }
 
+    private GameObject audioController;
+
     /// <summary>
     /// Assign gameobject references and initialize variables
     /// </summary>
@@ -65,6 +65,9 @@ public class Pedestal : MonoBehaviour, DynamicLightSource
         {
             emissionColor = emitters[0].materials[1].color;
         }
+
+        audioController = (GameObject)Instantiate(Resources.Load("audioController"), this.transform.position, this.transform.rotation);
+        audioController.transform.SetParent(this.transform);
     }
 
     /// <summary>
