@@ -26,6 +26,8 @@ public class StringConstants
         public const string HorizontalMovement = "Horizontal";
         public const string VerticalMovement = "Vertical";
         public const string Start = "Start";
+        public const string ResetOne = "LeftBumper";
+        public const string ResetTwo = "RightBumper";
     }
 
     public class Tags
