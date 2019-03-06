@@ -21,7 +21,7 @@ public class DataminingController : BaseController
         Level1 = 1
     }
 
-    public void Start()
+    public override void Initialize()
     {
         string timeAtStartup = DateTime.Now.ToString("yyyy_MM_dd___hh_mm_ss");
 
@@ -31,6 +31,13 @@ public class DataminingController : BaseController
         textWriter = new StreamWriter(filePath, true);
         textWriter.WriteLine("Playtest report for " + DateTime.Now.ToString("yyyy/MM/dd hh:mm tt") + ":");
         textWriter.WriteLine("");
+    }
+
+    public override void OnReset()
+    {
+        base.OnReset();
+
+        OnDestroy();
     }
 
     // Call when you want to start tracking data in a scene (ie, when the scene starts)
