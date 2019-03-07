@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18154222, g: 0.22718474, b: 0.30740482, a: 1}
+  m_IndirectSpecularColor: {r: 0.18154176, g: 0.227184, b: 0.3074043, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5040,7 +5040,7 @@ PrefabInstance:
     - target: {fileID: 2094711015599810859, guid: 2cc475a9a266c3d46888903b13110e34,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.001
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2094711015599810859, guid: 2cc475a9a266c3d46888903b13110e34,
         type: 3}
@@ -5365,6 +5365,32 @@ MonoBehaviour:
   moveableObject: {fileID: 2046364094}
   incrementPosition: {x: 0, y: 1.7, z: 0}
   moveSpeed: 3
+--- !u!1 &2064393997 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2094711015599810858, guid: 2cc475a9a266c3d46888903b13110e34,
+    type: 3}
+  m_PrefabInstance: {fileID: 1940908511}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &2064394000 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2094711015599810853, guid: 2cc475a9a266c3d46888903b13110e34,
+    type: 3}
+  m_PrefabInstance: {fileID: 1940908511}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2064394001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2064393997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d13cd51b4d39624489c76471ca9e2b10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particles: {fileID: 2064394000}
+  totem: {fileID: 2133883601}
 --- !u!114 &2108414647 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2166519438047993924, guid: f530fa11cd7fc2544b1edb8026259a32,
