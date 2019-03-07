@@ -231,9 +231,10 @@ Shader "Fluids/Water"
 
 				kA += kA * rampedFalloff * cutoff;
 
-				fixed4 ambient = kA * saturate(lerp(_FoamColor, col + ripplesColored, foamStep)); // ambient light
-				fixed4 diffuse = (1-kA) * saturate(lerp(_FoamColor, col + ripplesColored, foamStep)) * _LightColor0 * nl;
-				return ambient + diffuse;
+
+				fixed4 ambient = kA * (col + ripplesColored);
+				fixed4 diffuse = (1 - kA) * (col + ripplesColored) * _LightColor0 * nl;
+				return saturate(lerp(_FoamColor * pow(kA, 0.75), ambient + diffuse, foamStep)); // lerp in foam
             }
 
             ENDCG

@@ -15,22 +15,37 @@ public class DataminingController : BaseController
     private float levelStartTime;
     private int respawns;
 
+    private bool trackData = true;
+
     public enum DataScenes
     {
         Tutorial = 0,
         Level1 = 1
     }
 
+    ~DataminingController()
+    {
+        if (textWriter != null)
+            textWriter.Close();
+    }
+
     public override void Initialize()
     {
         string timeAtStartup = DateTime.Now.ToString("yyyy_MM_dd___hh_mm_ss");
 
-        string directoryPrefix = Application.dataPath + "/../PlaytestData";
-        System.IO.Directory.CreateDirectory(directoryPrefix); // Make sure our directory exists
-        filePath = directoryPrefix  + "/" + timeAtStartup + ".txt";
-        textWriter = new StreamWriter(filePath, true);
-        textWriter.WriteLine("Playtest report for " + DateTime.Now.ToString("yyyy/MM/dd hh:mm tt") + ":");
-        textWriter.WriteLine("");
+        try
+        {
+            string directoryPrefix = Application.dataPath + "/../PlaytestData";
+            System.IO.Directory.CreateDirectory(directoryPrefix); // Make sure our directory exists
+            filePath = directoryPrefix + "/" + timeAtStartup + ".txt";
+            textWriter = new StreamWriter(filePath, true);
+            textWriter.WriteLine("Playtest report for " + DateTime.Now.ToString("yyyy/MM/dd hh:mm tt") + ":");
+            textWriter.WriteLine("");
+        }
+        catch (Exception e)
+        {
+            trackData = false;
+        }
     }
 
     public override void OnReset()
@@ -51,7 +66,7 @@ public class DataminingController : BaseController
     // Call when you want to stop tracking data in a scene (ie, when a user completes the level)
     public void StopTrackingScene()
     {
-        if (textWriter == null)
+        if (textWriter == null || !trackData)
             return;
 
         textWriter.WriteLine("=== User completed " + DataSceneToString(currentScene) + " ===");
