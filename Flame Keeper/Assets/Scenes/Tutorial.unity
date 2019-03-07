@@ -3469,6 +3469,51 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1022785083
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1022785084}
+  - component: {fileID: 1022785085}
+  m_Layer: 0
+  m_Name: WindZone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1022785084
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1022785083}
+  m_LocalRotation: {x: 0.27059796, y: 0.65328157, z: 0.27059796, w: -0.65328157}
+  m_LocalPosition: {x: 1.34, y: 3.06, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2133883602}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: -45.000004, y: 270, z: 0}
+--- !u!182 &1022785085
+WindZone:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1022785083}
+  m_Enabled: 1
+  m_Mode: 0
+  m_Radius: 20
+  m_WindMain: 0.1
+  m_WindTurbulence: 1
+  m_WindPulseMagnitude: 0.5
+  m_WindPulseFrequency: 0.01
 --- !u!1 &1031839720
 GameObject:
   m_ObjectHideFlags: 0
@@ -5030,7 +5075,7 @@ PrefabInstance:
     - target: {fileID: 2094711015599810858, guid: 2cc475a9a266c3d46888903b13110e34,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2094711015599810859, guid: 2cc475a9a266c3d46888903b13110e34,
         type: 3}
@@ -5040,12 +5085,12 @@ PrefabInstance:
     - target: {fileID: 2094711015599810859, guid: 2cc475a9a266c3d46888903b13110e34,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3
+      value: 3.1
       objectReference: {fileID: 0}
     - target: {fileID: 2094711015599810859, guid: 2cc475a9a266c3d46888903b13110e34,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2094711015599810859, guid: 2cc475a9a266c3d46888903b13110e34,
         type: 3}
@@ -5086,6 +5131,47 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2094711015599810853, guid: 2cc475a9a266c3d46888903b13110e34,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2094711015599810853, guid: 2cc475a9a266c3d46888903b13110e34,
+        type: 3}
+      propertyPath: LightsModule.ratio
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2094711015599810853, guid: 2cc475a9a266c3d46888903b13110e34,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2094711015599810853, guid: 2cc475a9a266c3d46888903b13110e34,
+        type: 3}
+      propertyPath: LightsModule.light
+      value: 
+      objectReference: {fileID: 5321420503392549904, guid: 15f98233db528774cb78ab478b46afc3,
+        type: 3}
+    - target: {fileID: 2094711015599810853, guid: 2cc475a9a266c3d46888903b13110e34,
+        type: 3}
+      propertyPath: LightsModule.maxLights
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2094711015599810853, guid: 2cc475a9a266c3d46888903b13110e34,
+        type: 3}
+      propertyPath: LightsModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2094711015599810853, guid: 2cc475a9a266c3d46888903b13110e34,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2094711015599810853, guid: 2cc475a9a266c3d46888903b13110e34,
+        type: 3}
+      propertyPath: ExternalForcesModule.enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2cc475a9a266c3d46888903b13110e34, type: 3}
