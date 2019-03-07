@@ -3520,6 +3520,7 @@ GameObject:
   - component: {fileID: 1052880796}
   - component: {fileID: 1052880795}
   - component: {fileID: 1052880794}
+  - component: {fileID: 1052880798}
   m_Layer: 0
   m_Name: Puzzle3Animation
   m_TagString: Untagged
@@ -3543,6 +3544,17 @@ MonoBehaviour:
   eventsToPlay:
   - m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1052880798}
+        m_MethodName: PlayExample
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1052880795}
         m_MethodName: Play
         m_Mode: 1
@@ -3623,6 +3635,40 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1052880798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1052880793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f7d91fe287c11346ad7e1662218a427, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vc: {fileID: 0}
+  objectsToPlay:
+  - {fileID: 0}
+  blendWait: 2
+  actionWait: 1
+  method:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: OnPedestalActivate
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 452487770}
+          m_ObjectArgumentAssemblyTypeName: Pedestal, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  methodComponent: 
 --- !u!1 &1054981158 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 634882792799613288, guid: 6999d33e1de39fe49a1cfa85d333b91f,
@@ -3792,6 +3838,11 @@ PrefabInstance:
     - target: {fileID: 2166519438047993924, guid: f530fa11cd7fc2544b1edb8026259a32,
         type: 3}
       propertyPath: audioController
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2166519438047993924, guid: f530fa11cd7fc2544b1edb8026259a32,
+        type: 3}
+      propertyPath: connectedTriggers.Array.data[2]
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 477935946641737161, guid: f530fa11cd7fc2544b1edb8026259a32,
@@ -4095,7 +4146,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh7302
+  m_Name: pb_Mesh31932
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -4356,6 +4407,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vc: {fileID: 631242830}
+  objectsToPlay:
+  - {fileID: 232071369}
   blendWait: 2
   actionWait: 1.5
   method:
