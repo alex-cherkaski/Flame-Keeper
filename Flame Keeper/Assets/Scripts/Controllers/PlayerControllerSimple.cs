@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+
+using UnityEngine;
 
 public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
 {
@@ -65,7 +68,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     private float lockMovementTime = 0.0f;
     private Rigidbody rb;
     private CapsuleCollider capsuleCollider;
-    public MeshRenderer renderer;
+    public List<MeshRenderer> renderers;
     private Vector3 checkpointPosition;
 
     private bool enableInput;
@@ -195,7 +198,10 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
             lockMovementTime -= Time.deltaTime;
 
             // Blink character, uncomment when player is in
-            //renderer.enabled = (Time.time % 0.35f < 0.175) || lockMovementTime < 0.0f;
+            foreach (MeshRenderer rend in renderers)
+            {
+                rend.enabled = (Time.time % 0.35f < 0.175) || lockMovementTime < 0.0f;
+            }
 
             return;
         }
