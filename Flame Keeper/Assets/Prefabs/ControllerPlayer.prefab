@@ -284,7 +284,11 @@ MonoBehaviour:
   surfaceAttenuationFactor: 0.2
   surfaceNormalFactor: 0.8
   surfaceRampTex: {fileID: 2800000, guid: 6913e471487b7b847a56779e9bb8c797, type: 3}
-  renderer: {fileID: 0}
+  renderers:
+  - {fileID: 1455143110534954363}
+  - {fileID: 1455143110472081389}
+  - {fileID: 1455143111935879373}
+  - {fileID: 1455143112474005943}
   waitTime: 3
   inWaterSpeed: 2
 --- !u!1 &1455143111935879375
