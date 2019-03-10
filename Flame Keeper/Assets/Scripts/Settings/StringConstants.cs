@@ -35,6 +35,7 @@ public class StringConstants
     {
         public const string CrystalTag = "Crystal";
         public const string Player = "Player";
+        public const string Water = "Water";
     }
 
     public class PrefabPaths

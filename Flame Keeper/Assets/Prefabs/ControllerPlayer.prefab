@@ -98,11 +98,12 @@ MonoBehaviour:
   surfaceNormalFactor: 0.8
   surfaceRampTex: {fileID: 2800000, guid: 6913e471487b7b847a56779e9bb8c797, type: 3}
   renderers:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  waitTime: 3
+  - {fileID: 6649475450994747344}
+  - {fileID: 6649475450994747346}
+  - {fileID: 6649475450994747348}
+  - {fileID: 6649475450994747350}
+  - {fileID: 6649475450994747352}
+  waitTime: 2
   inWaterSpeed: 2
 --- !u!1 &6308676469548801159
 GameObject:
@@ -364,6 +365,36 @@ PrefabInstance:
 --- !u!4 &6649475450992977208 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400008, guid: 49d1c95e4e710c248bf9ddf52b665ea6,
+    type: 3}
+  m_PrefabInstance: {fileID: 6649475450992852912}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &6649475450994747344 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2300000, guid: 49d1c95e4e710c248bf9ddf52b665ea6,
+    type: 3}
+  m_PrefabInstance: {fileID: 6649475450992852912}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &6649475450994747346 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2300002, guid: 49d1c95e4e710c248bf9ddf52b665ea6,
+    type: 3}
+  m_PrefabInstance: {fileID: 6649475450992852912}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &6649475450994747348 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2300004, guid: 49d1c95e4e710c248bf9ddf52b665ea6,
+    type: 3}
+  m_PrefabInstance: {fileID: 6649475450992852912}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &6649475450994747350 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2300006, guid: 49d1c95e4e710c248bf9ddf52b665ea6,
+    type: 3}
+  m_PrefabInstance: {fileID: 6649475450992852912}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &6649475450994747352 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2300008, guid: 49d1c95e4e710c248bf9ddf52b665ea6,
     type: 3}
   m_PrefabInstance: {fileID: 6649475450992852912}
   m_PrefabAsset: {fileID: 0}

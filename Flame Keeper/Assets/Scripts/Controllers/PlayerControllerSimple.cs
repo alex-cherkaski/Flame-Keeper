@@ -74,12 +74,13 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     private bool enableInput;
 
     [Header("Water Collision")]
-    public float waitTime = 3f;
+    public float waitTime = 1f;
     public float inWaterSpeed;
     private bool playerTouchingWater;
     private bool checkWaterStatus = false;
     private float timer;
 
+    private Water currentWaterCollision;
     private bool currentGroundedState;
     private bool pastGroundedState;
 
@@ -165,11 +166,18 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
                 this.SetVelocity(normalVelocity);
                 timer = 0.0f;
             }
+
+            // Make the player sink while in water
+            if (currentWaterCollision != null)
+            {
+                currentWaterCollision.Sink(percentToDeath);
+            }
         }
         else
         {
             // Make sure player has normal speed if we aren't calculating water stuff
             checkWaterStatus = false;
+            currentWaterCollision = null;
             playerTouchingWater = false;
             this.SetVelocity(normalVelocity);
             timer = 0.0f;
@@ -440,12 +448,12 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         }
 
         //if the player is touching water
-        if (other.CompareTag("Water"))
+        if (other.CompareTag(StringConstants.Tags.Water))
         {
             checkWaterStatus = true;
+            currentWaterCollision = other.GetComponent<Water>();
             playerTouchingWater = true;
             this.SetVelocity(inWaterSpeed);
-            Debug.Log("About to Play WATER1");
             audioController.GetComponent<AudioController>().PlayAudioClip(AudioController.AudioClips.water4);
         }
     }
@@ -453,7 +461,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     private void OnTriggerExit(Collider other)
     {
         //if the player is getting out of the water
-        if (other.CompareTag("Water"))
+        if (other.CompareTag(StringConstants.Tags.Water))
         {
             playerTouchingWater = false;
             audioController.GetComponent<AudioController>().PlayAudioClip(AudioController.AudioClips.water2);

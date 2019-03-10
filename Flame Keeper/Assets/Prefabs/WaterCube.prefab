@@ -239,7 +239,7 @@ MonoBehaviour:
   moveAxis: 1
   distance: 0.1
   speed: 6
-  drainingWaterTrigger: {fileID: 0}
+  offset: {x: 0, y: 0, z: 0}
 --- !u!1 &701852298780976335
 GameObject:
   m_ObjectHideFlags: 0
@@ -330,6 +330,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f86c4b9ae2ebbc4fbe79d387f5bd75e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sinkHeight: 0
+  waterGround: {fileID: 0}
   reflectionCamera: {fileID: 701852296859461601}
   rippleCamera: {fileID: 701852297430394215}
   reflectionTexture: {fileID: 8400000, guid: a2f3e9b91eb45a54fbf6faeccf2dfaa8, type: 2}
@@ -434,6 +436,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f86c4b9ae2ebbc4fbe79d387f5bd75e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sinkHeight: 1.9
+  waterGround: {fileID: 701852298180609908}
   reflectionCamera: {fileID: 701852296859461601}
   rippleCamera: {fileID: 701852297430394215}
   reflectionTexture: {fileID: 8400000, guid: a2f3e9b91eb45a54fbf6faeccf2dfaa8, type: 2}
@@ -456,5 +460,5 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 9.999999, y: 0.25881386, z: 10}
-  m_Center: {x: 0, y: -0.12940693, z: 0}
+  m_Size: {x: 9.999999, y: 3.9, z: 10}
+  m_Center: {x: 0, y: -1.91, z: 0}
