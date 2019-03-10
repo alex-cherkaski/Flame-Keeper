@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 701852296859461603}
   - component: {fileID: 701852296859461601}
-  - component: {fileID: 701852296859461602}
   m_Layer: 0
   m_Name: RefllectionCamera
   m_TagString: Untagged
@@ -63,7 +62,7 @@ Camera:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 295
-  m_RenderingPath: -1
+  m_RenderingPath: 1
   m_TargetTexture: {fileID: 8400000, guid: a2f3e9b91eb45a54fbf6faeccf2dfaa8, type: 2}
   m_TargetDisplay: 0
   m_TargetEye: 3
@@ -74,14 +73,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &701852296859461602
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 701852296859461600}
-  m_Enabled: 1
 --- !u!1 &701852297430394214
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,7 +83,6 @@ GameObject:
   m_Component:
   - component: {fileID: 701852297430394209}
   - component: {fileID: 701852297430394215}
-  - component: {fileID: 701852297430394208}
   m_Layer: 0
   m_Name: RippleCamera
   m_TagString: Untagged
@@ -156,14 +146,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &701852297430394208
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 701852297430394214}
-  m_Enabled: 1
 --- !u!1 &701852297940931982
 GameObject:
   m_ObjectHideFlags: 0
@@ -187,9 +169,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 701852297940931982}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 12.85, y: -1.58, z: -38.51}
-  m_LocalScale: {x: 1, y: 1, z: 1.6036597}
+  m_LocalScale: {x: 0.3333334, y: 0.33333334, z: 0.53455335}
   m_Children:
   - {fileID: 701852298851483040}
   - {fileID: 701852298780976328}
@@ -208,7 +190,7 @@ GameObject:
   - component: {fileID: 701852298180609898}
   - component: {fileID: 701852298180609899}
   - component: {fileID: 701852298180609908}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WaterGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -257,6 +239,7 @@ MonoBehaviour:
   moveAxis: 1
   distance: 0.1
   speed: 6
+  drainingWaterTrigger: {fileID: 0}
 --- !u!1 &701852298780976335
 GameObject:
   m_ObjectHideFlags: 0
@@ -297,7 +280,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 701852298780976335}
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300000, guid: 13dd2ac06f19be740b997a798fa06c49, type: 3}
 --- !u!23 &701852298780976330
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -315,7 +298,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d7bb32e8b317033438553e7551b27ed8, type: 2}
+  - {fileID: 2100000, guid: 5dc0276b4d911ea48a86d77dea522649, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -401,7 +384,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 701852298851483047}
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300002, guid: 2b3e192c3d393ef468d61a7a562341a2, type: 3}
 --- !u!23 &701852298851483042
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -419,7 +402,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2879ecb2694002d49b4d106ce7166279, type: 2}
+  - {fileID: 2100000, guid: 15e68f7ea3ee82f45ac0c15bbf1891c1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

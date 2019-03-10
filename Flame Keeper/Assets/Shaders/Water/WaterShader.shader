@@ -175,7 +175,6 @@ Shader "Fluids/Water"
 				ripplesTex += tex2D(_RippleTex, uv).b; // Ripple texture is always orthographic
 
 				float ripples = step(0.99, ripplesTex * 2);
-				float4 ripplesColored = ripples * _FoamColor;
 
 				// Distort our uv coord a bit so we get a refraction and reflection effect
 				half2 bumpRefract = normalize(half2(sin(_Time.y * _WaveSpeed * 0.9 + (ripplesTex * 10.0) + fnoise), cos(_Time.y * _WaveSpeed + (ripplesTex * 10.0) + fnoise))) * _RefractDistortion;
@@ -232,9 +231,9 @@ Shader "Fluids/Water"
 				kA += kA * rampedFalloff * cutoff;
 
 
-				fixed4 ambient = kA * (col + ripplesColored);
-				fixed4 diffuse = (1 - kA) * (col + ripplesColored) * _LightColor0 * nl;
-				return saturate(lerp(_FoamColor * pow(kA, 0.75), ambient + diffuse, foamStep)); // lerp in foam
+				fixed4 ambient = kA * (col);
+				fixed4 diffuse = (1 - kA) * (col) * _LightColor0 * nl;
+				return saturate(lerp(_FoamColor * pow(kA, 0.3), ambient + diffuse, saturate(foamStep - ripples))); // lerp in foam
             }
 
             ENDCG
