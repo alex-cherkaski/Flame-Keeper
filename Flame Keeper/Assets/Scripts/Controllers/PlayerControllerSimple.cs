@@ -507,6 +507,14 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     }
 
     /// <summary>
+    /// Returns value of enableInput
+    /// </summary>
+    public bool IsInputEnabled()
+    {
+        return enableInput;
+    }
+
+    /// <summary>
     /// Checks if the player is not touching the water and is grounded
     /// </summary>
     bool OutOfWater()
