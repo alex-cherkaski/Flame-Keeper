@@ -13,6 +13,8 @@ public class MenuLevelConfig : LevelConfig
         base.OnLevelStart();
 
         m_allowInput = true;
+
+        FlameKeeper.Get().musicController.PlayTrack(MusicController.MusicTracks.MainTheme);
     }
 
     public void Update()
