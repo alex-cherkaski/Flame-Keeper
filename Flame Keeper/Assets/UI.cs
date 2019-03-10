@@ -5,17 +5,21 @@ using UnityEngine;
 public class UI : MonoBehaviour
 {
     public Animator animator;
+    public bool billboard = true; // If true, will always be facing towards the camera
 
-    // Start is called before the first frame update
+    private Camera mainCamera;
+
     void Start()
     {
-        
+        mainCamera = Camera.main;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        if (billboard)
+        {
+            transform.rotation = Quaternion.LookRotation(transform.position - mainCamera.transform.position);
+        }
     }
 
     public void FadeOut()

@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: WaterMat
+  m_Name: WaterMatWall
   m_Shader: {fileID: 4800000, guid: ba37c8793bfea634f80bff8226a95b46, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -69,8 +69,8 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _FoamDistance: 0.45
-    - _FoamNoiseScale: 2.18
+    - _FoamDistance: 0
+    - _FoamNoiseScale: 0
     - _FresnelNoseScale: 5
     - _GlossMapScale: 1
     - _Glossiness: 0.5

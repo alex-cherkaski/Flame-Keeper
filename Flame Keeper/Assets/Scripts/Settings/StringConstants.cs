@@ -28,6 +28,7 @@ public class StringConstants
         public const string Start = "Start";
         public const string ResetOne = "LeftBumper";
         public const string ResetTwo = "RightBumper";
+        public const string CameraView = "CameraView";
     }
 
     public class Tags
