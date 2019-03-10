@@ -53,7 +53,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     public LayerMask ground;
 
     private GameObject audioController;
-    
+
     private bool validHighJump = false;
     private bool trackApexTime = false;
     private bool trackJumpTime = false;
@@ -179,11 +179,6 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         if (enableInput && Input.GetButtonDown(StringConstants.Input.JumpButton))
         {
             lastJumpPress = Time.fixedTime;
-
-            if (!playerTouchingWater)
-            {
-                audioController.GetComponent<AudioController>().PlayAudioClip(AudioController.AudioClips.jumpNormal);
-            }
         }
     }
 
@@ -213,6 +208,11 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         if (!jumpDelayed && Grounded() && (Time.fixedTime - lastJumpPress) < jumpBufferTime)
         {
             // Start the initial jump
+            if (!playerTouchingWater)
+            {
+                audioController.GetComponent<AudioController>().PlayAudioClip(AudioController.AudioClips.jumpNormal);
+            }
+
             lastJumpExecute = Time.fixedTime;
             validHighJump = true;
             trackApexTime = true;
