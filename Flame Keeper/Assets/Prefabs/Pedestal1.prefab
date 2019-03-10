@@ -87,7 +87,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c71066eefb876624ea3bae8547895635, type: 3}
+  - {fileID: 2100000, guid: 68f6a6eca864d9348b16500791bf0773, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -176,16 +176,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activateAnimationSpeed: 0
+  actAsCheckpoint: 1
   connectedTriggers: []
-  emitter: {fileID: 5929978524284223007}
-  deactivatedEmitterIntensity: -3
+  emitters:
+  - {fileID: 5929978524281954527}
+  deactivatedEmitterIntensity: 1
   activatedEmitterIntensity: 3
   renderersInEmission: []
+  deactiveColor: {fileID: 2100000, guid: 860013adfcb8eca479b0e1a5167504d8, type: 2}
   pointLightController: {fileID: 477935946641737161}
-  wire: {fileID: 6564509901908771741}
-  wireDeactivatedColor: {r: 0, g: 0, b: 0, a: 0}
-  wireActivatedColor: {r: 0, g: 0, b: 0, a: 0}
-  player: {fileID: 0}
   activateDistance: 2
   maxLevel: 1
   startLevel: 0
@@ -231,10 +230,10 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 2
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 2.5
-  m_Range: 5
-  m_SpotAngle: 30
+  m_Color: {r: 0.8867924, g: 0.5949112, b: 0.28862584, a: 0}
+  m_Intensity: 1.5
+  m_Range: 25.5
+  m_SpotAngle: 179
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
@@ -273,10 +272,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointLight: {fileID: 5265881382496024329}
   lightConfigs:
-  - range: 1.87
-    intensity: 1
-  - range: 5
-    intensity: 2.5
+  - range: 25.5
+    intensity: 0
+  - range: 25.5
+    intensity: 1.5
   updateSpeed: 1
 --- !u!1 &6564509901908771741
 GameObject:
@@ -436,6 +435,14 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1a31edb6871912a4391061114d44cd46, type: 2}
+    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: d17c2dbc9c308ae4ebd282a23b88c329, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
 --- !u!4 &5929978524283724347 stripped
@@ -444,9 +451,9 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5929978524284123327}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &5929978524284223007 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 100000, guid: 0ca5f248f72df9b4892be5fb2bcb3464,
+--- !u!23 &5929978524281954527 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464,
     type: 3}
   m_PrefabInstance: {fileID: 5929978524284123327}
   m_PrefabAsset: {fileID: 0}

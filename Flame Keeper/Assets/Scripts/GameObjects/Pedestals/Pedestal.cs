@@ -14,6 +14,7 @@ public class Pedestal : MonoBehaviour, DynamicLightSource
     public float deactivatedEmitterIntensity = -3.0f;
     public float activatedEmitterIntensity = 3.0f;
     public List<MeshRenderer> renderersInEmission = new List<MeshRenderer>();
+    public Material deactiveColor;
 
     [Header("Lights")]
     public DynamicLightController pointLightController;
@@ -122,8 +123,8 @@ public class Pedestal : MonoBehaviour, DynamicLightSource
             }
             else
             {
-                emitter.materials[1].SetVector("_Color", emitter.materials[0].color);
-                emitter.materials[1].SetVector("_EmissionColor", emitter.materials[0].color * deactivatedEmitterIntensity * deactivatedEmitterIntensity * Mathf.Sign(deactivatedEmitterIntensity));
+                emitter.materials[1].SetVector("_Color", deactiveColor.color);
+                emitter.materials[1].SetVector("_EmissionColor", deactiveColor.color * deactivatedEmitterIntensity * deactivatedEmitterIntensity * Mathf.Sign(deactivatedEmitterIntensity));
             }
             i++;
         }
