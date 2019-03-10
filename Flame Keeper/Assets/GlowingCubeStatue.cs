@@ -15,12 +15,12 @@ public class GlowingCubeStatue : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Water"))
+        if (other.gameObject.CompareTag(StringConstants.Tags.Water))
         {
             audioController.GetComponent<AudioController>().PlayAudioClip(AudioController.AudioClips.water6);
         }

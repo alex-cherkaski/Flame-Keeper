@@ -14,6 +14,9 @@ public class Water : MonoBehaviour
     private float lastRender;
     private Renderer waterRenderer;
 
+    public float sinkHeight;
+    public MoveBackAndForth waterGround;
+
     public Camera reflectionCamera;
     public Camera rippleCamera;
     public RenderTexture reflectionTexture;
@@ -37,6 +40,11 @@ public class Water : MonoBehaviour
         // Set positions of all ripple objects
         Vector3 p = rippleCamera.transform.position;
         waterRenderer.sharedMaterial.SetVector("_RippleCameraPosition", new Vector4(p.x, p.y, p.z));
+    }
+
+    public void Sink(float percent)
+    {
+        waterGround.offset = new Vector3(0.0f, -sinkHeight * percent, 0.0f);
     }
 
    void OnTriggerEnter(Collider other)
