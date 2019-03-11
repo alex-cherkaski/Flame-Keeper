@@ -5048,37 +5048,37 @@ PrefabInstance:
     - target: {fileID: 5958864142565225140, guid: dc0442efc534bf248a185c8b33ac8865,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.13732511
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5958864142565225140, guid: dc0442efc534bf248a185c8b33ac8865,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9887173
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5958864142565225140, guid: dc0442efc534bf248a185c8b33ac8865,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -11.540001
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5958864142565225140, guid: dc0442efc534bf248a185c8b33ac8865,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -87.12
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5958864142565225140, guid: dc0442efc534bf248a185c8b33ac8865,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.059605774
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5958864142565225140, guid: dc0442efc534bf248a185c8b33ac8865,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0052137827
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5958864142565225140, guid: dc0442efc534bf248a185c8b33ac8865,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.64
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc0442efc534bf248a185c8b33ac8865, type: 3}
@@ -8346,7 +8346,7 @@ MonoBehaviour:
   - m_Script
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
-  m_Priority: 10
+  m_Priority: 1
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
