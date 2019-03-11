@@ -24,6 +24,7 @@ public class UI : MonoBehaviour
 
     public void FadeOut()
     {
+        Debug.Log("In Fade Out");
         animator.SetTrigger("FadeOut");
     }
 }
