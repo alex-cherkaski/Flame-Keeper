@@ -32,7 +32,7 @@ public class CameraController : MonoBehaviour
 
         // Check if we are allowing input
         float viewInput = Input.GetAxisRaw(StringConstants.Input.CameraView);
-        if (player.IsInputEnabled())
+        if (player.IsInputEnabled() && Mathf.Abs(viewInput) > 0.15f) // A little buffer for numerical stability, otherwise camera will drift
         {
             // Rotate camera
             float currentAngle = Vector3.SignedAngle(startingViewDirection, Vector3.Normalize(this.transform.position - mainCamera.transform.position), Vector3.up);
