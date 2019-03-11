@@ -23,12 +23,12 @@ public class UICollider : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag(StringConstants.Tags.Player))
         {
             if (pedestal.GetCurrLevel() == 0)
             {
@@ -47,7 +47,7 @@ public class UICollider : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.CompareTag("Player") && pastPedestalLevel != pedestal.GetCurrLevel())
+        if (other.gameObject.CompareTag(StringConstants.Tags.Player) && pastPedestalLevel != pedestal.GetCurrLevel())
         {
             if (giveFlame.activeSelf)
             {
@@ -87,7 +87,7 @@ public class UICollider : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag(StringConstants.Tags.Player))
         {
             if (giveFlame.activeSelf)
             {
