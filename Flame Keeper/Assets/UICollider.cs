@@ -30,6 +30,7 @@ public class UICollider : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            pastPedestalLevel = pedestal.GetCurrLevel();
             if (pedestal.GetCurrLevel() == 0)
             {
                 giveFlame.SetActive(true);
