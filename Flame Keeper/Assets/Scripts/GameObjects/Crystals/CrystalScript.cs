@@ -22,6 +22,9 @@ public class CrystalScript : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            ParticleSystem.ExternalForcesModule efm = particles.externalForces;
+            efm.enabled = true;
+
             particles.Stop();
         }   
     }
