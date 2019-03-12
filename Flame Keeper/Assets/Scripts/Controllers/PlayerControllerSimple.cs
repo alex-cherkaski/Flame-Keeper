@@ -13,6 +13,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     [Space]
     [Header("Child Controllers")]
     public DynamicLightController playerLightController;
+    public PlayerOrbitals playerOrbitals;
 
     int _lanternUses;
     private int lanternUses
@@ -24,6 +25,8 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         set
         {
             _lanternUses = value;
+
+            playerOrbitals.OnLanternUsesChanged(value);
 
             if (playerLightController && playerLightController.IsSetup())
                 OnLightSourceValueChange(_lanternUses);
@@ -544,6 +547,4 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     {
         return !playerTouchingWater && this.Grounded();
     }
-
-
 }
