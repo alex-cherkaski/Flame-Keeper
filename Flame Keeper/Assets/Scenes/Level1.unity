@@ -228,8 +228,8 @@ GameObject:
   - component: {fileID: 47670996}
   - component: {fileID: 47670995}
   - component: {fileID: 47670994}
-  - component: {fileID: 47670993}
   - component: {fileID: 47670992}
+  - component: {fileID: 47670993}
   m_Layer: 10
   m_Name: Plat2_4
   m_TagString: Platform
@@ -252,8 +252,8 @@ MonoBehaviour:
   moveableObject: {fileID: 47670996}
   incrementPosition: {x: -2.19, y: 0, z: 0}
   moveSpeed: 5
---- !u!64 &47670993
-MeshCollider:
+--- !u!65 &47670993
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -262,10 +262,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300228, guid: e98a219ecf44af9418949e3609195f67, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 1.9999999, y: 2.5, z: 1.9999996}
+  m_Center: {x: 0, y: -0.0000004768371, z: 1.2228568}
 --- !u!23 &47670994
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -816,14 +815,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 543134908}
     m_Modifications:
-    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 1a31edb6871912a4391061114d44cd46, type: 2}
-    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
-      propertyPath: m_Materials.Array.data[1]
-      value: 
-      objectReference: {fileID: 2100000, guid: d17c2dbc9c308ae4ebd282a23b88c329, type: 2}
+    - target: {fileID: 100004, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
+      propertyPath: m_Name
+      value: Totem
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.4
+      objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.21
@@ -880,14 +879,14 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 100004, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
-      propertyPath: m_Name
-      value: Totem
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.4
-      objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1a31edb6871912a4391061114d44cd46, type: 2}
+    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: d17c2dbc9c308ae4ebd282a23b88c329, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
 --- !u!64 &127161735
@@ -1391,14 +1390,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1949578221}
     m_Modifications:
-    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 1a31edb6871912a4391061114d44cd46, type: 2}
-    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
-      propertyPath: m_Materials.Array.data[1]
-      value: 
-      objectReference: {fileID: 2100000, guid: d17c2dbc9c308ae4ebd282a23b88c329, type: 2}
+    - target: {fileID: 100004, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
+      propertyPath: m_Name
+      value: Totem
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.4
+      objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.24281783
@@ -1455,14 +1454,14 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 100004, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
-      propertyPath: m_Name
-      value: Totem
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.4
-      objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1a31edb6871912a4391061114d44cd46, type: 2}
+    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: d17c2dbc9c308ae4ebd282a23b88c329, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
 --- !u!1 &284068260
@@ -2178,8 +2177,8 @@ GameObject:
   - component: {fileID: 439505018}
   - component: {fileID: 439505022}
   - component: {fileID: 439505021}
-  - component: {fileID: 439505020}
   - component: {fileID: 439505019}
+  - component: {fileID: 439505020}
   m_Layer: 10
   m_Name: Plat4_6
   m_TagString: Platform
@@ -2219,8 +2218,8 @@ MonoBehaviour:
   moveSpeed: 1
   startDelay: 0
   intervalPauseDelay: 0
---- !u!64 &439505020
-MeshCollider:
+--- !u!65 &439505020
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2229,10 +2228,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300228, guid: e98a219ecf44af9418949e3609195f67, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 2.5, y: 2.5, z: 1.9999996}
+  m_Center: {x: 0, y: -0.0000004768371, z: 1.2228568}
 --- !u!23 &439505021
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2381,8 +2379,8 @@ GameObject:
   - component: {fileID: 450771718}
   - component: {fileID: 450771722}
   - component: {fileID: 450771721}
-  - component: {fileID: 450771720}
   - component: {fileID: 450771719}
+  - component: {fileID: 450771720}
   m_Layer: 10
   m_Name: Plat2_1
   m_TagString: Platform
@@ -2419,8 +2417,8 @@ MonoBehaviour:
   moveableObject: {fileID: 450771718}
   incrementPosition: {x: -2.19, y: 0, z: 0}
   moveSpeed: 1
---- !u!64 &450771720
-MeshCollider:
+--- !u!65 &450771720
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2429,10 +2427,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300228, guid: e98a219ecf44af9418949e3609195f67, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 1.9999999, y: 2.5, z: 1.9999996}
+  m_Center: {x: 0, y: -0.0000004768371, z: 1.2228568}
 --- !u!23 &450771721
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3797,8 +3794,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.9999999, y: 2.0000005, z: 1.9999998}
-  m_Center: {x: 0, y: -0.00000047683704, z: 1.2228569}
+  m_Size: {x: 2.5, y: 2.0000005, z: 1.9999998}
+  m_Center: {x: 0.2, y: -0.00000047683704, z: 1.2228569}
 --- !u!23 &642352340
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4302,8 +4299,8 @@ GameObject:
   - component: {fileID: 733927569}
   - component: {fileID: 733927573}
   - component: {fileID: 733927572}
-  - component: {fileID: 733927571}
   - component: {fileID: 733927570}
+  - component: {fileID: 733927571}
   m_Layer: 10
   m_Name: Plat4_5
   m_TagString: Platform
@@ -4343,8 +4340,8 @@ MonoBehaviour:
   moveSpeed: 1
   startDelay: 0
   intervalPauseDelay: 0
---- !u!64 &733927571
-MeshCollider:
+--- !u!65 &733927571
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -4353,10 +4350,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300228, guid: e98a219ecf44af9418949e3609195f67, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 2.5, y: 2.5, z: 1.9999996}
+  m_Center: {x: 0, y: -0.0000004768371, z: 1.2228568}
 --- !u!23 &733927572
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4479,8 +4475,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.9999999, y: 2.0000005, z: 1.9999998}
-  m_Center: {x: 0, y: -0.00000047683704, z: 1.2228569}
+  m_Size: {x: 1.9999999, y: 2.5, z: 1.9999998}
+  m_Center: {x: 0, y: 0.2, z: 1.2228569}
 --- !u!23 &740140372
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4628,8 +4624,8 @@ GameObject:
   - component: {fileID: 755435195}
   - component: {fileID: 755435199}
   - component: {fileID: 755435198}
-  - component: {fileID: 755435197}
   - component: {fileID: 755435196}
+  - component: {fileID: 755435197}
   m_Layer: 10
   m_Name: Plat4_3
   m_TagString: Platform
@@ -4669,8 +4665,8 @@ MonoBehaviour:
   moveSpeed: 1
   startDelay: 0
   intervalPauseDelay: 2
---- !u!64 &755435197
-MeshCollider:
+--- !u!65 &755435197
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -4679,10 +4675,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300228, guid: e98a219ecf44af9418949e3609195f67, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 2.5, y: 2.5, z: 1.9999996}
+  m_Center: {x: 0, y: -0.0000004768371, z: 1.2228568}
 --- !u!23 &755435198
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5096,14 +5091,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 57826958}
     m_Modifications:
-    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 1a31edb6871912a4391061114d44cd46, type: 2}
-    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
-      propertyPath: m_Materials.Array.data[1]
-      value: 
-      objectReference: {fileID: 2100000, guid: d17c2dbc9c308ae4ebd282a23b88c329, type: 2}
+    - target: {fileID: 100004, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
+      propertyPath: m_Name
+      value: Totem
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.4
+      objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.24281783
@@ -5160,14 +5155,14 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 100004, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
-      propertyPath: m_Name
-      value: Totem
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.4
-      objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1a31edb6871912a4391061114d44cd46, type: 2}
+    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: d17c2dbc9c308ae4ebd282a23b88c329, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
 --- !u!1001 &889127281
@@ -5416,20 +5411,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 4300238, guid: e98a219ecf44af9418949e3609195f67, type: 3}
---- !u!64 &917191348
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1802238763}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300234, guid: e98a219ecf44af9418949e3609195f67, type: 3}
 --- !u!64 &945523726
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5670,8 +5651,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.9999999, y: 2.0000005, z: 1.9999998}
-  m_Center: {x: 0, y: -0.00000047683704, z: 1.2228569}
+  m_Size: {x: 2.5, y: 2.0000005, z: 1.9999998}
+  m_Center: {x: -0.2, y: -0.00000047683704, z: 1.2228569}
 --- !u!23 &993169119
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6157,8 +6138,8 @@ GameObject:
   - component: {fileID: 1150075504}
   - component: {fileID: 1150075508}
   - component: {fileID: 1150075507}
-  - component: {fileID: 1150075506}
   - component: {fileID: 1150075505}
+  - component: {fileID: 1150075506}
   m_Layer: 10
   m_Name: Plat4_4
   m_TagString: Platform
@@ -6198,8 +6179,8 @@ MonoBehaviour:
   moveSpeed: 1
   startDelay: 0
   intervalPauseDelay: 2
---- !u!64 &1150075506
-MeshCollider:
+--- !u!65 &1150075506
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -6208,10 +6189,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300228, guid: e98a219ecf44af9418949e3609195f67, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 2.5, y: 2.5, z: 1.9999998}
+  m_Center: {x: 0, y: -0.00000047683707, z: 1.2228569}
 --- !u!23 &1150075507
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7801,8 +7781,8 @@ GameObject:
   - component: {fileID: 1511547785}
   - component: {fileID: 1511547789}
   - component: {fileID: 1511547788}
-  - component: {fileID: 1511547787}
   - component: {fileID: 1511547786}
+  - component: {fileID: 1511547787}
   m_Layer: 10
   m_Name: Plat4_1
   m_TagString: Platform
@@ -7844,8 +7824,8 @@ MonoBehaviour:
   moveSpeed: 1
   startDelay: 0
   intervalPauseDelay: 0
---- !u!64 &1511547787
-MeshCollider:
+--- !u!65 &1511547787
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -7854,10 +7834,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300228, guid: e98a219ecf44af9418949e3609195f67, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 2.5, y: 2.5, z: 2}
+  m_Center: {x: 0, y: -0.0000004768371, z: 1.2228568}
 --- !u!23 &1511547788
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7952,8 +7931,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.9999999, y: 2.0000005, z: 1.9999998}
-  m_Center: {x: 0, y: -0.00000047683704, z: 1.2228569}
+  m_Size: {x: 2.5, y: 2.0000005, z: 1.9999998}
+  m_Center: {x: -0.22, y: -0.00000047683704, z: 1.2228569}
 --- !u!23 &1515224902
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -8123,20 +8102,6 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 2166519438047993924, guid: f530fa11cd7fc2544b1edb8026259a32, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f530fa11cd7fc2544b1edb8026259a32, type: 3}
---- !u!64 &1529270222
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1802238757}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300252, guid: e98a219ecf44af9418949e3609195f67, type: 3}
 --- !u!64 &1540253753
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -8711,8 +8676,8 @@ GameObject:
   - component: {fileID: 1682156399}
   - component: {fileID: 1682156402}
   - component: {fileID: 1682156401}
-  - component: {fileID: 1682156400}
   - component: {fileID: 1682156403}
+  - component: {fileID: 1682156400}
   m_Layer: 10
   m_Name: Plat2_3
   m_TagString: Platform
@@ -8734,8 +8699,8 @@ Transform:
   m_Father: {fileID: 171394364}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &1682156400
-MeshCollider:
+--- !u!65 &1682156400
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -8744,10 +8709,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300228, guid: e98a219ecf44af9418949e3609195f67, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 1.9999999, y: 2.5, z: 1.9999996}
+  m_Center: {x: 0, y: -0.0000004768371, z: 1.2228568}
 --- !u!23 &1682156401
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -15855,7 +15819,7 @@ GameObject:
   - component: {fileID: 1802266373}
   - component: {fileID: 1800939297}
   - component: {fileID: 1799972193}
-  - component: {fileID: 1529270222}
+  - component: {fileID: 1802238758}
   m_Layer: 10
   m_Name: plat_1
   m_TagString: Platform
@@ -15863,6 +15827,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!65 &1802238758
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1802238757}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.5, y: 2.5, z: 1.9999998}
+  m_Center: {x: 0, y: -0.00000047683716, z: 1.2228569}
 --- !u!1 &1802238761
 GameObject:
   m_ObjectHideFlags: 0
@@ -15893,7 +15870,7 @@ GameObject:
   - component: {fileID: 1802266379}
   - component: {fileID: 1800939303}
   - component: {fileID: 1799972199}
-  - component: {fileID: 917191348}
+  - component: {fileID: 1802238764}
   m_Layer: 10
   m_Name: plat_2
   m_TagString: Platform
@@ -15901,6 +15878,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!65 &1802238764
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1802238763}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.5, y: 2.5, z: 1.9999998}
+  m_Center: {x: 0, y: 0.0000014305115, z: 1.2228569}
 --- !u!1 &1802238765
 GameObject:
   m_ObjectHideFlags: 0
@@ -18885,14 +18875,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1992624653}
     m_Modifications:
-    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 1a31edb6871912a4391061114d44cd46, type: 2}
-    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
-      propertyPath: m_Materials.Array.data[1]
-      value: 
-      objectReference: {fileID: 2100000, guid: d17c2dbc9c308ae4ebd282a23b88c329, type: 2}
+    - target: {fileID: 100004, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
+      propertyPath: m_Name
+      value: Totem
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.4
+      objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.4
@@ -18949,14 +18939,14 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 100004, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
-      propertyPath: m_Name
-      value: Totem
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.4
-      objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1a31edb6871912a4391061114d44cd46, type: 2}
+    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: d17c2dbc9c308ae4ebd282a23b88c329, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
 --- !u!23 &1835972205 stripped
@@ -19145,14 +19135,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1354133800}
     m_Modifications:
-    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 1a31edb6871912a4391061114d44cd46, type: 2}
-    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
-      propertyPath: m_Materials.Array.data[1]
-      value: 
-      objectReference: {fileID: 2100000, guid: d17c2dbc9c308ae4ebd282a23b88c329, type: 2}
+    - target: {fileID: 100004, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
+      propertyPath: m_Name
+      value: Totem
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.4
+      objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.24281783
@@ -19209,14 +19199,14 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 100004, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
-      propertyPath: m_Name
-      value: Totem
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.4
-      objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1a31edb6871912a4391061114d44cd46, type: 2}
+    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: d17c2dbc9c308ae4ebd282a23b88c329, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
 --- !u!1001 &1913032831
@@ -19744,14 +19734,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 100849500}
     m_Modifications:
-    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 1a31edb6871912a4391061114d44cd46, type: 2}
-    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
-      propertyPath: m_Materials.Array.data[1]
-      value: 
-      objectReference: {fileID: 2100000, guid: d17c2dbc9c308ae4ebd282a23b88c329, type: 2}
+    - target: {fileID: 100004, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
+      propertyPath: m_Name
+      value: Totem
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.4
+      objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.24281783
@@ -19808,14 +19798,14 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 100004, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
-      propertyPath: m_Name
-      value: Totem
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.4
-      objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1a31edb6871912a4391061114d44cd46, type: 2}
+    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: d17c2dbc9c308ae4ebd282a23b88c329, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
 --- !u!64 &1980848506
@@ -20080,8 +20070,8 @@ GameObject:
   - component: {fileID: 2021212472}
   - component: {fileID: 2021212476}
   - component: {fileID: 2021212475}
-  - component: {fileID: 2021212474}
   - component: {fileID: 2021212473}
+  - component: {fileID: 2021212474}
   m_Layer: 10
   m_Name: Plat4_2
   m_TagString: Platform
@@ -20123,8 +20113,8 @@ MonoBehaviour:
   moveSpeed: 1
   startDelay: 0
   intervalPauseDelay: 0
---- !u!64 &2021212474
-MeshCollider:
+--- !u!65 &2021212474
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -20133,10 +20123,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300228, guid: e98a219ecf44af9418949e3609195f67, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 2.5, y: 2.5, z: 1.9999996}
+  m_Center: {x: 0, y: -0.0000004768371, z: 1.2228568}
 --- !u!23 &2021212475
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -20189,14 +20178,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1256787092}
     m_Modifications:
-    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 1a31edb6871912a4391061114d44cd46, type: 2}
-    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
-      propertyPath: m_Materials.Array.data[1]
-      value: 
-      objectReference: {fileID: 2100000, guid: d17c2dbc9c308ae4ebd282a23b88c329, type: 2}
+    - target: {fileID: 100004, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
+      propertyPath: m_Name
+      value: Totem
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.4
+      objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.24281783
@@ -20253,14 +20242,14 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 100004, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
-      propertyPath: m_Name
-      value: Totem
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.4
-      objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1a31edb6871912a4391061114d44cd46, type: 2}
+    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: d17c2dbc9c308ae4ebd282a23b88c329, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
 --- !u!1 &2049868252
@@ -20535,8 +20524,8 @@ GameObject:
   - component: {fileID: 2085928587}
   - component: {fileID: 2085928591}
   - component: {fileID: 2085928590}
-  - component: {fileID: 2085928589}
   - component: {fileID: 2085928588}
+  - component: {fileID: 2085928589}
   m_Layer: 10
   m_Name: Plat2_2
   m_TagString: Platform
@@ -20573,8 +20562,8 @@ MonoBehaviour:
   moveableObject: {fileID: 2085928587}
   incrementPosition: {x: -2.19, y: 0, z: 0}
   moveSpeed: 1
---- !u!64 &2085928589
-MeshCollider:
+--- !u!65 &2085928589
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -20583,10 +20572,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300228, guid: e98a219ecf44af9418949e3609195f67, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 1.9999999, y: 2.5, z: 1.9999996}
+  m_Center: {x: 0, y: -0.0000004768371, z: 1.2228568}
 --- !u!23 &2085928590
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -20981,11 +20969,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 521052407014330822, guid: 339f256b9c55c5448abe6eb701ccb457,
-        type: 3}
-      propertyPath: m_Name
-      value: Water
-      objectReference: {fileID: 0}
     - target: {fileID: 521052407014330818, guid: 339f256b9c55c5448abe6eb701ccb457,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -21045,6 +21028,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.x
       value: 12.35331
+      objectReference: {fileID: 0}
+    - target: {fileID: 521052407014330822, guid: 339f256b9c55c5448abe6eb701ccb457,
+        type: 3}
+      propertyPath: m_Name
+      value: Water
       objectReference: {fileID: 0}
     - target: {fileID: 521052407014330820, guid: 339f256b9c55c5448abe6eb701ccb457,
         type: 3}
