@@ -400,6 +400,12 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         // Stop angular velocity when colliding with an object or else the player
         // will continue to rotate
         rb.angularVelocity = new Vector3(0, 0, 0);
+
+
+        if (collision.gameObject.CompareTag("Platform"))
+        {
+            transform.parent = collision.gameObject.transform;
+        }
     }
 
     private void OnCollisionStay(Collision collision)
@@ -407,6 +413,15 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         // Stop angular velocity when colliding with an object or else the player
         // will continue to rotate
         rb.angularVelocity = new Vector3(0, 0, 0);
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+
+        if (collision.gameObject.CompareTag("Platform"))
+        {
+            transform.parent = null;
+        }
     }
 
     /// <summary>
