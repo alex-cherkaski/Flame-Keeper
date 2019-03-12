@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18154176, g: 0.227184, b: 0.3074043, a: 1}
+  m_IndirectSpecularColor: {r: 0.18154222, g: 0.22718474, b: 0.30740482, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -698,8 +698,7 @@ PrefabInstance:
     - target: {fileID: 1126581948, guid: 6999d33e1de39fe49a1cfa85d333b91f, type: 3}
       propertyPath: m_Material
       value: 
-      objectReference: {fileID: 13400000, guid: c379d4e49b9badd47ae59ad0863ffb40,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 3868483218226652597, guid: 6999d33e1de39fe49a1cfa85d333b91f,
         type: 3}
       propertyPath: m_Controller
@@ -1519,16 +1518,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 743946013904187400, guid: f530fa11cd7fc2544b1edb8026259a32,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 743946013904187400, guid: f530fa11cd7fc2544b1edb8026259a32,
-        type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 972267032}
     - target: {fileID: 2166519438047993924, guid: f530fa11cd7fc2544b1edb8026259a32,
         type: 3}
       propertyPath: connectedTriggers.Array.size
@@ -1563,6 +1552,11 @@ PrefabInstance:
         type: 3}
       propertyPath: audioController
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5929978524283724351, guid: f530fa11cd7fc2544b1edb8026259a32,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.4
       objectReference: {fileID: 0}
     - target: {fileID: 6110377354536668813, guid: f530fa11cd7fc2544b1edb8026259a32,
         type: 3}
@@ -1614,11 +1608,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 5929978524283724351, guid: f530fa11cd7fc2544b1edb8026259a32,
+    - target: {fileID: 743946013904187400, guid: f530fa11cd7fc2544b1edb8026259a32,
         type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.4
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 743946013904187400, guid: f530fa11cd7fc2544b1edb8026259a32,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 972267032}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f530fa11cd7fc2544b1edb8026259a32, type: 3}
 --- !u!1 &450079977 stripped
@@ -3181,41 +3180,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 477935946641737161, guid: f530fa11cd7fc2544b1edb8026259a32,
-        type: 3}
-      propertyPath: lightConfigs.Array.data[0].intensity
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 477935946641737161, guid: f530fa11cd7fc2544b1edb8026259a32,
-        type: 3}
-      propertyPath: lightConfigs.Array.data[1].intensity
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 477935946641737161, guid: f530fa11cd7fc2544b1edb8026259a32,
-        type: 3}
-      propertyPath: lightConfigs.Array.data[1].range
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 477935946641737161, guid: f530fa11cd7fc2544b1edb8026259a32,
-        type: 3}
-      propertyPath: lightConfigs.Array.data[0].range
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 5929978524281954527, guid: f530fa11cd7fc2544b1edb8026259a32,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 1a31edb6871912a4391061114d44cd46, type: 2}
-    - target: {fileID: 5929978524281954527, guid: f530fa11cd7fc2544b1edb8026259a32,
-        type: 3}
-      propertyPath: m_Materials.Array.data[1]
-      value: 
-      objectReference: {fileID: 2100000, guid: d17c2dbc9c308ae4ebd282a23b88c329, type: 2}
-    - target: {fileID: 743946013904187400, guid: f530fa11cd7fc2544b1edb8026259a32,
-        type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 972267032}
     - target: {fileID: 2166519438047993924, guid: f530fa11cd7fc2544b1edb8026259a32,
         type: 3}
       propertyPath: connectedTriggers.Array.size
@@ -3281,11 +3245,26 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 5104438138166402347, guid: f530fa11cd7fc2544b1edb8026259a32,
+    - target: {fileID: 477935946641737161, guid: f530fa11cd7fc2544b1edb8026259a32,
         type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 68f6a6eca864d9348b16500791bf0773, type: 2}
+      propertyPath: lightConfigs.Array.data[0].intensity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 477935946641737161, guid: f530fa11cd7fc2544b1edb8026259a32,
+        type: 3}
+      propertyPath: lightConfigs.Array.data[1].intensity
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 477935946641737161, guid: f530fa11cd7fc2544b1edb8026259a32,
+        type: 3}
+      propertyPath: lightConfigs.Array.data[1].range
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 477935946641737161, guid: f530fa11cd7fc2544b1edb8026259a32,
+        type: 3}
+      propertyPath: lightConfigs.Array.data[0].range
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 5265881382496024329, guid: f530fa11cd7fc2544b1edb8026259a32,
         type: 3}
       propertyPath: m_Color.r
@@ -3316,6 +3295,26 @@ PrefabInstance:
       propertyPath: m_Intensity
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 5929978524281954527, guid: f530fa11cd7fc2544b1edb8026259a32,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1a31edb6871912a4391061114d44cd46, type: 2}
+    - target: {fileID: 5929978524281954527, guid: f530fa11cd7fc2544b1edb8026259a32,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: d17c2dbc9c308ae4ebd282a23b88c329, type: 2}
+    - target: {fileID: 5104438138166402347, guid: f530fa11cd7fc2544b1edb8026259a32,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 68f6a6eca864d9348b16500791bf0773, type: 2}
+    - target: {fileID: 743946013904187400, guid: f530fa11cd7fc2544b1edb8026259a32,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 972267032}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f530fa11cd7fc2544b1edb8026259a32, type: 3}
 --- !u!1 &1170697036
