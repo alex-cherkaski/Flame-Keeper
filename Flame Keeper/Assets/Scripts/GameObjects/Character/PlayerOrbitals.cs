@@ -42,6 +42,9 @@ public class PlayerOrbitals : MonoBehaviour
 
     private void Update()
     {
+        // Ignore rotations of the player, (ie, orbs don't rotate as the player turns around)
+        this.transform.rotation = Quaternion.identity;
+
         CalculateOrbPositions();
     }
 
@@ -55,9 +58,9 @@ public class PlayerOrbitals : MonoBehaviour
         float i = 0;
         foreach (Transform orb in orbitals)
         {
-            orb.position = new Vector3(anchor.x + Mathf.Sin((i / total) * Mathf.PI * 2.0f) * orbitRadius,
-                                       anchor.y,
-                                       anchor.z + Mathf.Cos((i / total) * Mathf.PI * 2.0f) * orbitRadius);
+            orb.localPosition = new Vector3(Mathf.Sin((i / total) * Mathf.PI * 2.0f) * orbitRadius,
+                                            0.0f,
+                                            Mathf.Cos((i / total) * Mathf.PI * 2.0f) * orbitRadius);
             i++;
         }
     }
