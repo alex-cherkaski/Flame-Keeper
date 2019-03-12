@@ -26,8 +26,6 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         {
             _lanternUses = value;
 
-            playerOrbitals.OnLanternUsesChanged(value);
-
             if (playerLightController && playerLightController.IsSetup())
                 OnLightSourceValueChange(_lanternUses);
         }
@@ -105,6 +103,8 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         this.lanternUses = startingLanternUses;
         this.maxLanternUses = Mathf.Max(startingLanternUses, maxLanternUses);
         currVelocity = normalVelocity;
+
+        playerOrbitals.OnLanternUsesChanged(startingLanternUses, this.transform.position);
 
         RecordCheckpoint();
 
@@ -327,7 +327,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     /// <summary>
     /// Uses the lantern and returns true if possible, otherwise, false;
     /// </summary>
-    public bool RequestLanternUse()
+    public bool RequestLanternUse(Vector3 source)
     {
         if (lanternUses == 0)
         {
@@ -335,13 +335,14 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         }
 
         lanternUses--;
+        playerOrbitals.OnLanternUsesChanged(lanternUses, source);
         return true;
     }
 
     /// <summary>
     /// Adds to the lantern uses and returns true if possible, otherwise, false;
     /// </summary>
-    public bool RequestLanternAddition()
+    public bool RequestLanternAddition(Vector3 source)
     {
         if (lanternUses == maxLanternUses)
         {
@@ -349,6 +350,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         }
 
         lanternUses++;
+        playerOrbitals.OnLanternUsesChanged(lanternUses, source);
         return true;
     }
 
@@ -456,6 +458,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
             if (crystalScript != null)
             {
                 lanternUses += (int)crystalScript.GetWarmth();
+                playerOrbitals.OnLanternUsesChanged(lanternUses, crystalScript.transform.position);
                 other.gameObject.SetActive(false);
             }
             else

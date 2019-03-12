@@ -12,7 +12,7 @@ public class PlayerOrbitals : MonoBehaviour
     /// <summary>
     /// Called when the number of orbitals should change
     /// </summary>
-    public void OnLanternUsesChanged(int newValue)
+    public void OnLanternUsesChanged(int newValue, Vector3 source)
     {
         int previousCount = orbitals.Count;
         if (newValue > orbitals.Count)

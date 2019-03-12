@@ -81,7 +81,7 @@ public class Pedestal : MonoBehaviour, DynamicLightSource
         // Check for pedestal activation
         if (Input.GetButtonDown(StringConstants.Input.ActivateButton) && playerDistance < activateDistance && player.IsInputEnabled())
         {
-            if (currLevel < maxLevel && player.RequestLanternUse())
+            if (currLevel < maxLevel && player.RequestLanternUse(this.transform.position))
             {
                 currLevel++;
                 if (actAsCheckpoint)
@@ -94,7 +94,7 @@ public class Pedestal : MonoBehaviour, DynamicLightSource
         // Check for pedestal deactivation
         if (Input.GetButtonDown(StringConstants.Input.DeactivateButton) && playerDistance < activateDistance && player.IsInputEnabled())
         {
-            if (activated && player.RequestLanternAddition())
+            if (activated && player.RequestLanternAddition(this.transform.position))
             {
                 currLevel--;
                 if (actAsCheckpoint)
