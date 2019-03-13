@@ -523,12 +523,16 @@ MonoBehaviour:
   - {fileID: 0}
   emitters:
   - {fileID: 663407753299769754}
+  emissionFadeTime: 1
   deactivatedEmitterIntensity: 1
   activatedEmitterIntensity: 3
   renderersInEmission: []
   deactiveColor: {fileID: 2100000, guid: 860013adfcb8eca479b0e1a5167504d8, type: 2}
   pointLightController: {fileID: 6764012931560627340}
+  orbitalTargets:
+  - {fileID: 0}
   activateDistance: 3
+  checkPoint: {fileID: 0}
   maxLevel: 1
   startLevel: 1
 --- !u!1 &5396199622773284668
