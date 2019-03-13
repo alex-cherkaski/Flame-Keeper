@@ -93,7 +93,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.1, y: 2.1, z: 2.1}
+  m_Size: {x: 2.05, y: 2.05, z: 2.05}
   m_Center: {x: 2.3194144e-15, y: 1.222857, z: 0.0000042915344}
 --- !u!65 &1310648559938067879
 BoxCollider:
@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 894706c97a409614185357bdad441015, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  burnTime: 1
+  burnTime: 2
   automaticReset: 0
   resetObject: {fileID: 2992525889438807859}
   resetTransform: {x: 0, y: 0, z: 0}
