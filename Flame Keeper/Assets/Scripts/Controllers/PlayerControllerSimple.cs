@@ -78,6 +78,11 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     [Header("Water Collision")]
     public float waitTime = 1f;
     public float inWaterSpeed;
+
+    [Header("Animations")]
+    public Animator animator;
+    private const string runParameter = "Running";
+
     private bool playerTouchingWater;
     private bool checkWaterStatus = false;
     private float timer;
@@ -106,6 +111,8 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         currVelocity = normalVelocity;
 
         playerOrbitals.OnLanternUsesChanged(startingLanternUses, this.transform.position);
+
+        animator.SetBool(runParameter, false);
 
         RecordCheckpoint();
 
@@ -202,6 +209,8 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     {
         if (lockMovementTime > 0.0f)
         {
+            animator.SetBool(runParameter, false);
+
             lockMovementTime -= Time.deltaTime;
 
             // Blink character, uncomment when player is in
@@ -270,7 +279,10 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
 
         GetInput();
 
-        if (Mathf.Abs(input.x) == 0 && Mathf.Abs(input.y) == 0)
+        bool isMoving = !(Mathf.Abs(input.x) == 0 && Mathf.Abs(input.y) == 0);
+        animator.SetBool(runParameter, isMoving);
+
+        if (!isMoving)
         {
             return;
         }
