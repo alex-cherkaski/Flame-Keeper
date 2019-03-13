@@ -342,6 +342,8 @@ MonoBehaviour:
   moveableObject: {fileID: 47670996}
   incrementPosition: {x: -2.19, y: 0, z: 0}
   moveSpeed: 5
+  activatedColor: {r: 0.9764706, g: 0.35686275, b: 0.21176471, a: 0}
+  deactivatedColor: {r: 0.23137254, g: 0.57254905, b: 0.6784314, a: 1}
 --- !u!65 &47670993
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -562,7 +564,6 @@ MonoBehaviour:
   moveSpeed: 4
   startDelay: 0
   intervalPauseDelay: 0
-  isPedestal: 0
   activatedColor: {r: 0.9764706, g: 0.35686275, b: 0.21176471, a: 0}
   deactivatedColor: {r: 0.23137254, g: 0.57254905, b: 0.6784314, a: 1}
 --- !u!65 &62898205
@@ -658,6 +659,8 @@ MonoBehaviour:
   moveableObject: {fileID: 84090489}
   incrementPosition: {x: 0, y: 3.91, z: 0}
   moveSpeed: 1
+  activatedColor: {r: 0, g: 0, b: 0, a: 0}
+  deactivatedColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!64 &84090486
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2817,7 +2820,6 @@ MonoBehaviour:
   moveSpeed: 1
   startDelay: 0
   intervalPauseDelay: 0
-  isPedestal: 0
   activatedColor: {r: 0.9764706, g: 0.35686275, b: 0.21176471, a: 0}
   deactivatedColor: {r: 0.23137254, g: 0.57254905, b: 0.6784314, a: 1}
 --- !u!65 &439505020
@@ -3019,6 +3021,8 @@ MonoBehaviour:
   moveableObject: {fileID: 450771718}
   incrementPosition: {x: -2.19, y: 0, z: 0}
   moveSpeed: 1
+  activatedColor: {r: 0.9764706, g: 0.35686275, b: 0.21176471, a: 0}
+  deactivatedColor: {r: 0.23137254, g: 0.57254905, b: 0.6784314, a: 1}
 --- !u!65 &450771720
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3647,6 +3651,8 @@ MonoBehaviour:
   moveableObject: {fileID: 523761131}
   incrementPosition: {x: 0, y: 2.25, z: 0}
   moveSpeed: 1
+  activatedColor: {r: 0, g: 0, b: 0, a: 0}
+  deactivatedColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &523761133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4502,7 +4508,6 @@ MonoBehaviour:
   moveSpeed: 4
   startDelay: 0
   intervalPauseDelay: 0
-  isPedestal: 0
   activatedColor: {r: 0.9764706, g: 0.35686275, b: 0.21176471, a: 0}
   deactivatedColor: {r: 0.23137254, g: 0.57254905, b: 0.6784314, a: 1}
 --- !u!65 &642352339
@@ -4818,6 +4823,8 @@ MonoBehaviour:
   moveableObject: {fileID: 693816286}
   incrementPosition: {x: 0, y: 5.64, z: 0}
   moveSpeed: 1
+  activatedColor: {r: 0, g: 0, b: 0, a: 0}
+  deactivatedColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!65 &693816283
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5168,7 +5175,6 @@ MonoBehaviour:
   moveSpeed: 1
   startDelay: 0
   intervalPauseDelay: 0
-  isPedestal: 0
   activatedColor: {r: 0.9764706, g: 0.35686275, b: 0.21176471, a: 0}
   deactivatedColor: {r: 0.23137254, g: 0.57254905, b: 0.6784314, a: 1}
 --- !u!65 &733927571
@@ -5296,7 +5302,6 @@ MonoBehaviour:
   moveSpeed: 4
   startDelay: 0
   intervalPauseDelay: 0
-  isPedestal: 0
   activatedColor: {r: 0.9764706, g: 0.35686275, b: 0.21176471, a: 0}
   deactivatedColor: {r: 0.23137254, g: 0.57254905, b: 0.6784314, a: 1}
 --- !u!65 &740140371
@@ -5559,7 +5564,6 @@ MonoBehaviour:
   moveSpeed: 1
   startDelay: 0
   intervalPauseDelay: 2
-  isPedestal: 0
   activatedColor: {r: 0.9764706, g: 0.35686275, b: 0.21176471, a: 0}
   deactivatedColor: {r: 0.23137254, g: 0.57254905, b: 0.6784314, a: 1}
 --- !u!65 &755435197
@@ -6539,6 +6543,8 @@ MonoBehaviour:
   moveableObject: {fileID: 969766057}
   incrementPosition: {x: 0, y: 3.91, z: 0}
   moveSpeed: 1
+  activatedColor: {r: 0, g: 0, b: 0, a: 0}
+  deactivatedColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!65 &969766054
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6664,7 +6670,6 @@ MonoBehaviour:
   moveSpeed: 4
   startDelay: 0
   intervalPauseDelay: 0
-  isPedestal: 0
   activatedColor: {r: 0.9764706, g: 0.35686275, b: 0.21176471, a: 0}
   deactivatedColor: {r: 0.23137254, g: 0.57254905, b: 0.6784314, a: 1}
 --- !u!65 &993169118
@@ -7284,7 +7289,6 @@ MonoBehaviour:
   moveSpeed: 1
   startDelay: 0
   intervalPauseDelay: 2
-  isPedestal: 0
   activatedColor: {r: 0.9764706, g: 0.35686275, b: 0.21176471, a: 0}
   deactivatedColor: {r: 0.23137254, g: 0.57254905, b: 0.6784314, a: 1}
 --- !u!65 &1150075506
@@ -7815,7 +7819,6 @@ MonoBehaviour:
   moveSpeed: 1
   startDelay: 0
   intervalPauseDelay: 2
-  isPedestal: 1
   activatedColor: {r: 0, g: 0, b: 0, a: 0}
   deactivatedColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &1257401957
@@ -7897,6 +7900,8 @@ MonoBehaviour:
   moveableObject: {fileID: 1259410724}
   incrementPosition: {x: 0, y: 0, z: 0}
   moveSpeed: 1
+  activatedColor: {r: 0, g: 0, b: 0, a: 0}
+  deactivatedColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!64 &1259410721
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -9152,7 +9157,6 @@ MonoBehaviour:
   moveSpeed: 2
   startDelay: 0
   intervalPauseDelay: 0
-  isPedestal: 0
   activatedColor: {r: 0.9764706, g: 0.35686275, b: 0.21176471, a: 0}
   deactivatedColor: {r: 0.23137254, g: 0.57254905, b: 0.6784314, a: 1}
 --- !u!65 &1511547787
@@ -9252,7 +9256,6 @@ MonoBehaviour:
   moveSpeed: 4
   startDelay: 0
   intervalPauseDelay: 0
-  isPedestal: 0
   activatedColor: {r: 0.9764706, g: 0.35686275, b: 0.21176471, a: 0}
   deactivatedColor: {r: 0.23137254, g: 0.57254905, b: 0.6784314, a: 1}
 --- !u!65 &1515224901
@@ -10282,6 +10285,8 @@ MonoBehaviour:
   moveableObject: {fileID: 1682156399}
   incrementPosition: {x: -2.19, y: 0, z: 0}
   moveSpeed: 5
+  activatedColor: {r: 0.9764706, g: 0.35686275, b: 0.21176471, a: 0}
+  deactivatedColor: {r: 0.23137254, g: 0.57254905, b: 0.6784314, a: 1}
 --- !u!1 &1704301488
 GameObject:
   m_ObjectHideFlags: 0
@@ -21086,7 +21091,6 @@ MonoBehaviour:
   moveSpeed: 4
   startDelay: 0
   intervalPauseDelay: 0
-  isPedestal: 0
   activatedColor: {r: 0.9764706, g: 0.35686275, b: 0.21176471, a: 0}
   deactivatedColor: {r: 0.23137254, g: 0.57254905, b: 0.6784314, a: 1}
 --- !u!65 &1919210293
@@ -21182,6 +21186,8 @@ MonoBehaviour:
   moveableObject: {fileID: 1921200167}
   incrementPosition: {x: 0, y: 0, z: 5.6}
   moveSpeed: 1
+  activatedColor: {r: 0, g: 0, b: 0, a: 0}
+  deactivatedColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!65 &1921200164
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -21860,7 +21866,6 @@ MonoBehaviour:
   moveSpeed: 2
   startDelay: 0
   intervalPauseDelay: 0
-  isPedestal: 0
   activatedColor: {r: 0.9764706, g: 0.35686275, b: 0.21176471, a: 0}
   deactivatedColor: {r: 0.23137254, g: 0.57254905, b: 0.6784314, a: 1}
 --- !u!65 &2021212474
@@ -22343,6 +22348,8 @@ MonoBehaviour:
   moveableObject: {fileID: 2085928587}
   incrementPosition: {x: -2.19, y: 0, z: 0}
   moveSpeed: 1
+  activatedColor: {r: 0.9764706, g: 0.35686275, b: 0.21176471, a: 0}
+  deactivatedColor: {r: 0.23137254, g: 0.57254905, b: 0.6784314, a: 1}
 --- !u!65 &2085928589
 BoxCollider:
   m_ObjectHideFlags: 0
