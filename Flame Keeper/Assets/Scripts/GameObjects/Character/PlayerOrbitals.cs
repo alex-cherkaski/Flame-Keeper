@@ -6,6 +6,7 @@ public class PlayerOrbitals : MonoBehaviour
 {
     public GameObject orbPrefab;
     public float orbitRadius = 1.5f;
+    public float spinSpeed = 1.0f;
 
     private List<Transform> orbitals = new List<Transform>();
 
@@ -58,9 +59,10 @@ public class PlayerOrbitals : MonoBehaviour
         float i = 0;
         foreach (Transform orb in orbitals)
         {
-            orb.localPosition = new Vector3(Mathf.Sin((i / total) * Mathf.PI * 2.0f) * orbitRadius,
+            float offset = (i / total) * Mathf.PI * 2.0f;
+            orb.localPosition = new Vector3(Mathf.Sin(offset + Time.time * spinSpeed) * orbitRadius,
                                             0.0f,
-                                            Mathf.Cos((i / total) * Mathf.PI * 2.0f) * orbitRadius);
+                                            Mathf.Cos(offset + Time.time * spinSpeed) * orbitRadius);
             i++;
         }
     }
