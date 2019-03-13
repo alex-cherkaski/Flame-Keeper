@@ -420,7 +420,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         rb.angularVelocity = new Vector3(0, 0, 0);
 
 
-        if (collision.gameObject.CompareTag("Platform"))
+        if (collision.gameObject.CompareTag(StringConstants.Tags.Platform))
         {
             transform.parent = collision.gameObject.transform;
         }
@@ -432,7 +432,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         // will continue to rotate
         rb.angularVelocity = new Vector3(0, 0, 0);
 
-        if (collision.gameObject.CompareTag("Platform"))
+        if (collision.gameObject.CompareTag(StringConstants.Tags.Platform))
         {
             transform.parent = collision.gameObject.transform;
         }
