@@ -440,7 +440,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
 
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Platform"))
+        if (collision.gameObject.CompareTag(StringConstants.Tags.Platform))
         {
             transform.parent = null;
         }
