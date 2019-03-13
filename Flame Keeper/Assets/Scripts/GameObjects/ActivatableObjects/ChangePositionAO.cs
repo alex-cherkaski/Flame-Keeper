@@ -8,6 +8,12 @@ public class ChangePositionAO : ActivatableObject
     public Vector3 incrementPosition;
     public float moveSpeed = 1.0f;
 
+    public Color activatedColor;
+    public Color deactivatedColor;
+    private Color currentColor;
+
+    private MeshRenderer meshRenderer;
+
     private GameObject audioController;
 
     private Vector3 startingPosition;
@@ -58,10 +64,38 @@ public class ChangePositionAO : ActivatableObject
         targetPosition = startingPosition + (incrementPosition * GetLevel());
         audioController = (GameObject)Instantiate(Resources.Load("audioController"), this.transform.position, this.transform.rotation);
         audioController.transform.SetParent(this.transform);
+
+        if (this.CompareTag(StringConstants.Tags.Platform))
+        {
+            meshRenderer = GetComponent<MeshRenderer>();
+            if (GetLevel() > 0)
+            {
+                meshRenderer.material.color = activatedColor;
+                currentColor = activatedColor;
+            }
+            else
+            {
+                meshRenderer.material.color = deactivatedColor;
+                currentColor = deactivatedColor;
+            }
+        }
     }
 
     private void Update()
     {
         moveableObject.transform.position = Vector3.Lerp(moveableObject.transform.position, targetPosition, Time.deltaTime * moveSpeed);
+
+        if (this.CompareTag(StringConstants.Tags.Platform))
+        {
+            if (GetLevel() > 0)
+            {
+                currentColor = activatedColor;
+            }
+            else
+            {
+                currentColor = deactivatedColor;
+            }
+            meshRenderer.material.color = Color.Lerp(meshRenderer.material.color, currentColor, Time.deltaTime);
+        }
     }
 }
