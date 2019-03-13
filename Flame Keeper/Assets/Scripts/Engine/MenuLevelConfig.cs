@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class MenuLevelConfig : LevelConfig
 {
     private bool m_allowInput = false;
+    public GameObject pressStartText;
 
     protected override void OnLevelStart()
     {
@@ -21,6 +22,7 @@ public class MenuLevelConfig : LevelConfig
     {
         if (m_allowInput && Input.GetButton(StringConstants.Input.Start))
         {
+            pressStartText.SetActive(false);
             SceneManager.LoadScene(StringConstants.SceneNames.TutorialSceneName);
         }
     }
