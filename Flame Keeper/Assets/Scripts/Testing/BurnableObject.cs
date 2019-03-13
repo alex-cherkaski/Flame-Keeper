@@ -61,6 +61,16 @@ public class BurnableObject : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        Rigidbody body = GetComponent<Rigidbody>();
+
+        if (body.velocity.y > 0)
+        {
+            body.velocity = new Vector3(body.velocity.x, 0, body.velocity.z);
+        }
+    }
+
     private void Burn()
     {
         isBurning = false;
