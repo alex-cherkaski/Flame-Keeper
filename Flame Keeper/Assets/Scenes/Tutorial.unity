@@ -713,6 +713,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2108215608402563091, guid: 8e47a853d85f9854d8385d017238b383,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 775132631540362055, guid: 8e47a853d85f9854d8385d017238b383,
         type: 3}
       propertyPath: m_Name
@@ -775,16 +780,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4236735271293947047, guid: 8e47a853d85f9854d8385d017238b383,
         type: 3}
-      propertyPath: connectedTriggers.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4236735271293947047, guid: 8e47a853d85f9854d8385d017238b383,
-        type: 3}
-      propertyPath: emitters.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4236735271293947047, guid: 8e47a853d85f9854d8385d017238b383,
-        type: 3}
       propertyPath: connectedTriggers.Array.data[0]
       value: 
       objectReference: {fileID: 2046364098}
@@ -793,26 +788,6 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 972267032}
-    - target: {fileID: 4236735271293947047, guid: 8e47a853d85f9854d8385d017238b383,
-        type: 3}
-      propertyPath: emitters.Array.data[0]
-      value: 
-      objectReference: {fileID: 1884602196}
-    - target: {fileID: 4236735271293947047, guid: 8e47a853d85f9854d8385d017238b383,
-        type: 3}
-      propertyPath: emitters.Array.data[1]
-      value: 
-      objectReference: {fileID: 1436231320}
-    - target: {fileID: 4236735271293947047, guid: 8e47a853d85f9854d8385d017238b383,
-        type: 3}
-      propertyPath: deactivatedEmitterIntensity
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4236735271293947047, guid: 8e47a853d85f9854d8385d017238b383,
-        type: 3}
-      propertyPath: activateDistance
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 4236735271293947047, guid: 8e47a853d85f9854d8385d017238b383,
         type: 3}
       propertyPath: audioController
@@ -1520,16 +1495,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2166519438047993924, guid: f530fa11cd7fc2544b1edb8026259a32,
         type: 3}
-      propertyPath: connectedTriggers.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2166519438047993924, guid: f530fa11cd7fc2544b1edb8026259a32,
-        type: 3}
-      propertyPath: emitters.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2166519438047993924, guid: f530fa11cd7fc2544b1edb8026259a32,
-        type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 972267032}
@@ -1538,16 +1503,6 @@ PrefabInstance:
       propertyPath: connectedTriggers.Array.data[0]
       value: 
       objectReference: {fileID: 232071369}
-    - target: {fileID: 2166519438047993924, guid: f530fa11cd7fc2544b1edb8026259a32,
-        type: 3}
-      propertyPath: emitters.Array.data[0]
-      value: 
-      objectReference: {fileID: 1427138119}
-    - target: {fileID: 2166519438047993924, guid: f530fa11cd7fc2544b1edb8026259a32,
-        type: 3}
-      propertyPath: activateDistance
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 2166519438047993924, guid: f530fa11cd7fc2544b1edb8026259a32,
         type: 3}
       propertyPath: audioController
@@ -2272,6 +2227,10 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 57176256, guid: 2d71c2ba1fa1eb14d95a6999b63cfe0e, type: 3}
+      propertyPath: lerpSpeed
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d71c2ba1fa1eb14d95a6999b63cfe0e, type: 3}
@@ -3245,6 +3204,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: -0
       objectReference: {fileID: 0}
+    - target: {fileID: 743946013904187400, guid: f530fa11cd7fc2544b1edb8026259a32,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 972267032}
     - target: {fileID: 477935946641737161, guid: f530fa11cd7fc2544b1edb8026259a32,
         type: 3}
       propertyPath: lightConfigs.Array.data[0].intensity
@@ -3310,11 +3274,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 68f6a6eca864d9348b16500791bf0773, type: 2}
-    - target: {fileID: 743946013904187400, guid: f530fa11cd7fc2544b1edb8026259a32,
-        type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 972267032}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f530fa11cd7fc2544b1edb8026259a32, type: 3}
 --- !u!1 &1170697036
@@ -3536,7 +3495,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh31932
+  m_Name: pb_Mesh15706
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -3734,23 +3693,11 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.1351657, y: 4.6471233, z: 3.1389248}
   m_Center: {x: 0.071740516, y: 1.8235617, z: -0.4918044}
---- !u!23 &1427138119 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 5929978524281954527, guid: f530fa11cd7fc2544b1edb8026259a32,
-    type: 3}
-  m_PrefabInstance: {fileID: 430782546}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1428647403 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1620230636350702511, guid: 34adba8bf86aa3a40913514bdefc44e0,
     type: 3}
   m_PrefabInstance: {fileID: 1620230636413607571}
-  m_PrefabAsset: {fileID: 0}
---- !u!23 &1436231320 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 2404295177796403123, guid: 8e47a853d85f9854d8385d017238b383,
-    type: 3}
-  m_PrefabInstance: {fileID: 23870094}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1457034057 stripped
 GameObject:
@@ -4299,12 +4246,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 944b6c3280b524d47ba629f87563276b, type: 3}
---- !u!23 &1884602196 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 6092671682238276403, guid: 8e47a853d85f9854d8385d017238b383,
-    type: 3}
-  m_PrefabInstance: {fileID: 23870094}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1899062200 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 597692457348199577, guid: 6999d33e1de39fe49a1cfa85d333b91f,

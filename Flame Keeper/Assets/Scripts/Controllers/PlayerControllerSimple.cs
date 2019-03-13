@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
@@ -327,7 +328,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     /// <summary>
     /// Uses the lantern and returns true if possible, otherwise, false;
     /// </summary>
-    public bool RequestLanternUse(Vector3 source)
+    public bool RequestLanternUse(Vector3 source, Action onComplete = null)
     {
         if (lanternUses == 0)
         {
@@ -335,14 +336,14 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         }
 
         lanternUses--;
-        playerOrbitals.OnLanternUsesChanged(lanternUses, source);
+        playerOrbitals.OnLanternUsesChanged(lanternUses, source, onComplete);
         return true;
     }
 
     /// <summary>
     /// Adds to the lantern uses and returns true if possible, otherwise, false;
     /// </summary>
-    public bool RequestLanternAddition(Vector3 source)
+    public bool RequestLanternAddition(Vector3 source, Action onComplete = null)
     {
         if (lanternUses == maxLanternUses)
         {
@@ -350,7 +351,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         }
 
         lanternUses++;
-        playerOrbitals.OnLanternUsesChanged(lanternUses, source);
+        playerOrbitals.OnLanternUsesChanged(lanternUses, source, onComplete);
         return true;
     }
 

@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+
 using UnityEngine;
 
 public class Pedestal : MonoBehaviour, DynamicLightSource
@@ -11,6 +13,7 @@ public class Pedestal : MonoBehaviour, DynamicLightSource
 
     [Header("Emissions")]
     public List<MeshRenderer> emitters;
+    public float emissionFadeTime = 1.0f;
     public float deactivatedEmitterIntensity = -3.0f;
     public float activatedEmitterIntensity = 3.0f;
     public List<MeshRenderer> renderersInEmission = new List<MeshRenderer>();
@@ -19,6 +22,9 @@ public class Pedestal : MonoBehaviour, DynamicLightSource
     [Header("Lights")]
     public DynamicLightController pointLightController;
 
+    [Header("Orbital Targets")]
+    public List<Transform> orbitalTargets;
+
     [Header("Testing, should delete later")]
     public float activateDistance = 2.0f;
 
@@ -26,6 +32,7 @@ public class Pedestal : MonoBehaviour, DynamicLightSource
     private bool activated = false;
     private Color emissionColor;
     private MeshRenderer wireRenderer;
+    private List<float> emissionColorLerpTimes = new List<float>(); // For tracking when to fade in emissive colors
 
     public int maxLevel;
     public int startLevel;
@@ -67,6 +74,11 @@ public class Pedestal : MonoBehaviour, DynamicLightSource
             emissionColor = emitters[0].materials[1].color;
         }
 
+        foreach (MeshRenderer ren in emitters)
+        {
+            emissionColorLerpTimes.Add(0.0f);
+        }
+
         audioController = (GameObject)Instantiate(Resources.Load("audioController"), this.transform.position, this.transform.rotation);
         audioController.transform.SetParent(this.transform);
     }
@@ -81,22 +93,29 @@ public class Pedestal : MonoBehaviour, DynamicLightSource
         // Check for pedestal activation
         if (Input.GetButtonDown(StringConstants.Input.ActivateButton) && playerDistance < activateDistance && player.IsInputEnabled())
         {
-            if (currLevel < maxLevel && player.RequestLanternUse(this.transform.position))
+            // Async on this action so it happens after the flame enters the pedestal
+            Action onPedestalLit = () =>
             {
                 currLevel++;
+                emissionColorLerpTimes[currLevel - 1] = emissionFadeTime;
                 if (actAsCheckpoint)
                     player.RecordCheckpoint();
                 ActivatePedestal();
                 audioController.GetComponent<AudioController>().PlayAudioClip(AudioController.AudioClips.fire5);
+            };
+            if (currLevel < maxLevel)
+            {
+                player.RequestLanternUse(orbitalTargets[currLevel].position, onPedestalLit);
             }
         }
 
         // Check for pedestal deactivation
         if (Input.GetButtonDown(StringConstants.Input.DeactivateButton) && playerDistance < activateDistance && player.IsInputEnabled())
         {
-            if (activated && player.RequestLanternAddition(this.transform.position))
+            if (activated && player.RequestLanternAddition(orbitalTargets[currLevel-1].position))
             {
                 currLevel--;
+                emissionColorLerpTimes[currLevel] = emissionFadeTime;
                 if (actAsCheckpoint)
                     player.RecordCheckpoint();
                 if (currLevel <= 0)
@@ -115,16 +134,19 @@ public class Pedestal : MonoBehaviour, DynamicLightSource
         int i = 0;
         foreach (MeshRenderer emitter in emitters)
         {
-            // TODO: Should lerp these values to get a nice animation
+            // Lerp to emissive color, if needed
+            emissionColorLerpTimes[i] = Mathf.Max(emissionColorLerpTimes[i] - Time.deltaTime, 0.0f);
+            Color deactiveEmissive = deactiveColor.color * deactivatedEmitterIntensity * deactivatedEmitterIntensity * Mathf.Sign(deactivatedEmitterIntensity);
+            Color activeEmissive = emissionColor * activatedEmitterIntensity * activatedEmitterIntensity * Mathf.Sign(activatedEmitterIntensity);
             if (i < currLevel)
             {
-                emitter.materials[1].SetVector("_Color", emissionColor);
-                emitter.materials[1].SetVector("_EmissionColor", emissionColor * activatedEmitterIntensity * activatedEmitterIntensity * Mathf.Sign(activatedEmitterIntensity));
+                emitter.materials[1].SetVector("_Color", Color.Lerp(emissionColor, deactiveColor.color, emissionColorLerpTimes[i]/emissionFadeTime));
+                emitter.materials[1].SetVector("_EmissionColor", Color.Lerp(activeEmissive, deactiveEmissive, emissionColorLerpTimes[i] / emissionFadeTime));
             }
             else
             {
-                emitter.materials[1].SetVector("_Color", deactiveColor.color);
-                emitter.materials[1].SetVector("_EmissionColor", deactiveColor.color * deactivatedEmitterIntensity * deactivatedEmitterIntensity * Mathf.Sign(deactivatedEmitterIntensity));
+                emitter.materials[1].SetVector("_Color", Color.Lerp(deactiveColor.color, emissionColor, emissionColorLerpTimes[i] / emissionFadeTime));
+                emitter.materials[1].SetVector("_EmissionColor", Color.Lerp(deactiveEmissive, activeEmissive, emissionColorLerpTimes[i] / emissionFadeTime));
             }
             i++;
         }
