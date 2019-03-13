@@ -13,8 +13,6 @@ public class MovingObject : ActivatableObject
     public float startDelay;
     public float intervalPauseDelay;
 
-    public bool isPedestal;
-
     public Color activatedColor;
     public Color deactivatedColor;
     private Color currentColor;
@@ -81,9 +79,9 @@ public class MovingObject : ActivatableObject
         //audioController = (GameObject)Instantiate(Resources.Load("audioController"), this.transform.position, this.transform.rotation);
         //audioController.transform.SetParent(this.transform);
 
-        meshRenderer = GetComponent<MeshRenderer>();
-        if (!isPedestal)
+        if (this.CompareTag(StringConstants.Tags.Platform))
         {
+            meshRenderer = GetComponent<MeshRenderer>();
             if (GetLevel() > 0)
             {
                 meshRenderer.material.color = activatedColor;
@@ -160,7 +158,7 @@ public class MovingObject : ActivatableObject
             waitDelay = intervalPauseDelay;
         }
 
-        if (!isPedestal)
+        if (this.CompareTag(StringConstants.Tags.Platform))
         {
             if (GetLevel() > 0)
             {
