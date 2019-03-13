@@ -13,6 +13,14 @@ public class MovingObject : ActivatableObject
     public float startDelay;
     public float intervalPauseDelay;
 
+    public bool isPedestal;
+
+    public Color activatedColor;
+    public Color deactivatedColor;
+    private Color currentColor;
+
+    private MeshRenderer meshRenderer;
+
     private float waitDelay;
 
     private Vector3 minStep;
@@ -72,6 +80,21 @@ public class MovingObject : ActivatableObject
 
         //audioController = (GameObject)Instantiate(Resources.Load("audioController"), this.transform.position, this.transform.rotation);
         //audioController.transform.SetParent(this.transform);
+
+        meshRenderer = GetComponent<MeshRenderer>();
+        if (!isPedestal)
+        {
+            if (GetLevel() > 0)
+            {
+                meshRenderer.material.color = activatedColor;
+                currentColor = activatedColor;
+            }
+            else
+            {
+                meshRenderer.material.color = deactivatedColor;
+                currentColor = deactivatedColor;
+            }
+        }
     }
 
     private void Update()
@@ -135,6 +158,19 @@ public class MovingObject : ActivatableObject
             //switch targetposition to next on list
             targetPosition = positions[count];
             waitDelay = intervalPauseDelay;
+        }
+
+        if (!isPedestal)
+        {
+            if (GetLevel() > 0)
+            {
+                currentColor = activatedColor;
+            }
+            else
+            {
+                currentColor = deactivatedColor;
+            }
+            meshRenderer.material.color = Color.Lerp(meshRenderer.material.color, currentColor, Time.deltaTime);
         }
     }
 }
