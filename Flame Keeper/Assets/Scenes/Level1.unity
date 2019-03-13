@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18265642, g: 0.22836664, b: 0.3071357, a: 1}
+  m_IndirectSpecularColor: {r: 0.18265615, g: 0.22836602, b: 0.30713457, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -562,6 +562,9 @@ MonoBehaviour:
   moveSpeed: 4
   startDelay: 0
   intervalPauseDelay: 0
+  isPedestal: 0
+  activatedColor: {r: 0.9764706, g: 0.35686275, b: 0.21176471, a: 0}
+  deactivatedColor: {r: 0.23137254, g: 0.57254905, b: 0.6784314, a: 1}
 --- !u!65 &62898205
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -955,6 +958,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Totem
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1a31edb6871912a4391061114d44cd46, type: 2}
+    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: d17c2dbc9c308ae4ebd282a23b88c329, type: 2}
     - target: {fileID: 400000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
       propertyPath: m_LocalPosition.y
       value: 2.4
@@ -1015,14 +1026,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 1a31edb6871912a4391061114d44cd46, type: 2}
-    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
-      propertyPath: m_Materials.Array.data[1]
-      value: 
-      objectReference: {fileID: 2100000, guid: d17c2dbc9c308ae4ebd282a23b88c329, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
 --- !u!64 &127161735
@@ -1690,6 +1693,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Totem
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1a31edb6871912a4391061114d44cd46, type: 2}
+    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: d17c2dbc9c308ae4ebd282a23b88c329, type: 2}
     - target: {fileID: 400000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
       propertyPath: m_LocalPosition.y
       value: 2.4
@@ -1750,14 +1761,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 1a31edb6871912a4391061114d44cd46, type: 2}
-    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
-      propertyPath: m_Materials.Array.data[1]
-      value: 
-      objectReference: {fileID: 2100000, guid: d17c2dbc9c308ae4ebd282a23b88c329, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
 --- !u!1 &284068260
@@ -2814,6 +2817,9 @@ MonoBehaviour:
   moveSpeed: 1
   startDelay: 0
   intervalPauseDelay: 0
+  isPedestal: 0
+  activatedColor: {r: 0.9764706, g: 0.35686275, b: 0.21176471, a: 0}
+  deactivatedColor: {r: 0.23137254, g: 0.57254905, b: 0.6784314, a: 1}
 --- !u!65 &439505020
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4496,6 +4502,9 @@ MonoBehaviour:
   moveSpeed: 4
   startDelay: 0
   intervalPauseDelay: 0
+  isPedestal: 0
+  activatedColor: {r: 0.9764706, g: 0.35686275, b: 0.21176471, a: 0}
+  deactivatedColor: {r: 0.23137254, g: 0.57254905, b: 0.6784314, a: 1}
 --- !u!65 &642352339
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5159,6 +5168,9 @@ MonoBehaviour:
   moveSpeed: 1
   startDelay: 0
   intervalPauseDelay: 0
+  isPedestal: 0
+  activatedColor: {r: 0.9764706, g: 0.35686275, b: 0.21176471, a: 0}
+  deactivatedColor: {r: 0.23137254, g: 0.57254905, b: 0.6784314, a: 1}
 --- !u!65 &733927571
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5284,6 +5296,9 @@ MonoBehaviour:
   moveSpeed: 4
   startDelay: 0
   intervalPauseDelay: 0
+  isPedestal: 0
+  activatedColor: {r: 0.9764706, g: 0.35686275, b: 0.21176471, a: 0}
+  deactivatedColor: {r: 0.23137254, g: 0.57254905, b: 0.6784314, a: 1}
 --- !u!65 &740140371
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5544,6 +5559,9 @@ MonoBehaviour:
   moveSpeed: 1
   startDelay: 0
   intervalPauseDelay: 2
+  isPedestal: 0
+  activatedColor: {r: 0.9764706, g: 0.35686275, b: 0.21176471, a: 0}
+  deactivatedColor: {r: 0.23137254, g: 0.57254905, b: 0.6784314, a: 1}
 --- !u!65 &755435197
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5988,6 +6006,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Totem
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1a31edb6871912a4391061114d44cd46, type: 2}
+    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: d17c2dbc9c308ae4ebd282a23b88c329, type: 2}
     - target: {fileID: 400000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
       propertyPath: m_LocalPosition.y
       value: 2.4
@@ -6048,14 +6074,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 1a31edb6871912a4391061114d44cd46, type: 2}
-    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
-      propertyPath: m_Materials.Array.data[1]
-      value: 
-      objectReference: {fileID: 2100000, guid: d17c2dbc9c308ae4ebd282a23b88c329, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
 --- !u!1001 &889127281
@@ -6646,6 +6664,9 @@ MonoBehaviour:
   moveSpeed: 4
   startDelay: 0
   intervalPauseDelay: 0
+  isPedestal: 0
+  activatedColor: {r: 0.9764706, g: 0.35686275, b: 0.21176471, a: 0}
+  deactivatedColor: {r: 0.23137254, g: 0.57254905, b: 0.6784314, a: 1}
 --- !u!65 &993169118
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7263,6 +7284,9 @@ MonoBehaviour:
   moveSpeed: 1
   startDelay: 0
   intervalPauseDelay: 2
+  isPedestal: 0
+  activatedColor: {r: 0.9764706, g: 0.35686275, b: 0.21176471, a: 0}
+  deactivatedColor: {r: 0.23137254, g: 0.57254905, b: 0.6784314, a: 1}
 --- !u!65 &1150075506
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7791,6 +7815,9 @@ MonoBehaviour:
   moveSpeed: 1
   startDelay: 0
   intervalPauseDelay: 2
+  isPedestal: 1
+  activatedColor: {r: 0, g: 0, b: 0, a: 0}
+  deactivatedColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &1257401957
 GameObject:
   m_ObjectHideFlags: 0
@@ -9125,6 +9152,9 @@ MonoBehaviour:
   moveSpeed: 2
   startDelay: 0
   intervalPauseDelay: 0
+  isPedestal: 0
+  activatedColor: {r: 0.9764706, g: 0.35686275, b: 0.21176471, a: 0}
+  deactivatedColor: {r: 0.23137254, g: 0.57254905, b: 0.6784314, a: 1}
 --- !u!65 &1511547787
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9222,6 +9252,9 @@ MonoBehaviour:
   moveSpeed: 4
   startDelay: 0
   intervalPauseDelay: 0
+  isPedestal: 0
+  activatedColor: {r: 0.9764706, g: 0.35686275, b: 0.21176471, a: 0}
+  deactivatedColor: {r: 0.23137254, g: 0.57254905, b: 0.6784314, a: 1}
 --- !u!65 &1515224901
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -20547,6 +20580,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Totem
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1a31edb6871912a4391061114d44cd46, type: 2}
+    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: d17c2dbc9c308ae4ebd282a23b88c329, type: 2}
     - target: {fileID: 400000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
       propertyPath: m_LocalPosition.y
       value: 2.4
@@ -20607,14 +20648,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 1a31edb6871912a4391061114d44cd46, type: 2}
-    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
-      propertyPath: m_Materials.Array.data[1]
-      value: 
-      objectReference: {fileID: 2100000, guid: d17c2dbc9c308ae4ebd282a23b88c329, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
 --- !u!23 &1835972205 stripped
@@ -20807,6 +20840,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Totem
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1a31edb6871912a4391061114d44cd46, type: 2}
+    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: d17c2dbc9c308ae4ebd282a23b88c329, type: 2}
     - target: {fileID: 400000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
       propertyPath: m_LocalPosition.y
       value: 2.4
@@ -20867,14 +20908,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 1a31edb6871912a4391061114d44cd46, type: 2}
-    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
-      propertyPath: m_Materials.Array.data[1]
-      value: 
-      objectReference: {fileID: 2100000, guid: d17c2dbc9c308ae4ebd282a23b88c329, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
 --- !u!1001 &1913032831
@@ -21053,6 +21086,9 @@ MonoBehaviour:
   moveSpeed: 4
   startDelay: 0
   intervalPauseDelay: 0
+  isPedestal: 0
+  activatedColor: {r: 0.9764706, g: 0.35686275, b: 0.21176471, a: 0}
+  deactivatedColor: {r: 0.23137254, g: 0.57254905, b: 0.6784314, a: 1}
 --- !u!65 &1919210293
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -21412,6 +21448,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Totem
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1a31edb6871912a4391061114d44cd46, type: 2}
+    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: d17c2dbc9c308ae4ebd282a23b88c329, type: 2}
     - target: {fileID: 400000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
       propertyPath: m_LocalPosition.y
       value: 2.4
@@ -21472,14 +21516,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 1a31edb6871912a4391061114d44cd46, type: 2}
-    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
-      propertyPath: m_Materials.Array.data[1]
-      value: 
-      objectReference: {fileID: 2100000, guid: d17c2dbc9c308ae4ebd282a23b88c329, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
 --- !u!64 &1980848506
@@ -21824,6 +21860,9 @@ MonoBehaviour:
   moveSpeed: 2
   startDelay: 0
   intervalPauseDelay: 0
+  isPedestal: 0
+  activatedColor: {r: 0.9764706, g: 0.35686275, b: 0.21176471, a: 0}
+  deactivatedColor: {r: 0.23137254, g: 0.57254905, b: 0.6784314, a: 1}
 --- !u!65 &2021212474
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -21924,6 +21963,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Totem
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1a31edb6871912a4391061114d44cd46, type: 2}
+    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: d17c2dbc9c308ae4ebd282a23b88c329, type: 2}
     - target: {fileID: 400000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
       propertyPath: m_LocalPosition.y
       value: 2.4
@@ -21984,14 +22031,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 1a31edb6871912a4391061114d44cd46, type: 2}
-    - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
-      propertyPath: m_Materials.Array.data[1]
-      value: 
-      objectReference: {fileID: 2100000, guid: d17c2dbc9c308ae4ebd282a23b88c329, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
 --- !u!1 &2049868252
@@ -22741,6 +22780,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 521052407014330822, guid: 339f256b9c55c5448abe6eb701ccb457,
+        type: 3}
+      propertyPath: m_Name
+      value: Water
+      objectReference: {fileID: 0}
     - target: {fileID: 521052407014330818, guid: 339f256b9c55c5448abe6eb701ccb457,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -22800,11 +22844,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.x
       value: 12.35331
-      objectReference: {fileID: 0}
-    - target: {fileID: 521052407014330822, guid: 339f256b9c55c5448abe6eb701ccb457,
-        type: 3}
-      propertyPath: m_Name
-      value: Water
       objectReference: {fileID: 0}
     - target: {fileID: 521052407014330820, guid: 339f256b9c55c5448abe6eb701ccb457,
         type: 3}
