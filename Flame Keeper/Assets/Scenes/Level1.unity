@@ -558,6 +558,7 @@ MonoBehaviour:
   positions:
   - {x: 4.8, y: 7.8, z: 17.7}
   - {x: 6.8, y: 7.8, z: 17.7}
+  cycle: 0
   moveSpeed: 4
   startDelay: 0
   intervalPauseDelay: 0
@@ -954,6 +955,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Totem
       objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.4
+      objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.21
@@ -1009,10 +1014,6 @@ PrefabInstance:
     - target: {fileID: 400004, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
       propertyPath: m_LocalScale.z
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.4
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1689,6 +1690,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Totem
       objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.4
+      objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.24281783
@@ -1744,10 +1749,6 @@ PrefabInstance:
     - target: {fileID: 400004, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
       propertyPath: m_LocalScale.z
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.4
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2809,6 +2810,7 @@ MonoBehaviour:
   positions:
   - {x: -24.8, y: 6.3, z: -38.4}
   - {x: -22, y: 6.3, z: -38.4}
+  cycle: 0
   moveSpeed: 1
   startDelay: 0
   intervalPauseDelay: 0
@@ -4490,6 +4492,7 @@ MonoBehaviour:
   positions:
   - {x: 4.8, y: 10.3, z: 13.6}
   - {x: 4.8, y: 10.3, z: 11.6}
+  cycle: 0
   moveSpeed: 4
   startDelay: 0
   intervalPauseDelay: 0
@@ -5152,6 +5155,7 @@ MonoBehaviour:
   positions:
   - {x: -17.3, y: 7.7, z: -38.4}
   - {x: -20, y: 7.7, z: -38.4}
+  cycle: 0
   moveSpeed: 1
   startDelay: 0
   intervalPauseDelay: 0
@@ -5276,6 +5280,7 @@ MonoBehaviour:
   positions:
   - {x: 4.8, y: 6.4, z: 14.2}
   - {x: 6.8, y: 6.4, z: 14.2}
+  cycle: 0
   moveSpeed: 4
   startDelay: 0
   intervalPauseDelay: 0
@@ -5535,6 +5540,7 @@ MonoBehaviour:
   positions:
   - {x: -27.8, y: 22, z: -33.8}
   - {x: -27.8, y: 5.8, z: -33.8}
+  cycle: 0
   moveSpeed: 1
   startDelay: 0
   intervalPauseDelay: 2
@@ -5982,6 +5988,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Totem
       objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.4
+      objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.24281783
@@ -6037,10 +6047,6 @@ PrefabInstance:
     - target: {fileID: 400004, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
       propertyPath: m_LocalScale.z
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.4
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -6636,6 +6642,7 @@ MonoBehaviour:
   positions:
   - {x: 2.2, y: 5, z: 13.6}
   - {x: 2.2, y: 5, z: 11.6}
+  cycle: 0
   moveSpeed: 4
   startDelay: 0
   intervalPauseDelay: 0
@@ -7077,11 +7084,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 895972276}
     m_Modifications:
-    - target: {fileID: 8187980495591370671, guid: f530fa11cd7fc2544b1edb8026259a32,
-        type: 3}
-      propertyPath: m_Name
-      value: Target1
-      objectReference: {fileID: 0}
     - target: {fileID: 1982154706665110621, guid: f530fa11cd7fc2544b1edb8026259a32,
         type: 3}
       propertyPath: m_Name
@@ -7152,6 +7154,11 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 828628015}
+    - target: {fileID: 8187980495591370671, guid: f530fa11cd7fc2544b1edb8026259a32,
+        type: 3}
+      propertyPath: m_Name
+      value: Target1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2166519438047993924, guid: f530fa11cd7fc2544b1edb8026259a32, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f530fa11cd7fc2544b1edb8026259a32, type: 3}
@@ -7252,6 +7259,7 @@ MonoBehaviour:
   positions:
   - {x: -23.4, y: 23, z: -25.8}
   - {x: -23.4, y: 6.8, z: -25.8}
+  cycle: 0
   moveSpeed: 1
   startDelay: 0
   intervalPauseDelay: 2
@@ -7779,6 +7787,7 @@ MonoBehaviour:
   positions:
   - {x: -23.3, y: 23, z: -28.3}
   - {x: -23.3, y: 6.7, z: -28.3}
+  cycle: 0
   moveSpeed: 1
   startDelay: 0
   intervalPauseDelay: 2
@@ -9112,7 +9121,8 @@ MonoBehaviour:
   - {x: -28, y: 6.3, z: -21.6}
   - {x: -28, y: 6.3, z: -30}
   - {x: -19, y: 6.3, z: -30}
-  moveSpeed: 1
+  cycle: 1
+  moveSpeed: 2
   startDelay: 0
   intervalPauseDelay: 0
 --- !u!65 &1511547787
@@ -9208,6 +9218,7 @@ MonoBehaviour:
   positions:
   - {x: -0.5, y: 3.6, z: 13.6}
   - {x: -0.5, y: 3.6, z: 11.6}
+  cycle: 0
   moveSpeed: 4
   startDelay: 0
   intervalPauseDelay: 0
@@ -9320,11 +9331,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 895972276}
     m_Modifications:
-    - target: {fileID: 8187980495591370671, guid: f530fa11cd7fc2544b1edb8026259a32,
-        type: 3}
-      propertyPath: m_Name
-      value: Target1
-      objectReference: {fileID: 0}
     - target: {fileID: 1982154706665110621, guid: f530fa11cd7fc2544b1edb8026259a32,
         type: 3}
       propertyPath: m_Name
@@ -9395,6 +9401,11 @@ PrefabInstance:
       propertyPath: pedestal
       value: 
       objectReference: {fileID: 200925875}
+    - target: {fileID: 8187980495591370671, guid: f530fa11cd7fc2544b1edb8026259a32,
+        type: 3}
+      propertyPath: m_Name
+      value: Target1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2166519438047993924, guid: f530fa11cd7fc2544b1edb8026259a32, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f530fa11cd7fc2544b1edb8026259a32, type: 3}
@@ -20536,6 +20547,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Totem
       objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.4
+      objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.4
@@ -20591,10 +20606,6 @@ PrefabInstance:
     - target: {fileID: 400004, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
       propertyPath: m_LocalScale.z
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.4
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -20796,6 +20807,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Totem
       objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.4
+      objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.24281783
@@ -20851,10 +20866,6 @@ PrefabInstance:
     - target: {fileID: 400004, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
       propertyPath: m_LocalScale.z
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.4
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -21038,6 +21049,7 @@ MonoBehaviour:
   positions:
   - {x: 2, y: 11.6, z: 13.6}
   - {x: 2, y: 11.6, z: 11.6}
+  cycle: 0
   moveSpeed: 4
   startDelay: 0
   intervalPauseDelay: 0
@@ -21400,6 +21412,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Totem
       objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.4
+      objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.24281783
@@ -21455,10 +21471,6 @@ PrefabInstance:
     - target: {fileID: 400004, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
       propertyPath: m_LocalScale.z
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.4
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -21808,7 +21820,8 @@ MonoBehaviour:
   - {x: -19, y: 6.3, z: -30}
   - {x: -19, y: 6.3, z: -21.6}
   - {x: -28, y: 6.3, z: -21.6}
-  moveSpeed: 1
+  cycle: 1
+  moveSpeed: 2
   startDelay: 0
   intervalPauseDelay: 0
 --- !u!65 &2021212474
@@ -21911,6 +21924,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Totem
       objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.4
+      objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.24281783
@@ -21966,10 +21983,6 @@ PrefabInstance:
     - target: {fileID: 400004, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
       propertyPath: m_LocalScale.z
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.4
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: 0ca5f248f72df9b4892be5fb2bcb3464, type: 3}
       propertyPath: m_Materials.Array.data[0]

@@ -7,6 +7,7 @@ public class MovingObject : ActivatableObject
     [Header("Events")]
     //the object will always start by going towards the first position
     public List<Vector3> positions;
+    public bool cycle;
     public float moveSpeed;
 
     public float startDelay;
@@ -92,37 +93,44 @@ public class MovingObject : ActivatableObject
         {
             moveableObject.transform.position = targetPosition;
 
-            if (forward)
+            if (cycle)
             {
-                count++;
-                //if at the end of the list, switch to decrementing count
-                if (count == positions.Count)
-                {
-                    forward = false;
-                    count = positions.Count - 2;
-                    minStep = (positions[count] - positions[count + 1]) * 0.001f;
-                }
-                else
-                {
-                    minStep = (positions[count] - positions[count-1]) * 0.001f;
-                }
-                //audioController.GetComponent<AudioController>().PlayAudioClip(AudioController.AudioClips.Scrape3);
+                count = (count + 1) % positions.Count;
             }
             else
             {
-                count--;
-                //if at the beginning of the list, switch between incrementing count
-                if (count == -1)
+                if (forward)
                 {
-                    forward = true;
-                    count = 1;
-                    minStep = (positions[count] - positions[count - 1]) * 0.001f;
+                    count++;
+                    //if at the end of the list, switch to decrementing count
+                    if (count == positions.Count)
+                    {
+                        forward = false;
+                        count = positions.Count - 2;
+                        minStep = (positions[count] - positions[count + 1]) * 0.001f;
+                    }
+                    else
+                    {
+                        minStep = (positions[count] - positions[count - 1]) * 0.001f;
+                    }
+                    //audioController.GetComponent<AudioController>().PlayAudioClip(AudioController.AudioClips.Scrape3);
                 }
                 else
                 {
-                    minStep = (positions[count] - positions[count + 1]) * 0.001f;
+                    count--;
+                    //if at the beginning of the list, switch between incrementing count
+                    if (count == -1)
+                    {
+                        forward = true;
+                        count = 1;
+                        minStep = (positions[count] - positions[count - 1]) * 0.001f;
+                    }
+                    else
+                    {
+                        minStep = (positions[count] - positions[count + 1]) * 0.001f;
+                    }
+                    //audioController.GetComponent<AudioController>().PlayAudioClip(AudioController.AudioClips.Scrape3);
                 }
-                //audioController.GetComponent<AudioController>().PlayAudioClip(AudioController.AudioClips.Scrape3);
             }
             //switch targetposition to next on list
             targetPosition = positions[count];
