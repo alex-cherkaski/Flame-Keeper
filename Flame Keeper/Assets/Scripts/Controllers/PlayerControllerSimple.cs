@@ -503,6 +503,11 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         checkpointPosition = this.transform.position;
     }
 
+    public void RecordCheckpoint(Vector3 position)
+    {
+        checkpointPosition = position;
+    }
+
     /// <summary>
     /// Reset the player back to their last checkpoint (ie, last pedestal lit)
     /// </summary>
