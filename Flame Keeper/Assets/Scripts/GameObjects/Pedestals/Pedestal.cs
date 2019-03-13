@@ -22,6 +22,8 @@ public class Pedestal : MonoBehaviour, DynamicLightSource
     [Header("Testing, should delete later")]
     public float activateDistance = 2.0f;
 
+    public GameObject checkPoint;
+
     private PlayerControllerSimple player;
     private bool activated = false;
     private Color emissionColor;
@@ -85,7 +87,8 @@ public class Pedestal : MonoBehaviour, DynamicLightSource
             {
                 currLevel++;
                 if (actAsCheckpoint)
-                    player.RecordCheckpoint();
+                    //player.RecordCheckpoint();
+                    player.RecordCheckpoint(checkPoint.transform.position);
                 ActivatePedestal();
                 audioController.GetComponent<AudioController>().PlayAudioClip(AudioController.AudioClips.fire5);
             }
@@ -98,7 +101,8 @@ public class Pedestal : MonoBehaviour, DynamicLightSource
             {
                 currLevel--;
                 if (actAsCheckpoint)
-                    player.RecordCheckpoint();
+                    //player.RecordCheckpoint();
+                    player.RecordCheckpoint(checkPoint.transform.position);
                 if (currLevel <= 0)
                 {
                     DeactivatePedestal();
