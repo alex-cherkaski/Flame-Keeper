@@ -26,6 +26,7 @@ public class StringConstants
         public const string HorizontalMovement = "Horizontal";
         public const string VerticalMovement = "Vertical";
         public const string Start = "Start";
+        public const string Back = "Back";
         public const string ResetOne = "LeftBumper";
         public const string ResetTwo = "RightBumper";
         public const string CameraView = "CameraView";
