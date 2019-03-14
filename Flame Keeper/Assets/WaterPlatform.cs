@@ -7,7 +7,7 @@ public class WaterPlatform : MonoBehaviour
     public float rotateSpeed = 0.1f;
     public float sinkSpeed = 0.1f;
 
-    public float rotateIntensity = 0.3f; // Keep in the range 0-1, how much the platform tilts when you jump on it 
+    public float rotateIntensity = 0.3f; // Keep in the range 0-1, how much the platform tilts when you jump on it
     public float heightDecrease = 0.5f; // How low the platform sinks when the player jump on it
 
     private Quaternion targetRotation;
@@ -15,6 +15,8 @@ public class WaterPlatform : MonoBehaviour
     private Vector3 targetPosition;
     private PlayerControllerSimple player;
     private bool playerInContact;
+    private float startingWaterHeight;
+    private float yOffset = 0.0f;
 
     private void Start()
     {
@@ -31,7 +33,18 @@ public class WaterPlatform : MonoBehaviour
             playerInContact = true;
 
             // Set the correct target position, should sink a little bit since there is mass on it
-            targetPosition = new Vector3(this.transform.position.x, this.transform.position.y - heightDecrease, this.transform.position.z);
+            targetPosition = new Vector3(startingPosition.x, startingPosition.y - heightDecrease + yOffset, startingPosition.z);
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag(StringConstants.Tags.Player))
+        {
+            playerInContact = true;
+
+            // Set the correct target position, should sink a little bit since there is mass on it
+            targetPosition = new Vector3(startingPosition.x, startingPosition.y - heightDecrease + yOffset, startingPosition.z);
         }
     }
 
