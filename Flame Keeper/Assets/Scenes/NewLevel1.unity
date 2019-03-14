@@ -582,21 +582,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 521052407014330822, guid: 339f256b9c55c5448abe6eb701ccb457,
-        type: 3}
-      propertyPath: m_Name
-      value: Water
-      objectReference: {fileID: 0}
-    - target: {fileID: 521052407014330822, guid: 339f256b9c55c5448abe6eb701ccb457,
-        type: 3}
-      propertyPath: m_Name
-      value: Water
-      objectReference: {fileID: 0}
-    - target: {fileID: 521052407014330822, guid: 339f256b9c55c5448abe6eb701ccb457,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 521052407014330818, guid: 339f256b9c55c5448abe6eb701ccb457,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -661,6 +646,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 25.292696
+      objectReference: {fileID: 0}
+    - target: {fileID: 521052407014330822, guid: 339f256b9c55c5448abe6eb701ccb457,
+        type: 3}
+      propertyPath: m_Name
+      value: Water
+      objectReference: {fileID: 0}
+    - target: {fileID: 521052407014330822, guid: 339f256b9c55c5448abe6eb701ccb457,
+        type: 3}
+      propertyPath: m_Name
+      value: Water
+      objectReference: {fileID: 0}
+    - target: {fileID: 521052407014330822, guid: 339f256b9c55c5448abe6eb701ccb457,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 521052407014330820, guid: 339f256b9c55c5448abe6eb701ccb457,
         type: 3}
@@ -29496,8 +29496,19 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8163366762143985882, guid: 69a9735127ff18340b163b8d337cca79,
+        type: 3}
+      propertyPath: totem
+      value: 
+      objectReference: {fileID: 1955670240}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 69a9735127ff18340b163b8d337cca79, type: 3}
+--- !u!1 &1955670240 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7474029194406719394, guid: 69a9735127ff18340b163b8d337cca79,
+    type: 3}
+  m_PrefabInstance: {fileID: 1955670239}
+  m_PrefabAsset: {fileID: 0}
 --- !u!64 &1982348102
 MeshCollider:
   m_ObjectHideFlags: 0
