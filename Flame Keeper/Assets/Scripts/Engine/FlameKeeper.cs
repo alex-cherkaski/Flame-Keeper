@@ -79,6 +79,14 @@ public class FlameKeeper : MonoBehaviour
         {
             ResetGame();
         }
+
+        // If holding down the two reset buttons and back, reset the level
+        if (Input.GetButton(StringConstants.Input.ResetOne)
+            && Input.GetButton(StringConstants.Input.ResetTwo)
+            && Input.GetButton(StringConstants.Input.Back))
+        {
+            RestartLevel();
+        }
     }
 
     /// <summary>
@@ -95,5 +103,14 @@ public class FlameKeeper : MonoBehaviour
 
         // This is gonna try to create another game manager, but whatever, we enforce only one can exist anyways
         SceneManager.LoadScene(StringConstants.SceneNames.RootSceneName);
+    }
+
+    /// <summary>
+    /// Reload the current level
+    /// </summary>
+    private void RestartLevel()
+    {
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
     }
 }
