@@ -582,6 +582,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 521052407014330822, guid: 339f256b9c55c5448abe6eb701ccb457,
+        type: 3}
+      propertyPath: m_Name
+      value: Water
+      objectReference: {fileID: 0}
+    - target: {fileID: 521052407014330822, guid: 339f256b9c55c5448abe6eb701ccb457,
+        type: 3}
+      propertyPath: m_Name
+      value: Water
+      objectReference: {fileID: 0}
+    - target: {fileID: 521052407014330822, guid: 339f256b9c55c5448abe6eb701ccb457,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 521052407014330818, guid: 339f256b9c55c5448abe6eb701ccb457,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -646,21 +661,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 25.292696
-      objectReference: {fileID: 0}
-    - target: {fileID: 521052407014330822, guid: 339f256b9c55c5448abe6eb701ccb457,
-        type: 3}
-      propertyPath: m_Name
-      value: Water
-      objectReference: {fileID: 0}
-    - target: {fileID: 521052407014330822, guid: 339f256b9c55c5448abe6eb701ccb457,
-        type: 3}
-      propertyPath: m_Name
-      value: Water
-      objectReference: {fileID: 0}
-    - target: {fileID: 521052407014330822, guid: 339f256b9c55c5448abe6eb701ccb457,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 521052407014330820, guid: 339f256b9c55c5448abe6eb701ccb457,
         type: 3}
@@ -17457,8 +17457,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   positions:
-  - {x: 2.697685, y: 7.059199, z: -40.66167}
-  - {x: -11.91575, y: 7.059199, z: -40.66167}
+  - {x: 2.697685, y: 7.1, z: -40.66167}
+  - {x: -11.91575, y: 7.1, z: -40.66167}
   cycle: 1
   moveSpeed: 1.2
   startDelay: 0
@@ -17481,7 +17481,7 @@ MonoBehaviour:
   - {x: -11.91575, y: 7.059199, z: -33.2}
   - {x: 2.697685, y: 7.059199, z: -33.2}
   cycle: 1
-  moveSpeed: 1.5
+  moveSpeed: 1.2
   startDelay: 0
   intervalPauseDelay: 0
   activatedColor: {r: 0.9764706, g: 0.35686275, b: 0.21176471, a: 0}
@@ -17502,7 +17502,7 @@ MonoBehaviour:
   - {x: 2.697685, y: 7.1, z: -26.8}
   - {x: -11.91575, y: 7.1, z: -26.8}
   cycle: 1
-  moveSpeed: 1.5
+  moveSpeed: 1.2
   startDelay: 0
   intervalPauseDelay: 0
   activatedColor: {r: 0.9764706, g: 0.35686275, b: 0.21176471, a: 0}
@@ -24472,7 +24472,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 461100947}
   m_LocalRotation: {x: 0.000000059604645, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.6976848, y: 7.059199, z: -40.66167}
+  m_LocalPosition: {x: 2.6976848, y: 7.1, z: -40.66167}
   m_LocalScale: {x: 2.6049492, y: 0.4, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
@@ -29500,6 +29500,11 @@ PrefabInstance:
         type: 3}
       propertyPath: totem
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1037366095284323601, guid: 69a9735127ff18340b163b8d337cca79,
+        type: 3}
+      propertyPath: nextSceneName
+      value: Tutorial
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 69a9735127ff18340b163b8d337cca79, type: 3}
