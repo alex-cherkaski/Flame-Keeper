@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
@@ -13,6 +14,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     [Space]
     [Header("Child Controllers")]
     public DynamicLightController playerLightController;
+    public PlayerOrbitals playerOrbitals;
 
     int _lanternUses;
     private int lanternUses
@@ -53,7 +55,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     public LayerMask ground;
 
     private GameObject audioController;
-    
+
     private bool validHighJump = false;
     private bool trackApexTime = false;
     private bool trackJumpTime = false;
@@ -74,12 +76,18 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     private bool enableInput;
 
     [Header("Water Collision")]
-    public float waitTime = 3f;
+    public float waitTime = 1f;
     public float inWaterSpeed;
+
+    [Header("Animations")]
+    public Animator animator;
+    private const string runParameter = "Running";
+
     private bool playerTouchingWater;
     private bool checkWaterStatus = false;
     private float timer;
 
+    private Water currentWaterCollision;
     private bool currentGroundedState;
     private bool pastGroundedState;
 
@@ -101,6 +109,10 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         this.lanternUses = startingLanternUses;
         this.maxLanternUses = Mathf.Max(startingLanternUses, maxLanternUses);
         currVelocity = normalVelocity;
+
+        playerOrbitals.OnLanternUsesChanged(startingLanternUses, this.transform.position);
+
+        animator.SetBool(runParameter, false);
 
         RecordCheckpoint();
 
@@ -165,11 +177,18 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
                 this.SetVelocity(normalVelocity);
                 timer = 0.0f;
             }
+
+            // Make the player sink while in water
+            if (currentWaterCollision != null)
+            {
+                currentWaterCollision.Sink(percentToDeath);
+            }
         }
         else
         {
             // Make sure player has normal speed if we aren't calculating water stuff
             checkWaterStatus = false;
+            currentWaterCollision = null;
             playerTouchingWater = false;
             this.SetVelocity(normalVelocity);
             timer = 0.0f;
@@ -179,11 +198,6 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         if (enableInput && Input.GetButtonDown(StringConstants.Input.JumpButton))
         {
             lastJumpPress = Time.fixedTime;
-
-            if (!playerTouchingWater)
-            {
-                audioController.GetComponent<AudioController>().PlayAudioClip(AudioController.AudioClips.jumpNormal);
-            }
         }
     }
 
@@ -195,6 +209,8 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     {
         if (lockMovementTime > 0.0f)
         {
+            animator.SetBool(runParameter, false);
+
             lockMovementTime -= Time.deltaTime;
 
             // Blink character, uncomment when player is in
@@ -213,6 +229,11 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         if (!jumpDelayed && Grounded() && (Time.fixedTime - lastJumpPress) < jumpBufferTime)
         {
             // Start the initial jump
+            if (!playerTouchingWater)
+            {
+                audioController.GetComponent<AudioController>().PlayAudioClip(AudioController.AudioClips.jumpNormal);
+            }
+
             lastJumpExecute = Time.fixedTime;
             validHighJump = true;
             trackApexTime = true;
@@ -230,7 +251,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         if (validHighJump && (Time.fixedTime - lastJumpExecute) > highJumpBufferTime)
         {
             // They held the button, do a high jump
-            rb.AddForce(0, highJumpAdditionalForce, 0, ForceMode.Impulse);
+            //rb.AddForce(0, highJumpAdditionalForce, 0, ForceMode.Impulse);
             validHighJump = false;
         }
 
@@ -258,7 +279,10 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
 
         GetInput();
 
-        if (Mathf.Abs(input.x) == 0 && Mathf.Abs(input.y) == 0)
+        bool isMoving = !(Mathf.Abs(input.x) == 0 && Mathf.Abs(input.y) == 0);
+        animator.SetBool(runParameter, isMoving);
+
+        if (!isMoving)
         {
             return;
         }
@@ -316,7 +340,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     /// <summary>
     /// Uses the lantern and returns true if possible, otherwise, false;
     /// </summary>
-    public bool RequestLanternUse()
+    public bool RequestLanternUse(Vector3 source, Action onComplete = null)
     {
         if (lanternUses == 0)
         {
@@ -324,13 +348,14 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         }
 
         lanternUses--;
+        playerOrbitals.OnLanternUsesChanged(lanternUses, source, onComplete);
         return true;
     }
 
     /// <summary>
     /// Adds to the lantern uses and returns true if possible, otherwise, false;
     /// </summary>
-    public bool RequestLanternAddition()
+    public bool RequestLanternAddition(Vector3 source, Action onComplete = null)
     {
         if (lanternUses == maxLanternUses)
         {
@@ -338,6 +363,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         }
 
         lanternUses++;
+        playerOrbitals.OnLanternUsesChanged(lanternUses, source, onComplete);
         return true;
     }
 
@@ -392,6 +418,12 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         // Stop angular velocity when colliding with an object or else the player
         // will continue to rotate
         rb.angularVelocity = new Vector3(0, 0, 0);
+
+
+        if (collision.gameObject.CompareTag(StringConstants.Tags.Platform))
+        {
+            transform.parent = collision.gameObject.transform;
+        }
     }
 
     private void OnCollisionStay(Collision collision)
@@ -399,6 +431,19 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         // Stop angular velocity when colliding with an object or else the player
         // will continue to rotate
         rb.angularVelocity = new Vector3(0, 0, 0);
+
+        if (collision.gameObject.CompareTag(StringConstants.Tags.Platform))
+        {
+            transform.parent = collision.gameObject.transform;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag(StringConstants.Tags.Platform))
+        {
+            transform.parent = null;
+        }
     }
 
     /// <summary>
@@ -430,6 +475,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
             if (crystalScript != null)
             {
                 lanternUses += (int)crystalScript.GetWarmth();
+                playerOrbitals.OnLanternUsesChanged(lanternUses, crystalScript.transform.position);
                 other.gameObject.SetActive(false);
             }
             else
@@ -440,12 +486,12 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         }
 
         //if the player is touching water
-        if (other.CompareTag("Water"))
+        if (other.CompareTag(StringConstants.Tags.Water))
         {
             checkWaterStatus = true;
+            currentWaterCollision = other.GetComponent<Water>();
             playerTouchingWater = true;
             this.SetVelocity(inWaterSpeed);
-            Debug.Log("About to Play WATER1");
             audioController.GetComponent<AudioController>().PlayAudioClip(AudioController.AudioClips.water4);
         }
     }
@@ -453,7 +499,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     private void OnTriggerExit(Collider other)
     {
         //if the player is getting out of the water
-        if (other.CompareTag("Water"))
+        if (other.CompareTag(StringConstants.Tags.Water))
         {
             playerTouchingWater = false;
             audioController.GetComponent<AudioController>().PlayAudioClip(AudioController.AudioClips.water2);
@@ -474,6 +520,11 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     public void RecordCheckpoint()
     {
         checkpointPosition = this.transform.position;
+    }
+
+    public void RecordCheckpoint(Vector3 position)
+    {
+        checkpointPosition = position;
     }
 
     /// <summary>
@@ -507,12 +558,18 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     }
 
     /// <summary>
+    /// Returns value of enableInput
+    /// </summary>
+    public bool IsInputEnabled()
+    {
+        return enableInput;
+    }
+
+    /// <summary>
     /// Checks if the player is not touching the water and is grounded
     /// </summary>
     bool OutOfWater()
     {
         return !playerTouchingWater && this.Grounded();
     }
-
-
 }

@@ -7,6 +7,7 @@ using Cinemachine;
 public class ExampleAnim : MonoBehaviour
 {
     public CinemachineVirtualCamera vc;
+    public List<ActivatableObject> objectsToPlay;
     public float blendWait;
     public float actionWait;
     public UnityEvent method;
@@ -29,18 +30,23 @@ public class ExampleAnim : MonoBehaviour
 
     IEnumerator ShowExample()
     {
-        ActivatableObject[] scriptComponents = this.GetComponents<ActivatableObject>();
-
-        vc.Priority += 100;
+        
+        if (vc != null)
+        {
+            vc.Priority += 100;
+        }
         yield return new WaitForSeconds(blendWait);
-        foreach (ActivatableObject comp in scriptComponents)
+        foreach (ActivatableObject comp in objectsToPlay)
         {
             comp.enabled = true;
         }
         yield return new WaitForSeconds(0.1f);
         method.Invoke();
         yield return new WaitForSeconds(actionWait);
-        vc.Priority -= 100;
+        if (vc != null)
+        {
+            vc.Priority -= 100;
+        }
         yield return new WaitForSeconds(blendWait);
     }
 }

@@ -70,8 +70,8 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _FoamDistance: 0.45
-    - _FoamNoiseScale: 1.75
-    - _FresnelNoseScale: 8
+    - _FoamNoiseScale: 2.18
+    - _FresnelNoseScale: 5
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
@@ -81,19 +81,19 @@ Material:
     - _OrthographicCamera: 0
     - _Parallax: 0.02
     - _ReflectDistortion: 0.1
-    - _ReflectIntensity: 0.5
+    - _ReflectIntensity: 0.86
     - _RefractDistortion: 1
-    - _RefractIntensity: 1
+    - _RefractIntensity: 4
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
     - _WaveFrequency: 1
     - _WaveHeight: 0.2
-    - _WaveSpeed: 1
+    - _WaveSpeed: 1.54
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FoamColor: {r: 1, g: 1, b: 1, a: 1}
-    - _WaterTint: {r: 0, g: 0.42007485, b: 0.6320754, a: 1}
+    - _WaterTint: {r: 0.30588236, g: 0.42745098, b: 0.49019608, a: 1}

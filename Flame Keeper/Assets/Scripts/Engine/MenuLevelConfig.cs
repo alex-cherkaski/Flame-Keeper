@@ -7,18 +7,22 @@ using UnityEngine.SceneManagement;
 public class MenuLevelConfig : LevelConfig
 {
     private bool m_allowInput = false;
+    public GameObject pressStartText;
 
     protected override void OnLevelStart()
     {
         base.OnLevelStart();
 
         m_allowInput = true;
+
+        FlameKeeper.Get().musicController.PlayTrack(MusicController.MusicTracks.MainTheme);
     }
 
     public void Update()
     {
         if (m_allowInput && Input.GetButton(StringConstants.Input.Start))
         {
+            pressStartText.SetActive(false);
             SceneManager.LoadScene(StringConstants.SceneNames.TutorialSceneName);
         }
     }

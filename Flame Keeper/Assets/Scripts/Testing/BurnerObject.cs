@@ -54,6 +54,10 @@ public class BurnerObject : ActivatableObject
         {
             burningIndicator.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
         }
+        else
+        {
+            burningIndicator.GetComponent<Renderer>().material.SetColor("_Color", origColor);
+        }
     }
 
     public bool IsBurning()

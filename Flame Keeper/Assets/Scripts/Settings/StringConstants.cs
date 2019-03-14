@@ -20,20 +20,23 @@ public class StringConstants
 
     public class Input
     {
-        public const string ActivateButton = "Controller_X";
-        public const string DeactivateButton = "Controller_B";
+        public const string ActivateButton = "Controller_B";
+        public const string DeactivateButton = "Controller_X";
         public const string JumpButton = "Controller_A";
         public const string HorizontalMovement = "Horizontal";
         public const string VerticalMovement = "Vertical";
         public const string Start = "Start";
         public const string ResetOne = "LeftBumper";
         public const string ResetTwo = "RightBumper";
+        public const string CameraView = "CameraView";
     }
 
     public class Tags
     {
         public const string CrystalTag = "Crystal";
         public const string Player = "Player";
+        public const string Water = "Water";
+        public const string Platform = "Platform";
     }
 
     public class PrefabPaths

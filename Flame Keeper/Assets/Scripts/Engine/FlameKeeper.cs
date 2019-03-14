@@ -45,19 +45,6 @@ public class FlameKeeper : MonoBehaviour
         return _instance;
     }
 
-    private void SetupControllers()
-    {
-        if (levelController)
-            controllersList.Add(levelController);
-        if (dataminingController)
-            controllersList.Add(dataminingController);
-
-        foreach (BaseController controller in controllersList)
-        {
-            controller.Initialize();
-        }
-    }
-
     private List<BaseController> controllersList = new List<BaseController>(); // List of all controllers so looping over all of them is fast
 
     /// <summary>
@@ -66,13 +53,28 @@ public class FlameKeeper : MonoBehaviour
     /// </summary>
     public LevelController levelController;
     public DataminingController dataminingController;
+    public MusicController musicController;
 
+    private void SetupControllers()
+    {
+        if (levelController)
+            controllersList.Add(levelController);
+        if (dataminingController)
+            controllersList.Add(dataminingController);
+        if (musicController)
+            controllersList.Add(musicController);
+
+        foreach (BaseController controller in controllersList)
+        {
+            controller.Initialize();
+        }
+    }
 
     public void Update()
     {
         // If holding down the two reset buttons and start, reset the game
-        if (Input.GetButton(StringConstants.Input.ResetOne) 
-            && Input.GetButton(StringConstants.Input.ResetTwo) 
+        if (Input.GetButton(StringConstants.Input.ResetOne)
+            && Input.GetButton(StringConstants.Input.ResetTwo)
             && Input.GetButton(StringConstants.Input.Start))
         {
             ResetGame();
