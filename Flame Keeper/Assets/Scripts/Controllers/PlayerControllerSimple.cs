@@ -7,7 +7,7 @@ using UnityEngine;
 public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
 {
     [Header("Parameters")]
-    public float normalVelocity = 5;
+    public float maxVelocity = 5;
     private float currVelocity;
     public float turnSpeed = 10;
 
@@ -36,6 +36,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     private float angle;
     private Quaternion targetRotation;
     private Transform levelCamera;
+    private Vector3 startingScale;
 
     [Space]
     [Header("Jump Parameters")]
@@ -108,7 +109,9 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         this.transform.position = startingPosition;
         this.lanternUses = startingLanternUses;
         this.maxLanternUses = Mathf.Max(startingLanternUses, maxLanternUses);
-        currVelocity = normalVelocity;
+
+        currVelocity = 0.0f;
+        startingScale = this.transform.localScale;
 
         playerOrbitals.OnLanternUsesChanged(startingLanternUses, this.transform.position);
 
@@ -174,7 +177,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
                 this.GoToLastCheckpoint();
                 checkWaterStatus = false;
                 playerTouchingWater = false;
-                this.SetVelocity(normalVelocity);
+                this.SetVelocity(maxVelocity * input.magnitude);
                 timer = 0.0f;
             }
 
@@ -190,7 +193,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
             checkWaterStatus = false;
             currentWaterCollision = null;
             playerTouchingWater = false;
-            this.SetVelocity(normalVelocity);
+            this.SetVelocity(maxVelocity * input.magnitude);
             timer = 0.0f;
         }
 
@@ -463,6 +466,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         if (collision.gameObject.CompareTag(StringConstants.Tags.Platform))
         {
             transform.parent = null;
+            this.transform.localScale = startingScale; // Make sure scale doesnt drift off
         }
     }
 
