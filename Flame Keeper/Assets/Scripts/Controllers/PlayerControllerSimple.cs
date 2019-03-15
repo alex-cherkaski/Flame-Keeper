@@ -199,6 +199,9 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         {
             lastJumpPress = Time.fixedTime;
         }
+        /*
+        Debug.DrawRay(transform.position, Vector3.down * 2, Color.green);
+        */
     }
 
 
@@ -419,9 +422,17 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         // will continue to rotate
         rb.angularVelocity = new Vector3(0, 0, 0);
 
+        RaycastHit hit;
+        LayerMask layerMask = ~LayerMask.GetMask("Player");
+        Physics.Raycast(transform.position, Vector3.down, out hit, Mathf.Infinity, layerMask);
 
-        if (collision.gameObject.CompareTag(StringConstants.Tags.Platform))
+        if (collision.gameObject.CompareTag(StringConstants.Tags.Platform) && hit.collider.CompareTag(StringConstants.Tags.Platform))
         {
+            /*
+            Debug.Log("hit.collider.tag = " + hit.collider.tag);
+            Debug.Log(hit.ToString());
+            Debug.Log(layerMask.value);
+            */
             transform.parent = collision.gameObject.transform;
         }
     }
@@ -432,8 +443,17 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         // will continue to rotate
         rb.angularVelocity = new Vector3(0, 0, 0);
 
-        if (collision.gameObject.CompareTag(StringConstants.Tags.Platform))
+        RaycastHit hit;
+        LayerMask layerMask = ~LayerMask.GetMask("Player");
+        Physics.Raycast(transform.position, Vector3.down, out hit, Mathf.Infinity, layerMask);
+
+        if (collision.gameObject.CompareTag(StringConstants.Tags.Platform) && hit.collider.CompareTag(StringConstants.Tags.Platform))
         {
+            /*
+            Debug.Log("hit.collider.tag = " + hit.collider.tag);
+            Debug.Log(hit.ToString());
+            Debug.Log(layerMask.value);
+            */
             transform.parent = collision.gameObject.transform;
         }
     }
