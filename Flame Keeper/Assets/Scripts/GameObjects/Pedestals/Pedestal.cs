@@ -33,6 +33,11 @@ public class Pedestal : MonoBehaviour, DynamicLightSource
     public int maxLevel;
     public int startLevel;
 
+    [Header("Pedestal Flame")]
+    public GameObject pedestalFlame;
+
+    private ParticleSystem[] flameParticleSystems;
+
     private PlayerControllerSimple player;
     private bool activated = false; // Ie, does the pedestal have at least one charge?
 
@@ -102,6 +107,8 @@ public class Pedestal : MonoBehaviour, DynamicLightSource
 
         audioController = (GameObject)Instantiate(Resources.Load("audioController"), this.transform.position, this.transform.rotation);
         audioController.transform.SetParent(this.transform);
+
+        flameParticleSystems = GetParticleSystems();
     }
 
     /// <summary>
@@ -180,6 +187,27 @@ public class Pedestal : MonoBehaviour, DynamicLightSource
         {
             rend.UpdateGIMaterials();
         }
+
+        if (currentLevel == maxLevel)
+        {
+            foreach (ParticleSystem particleSystem in flameParticleSystems)
+            {
+                if (particleSystem.isStopped)
+                {
+                    particleSystem.Play();
+                }
+            }
+        }
+        else
+        {
+            foreach (ParticleSystem particleSystem in flameParticleSystems)
+            {
+                if (particleSystem.isPlaying)
+                {
+                    particleSystem.Stop();
+                }
+            }
+        }
     }
 
     /// <summary>
@@ -239,5 +267,29 @@ public class Pedestal : MonoBehaviour, DynamicLightSource
     public int GetCurrLevel()
     {
         return currentLevel;
+    }
+
+    private ParticleSystem[] GetParticleSystems()
+    {
+        Transform[] allChildren = GetComponentsInChildren<Transform>();
+        List<GameObject> childObjects = new List<GameObject>();
+
+        GameObject particleSystemParent = null;
+        foreach (Transform child in allChildren)
+        {
+            if (child.gameObject.CompareTag("Fire"))
+            {
+                particleSystemParent = child.gameObject;
+                break;
+            }
+        }
+
+        if (particleSystemParent)
+        {
+            return particleSystemParent.GetComponentsInChildren<ParticleSystem>(true);
+        }
+
+        Debug.Log("particleSystemParent is null!");
+        return null;
     }
 }
