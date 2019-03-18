@@ -23,6 +23,7 @@ public class StringConstants
         public const string ActivateButton = "Controller_B";
         public const string DeactivateButton = "Controller_X";
         public const string JumpButton = "Controller_A";
+        public const string SkipButton = "Controller_A";
         public const string HorizontalMovement = "Horizontal";
         public const string VerticalMovement = "Vertical";
         public const string Start = "Start";
