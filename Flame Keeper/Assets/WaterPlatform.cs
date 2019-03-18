@@ -75,9 +75,9 @@ public class WaterPlatform : MonoBehaviour
         }
 
         // Animate towards the target rotation
-        this.transform.rotation = Quaternion.Lerp(this.transform.rotation, targetRotation, Time.time * 0.01f * rotateSpeed);
+        this.transform.rotation = Quaternion.Lerp(this.transform.rotation, targetRotation, Time.deltaTime * rotateSpeed);
 
         // Always update position after doing the rotation math
-        this.transform.position = Vector3.Lerp(this.transform.position, targetPosition, Time.time * 0.01f * sinkSpeed);
+        this.transform.position = Vector3.Lerp(this.transform.position, targetPosition, Time.deltaTime * sinkSpeed);
     }
 }
