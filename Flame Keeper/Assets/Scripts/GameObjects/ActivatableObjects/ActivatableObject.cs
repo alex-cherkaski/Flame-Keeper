@@ -17,7 +17,6 @@ public abstract class ActivatableObject : MonoBehaviour
         {
             level += pedestal.GetCurrLevel();
         }
-        Debug.Log("Current level is " + level);
         return level;
     }
 

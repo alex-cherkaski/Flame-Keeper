@@ -39,9 +39,8 @@ public class BurnableObject : MonoBehaviour
 
         if (isBurning && timer <= burnTime)
         {
-            Debug.Log("im burning");
             timer += Time.deltaTime;
-            this.GetComponent<Renderer>().material.color = Color.Lerp(colorStart, colorEnd, burnTime);
+            this.GetComponent<Renderer>().material.color = Color.Lerp(colorStart, colorEnd, Time.deltaTime * burnTime);
 
             if (timer > burnTime)
             {
@@ -101,7 +100,6 @@ public class BurnableObject : MonoBehaviour
         BurnerObject burner = other.gameObject.GetComponent<BurnerObject>();
         if (burner != null)
         {
-            Debug.Log("i found a burner");
             currBurner = burner;
         }
     }
