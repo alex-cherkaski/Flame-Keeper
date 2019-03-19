@@ -40,7 +40,7 @@ public class BurnableObject : MonoBehaviour
         if (isBurning && timer <= burnTime)
         {
             timer += Time.deltaTime;
-            this.GetComponent<Renderer>().material.color = Color.Lerp(colorStart, colorEnd, Time.deltaTime * burnTime);
+            this.GetComponent<Renderer>().material.color = Color.Lerp(this.GetComponent<Renderer>().material.color, colorEnd, Time.deltaTime * burnTime);
 
             if (timer > burnTime)
             {
