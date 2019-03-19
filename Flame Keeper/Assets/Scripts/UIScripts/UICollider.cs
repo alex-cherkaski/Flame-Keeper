@@ -52,21 +52,15 @@ public class UICollider : MonoBehaviour
         {
             if (giveFlame.activeSelf)
             {
-                //giveFlame.GetComponent<UI>().FadeOut();
-                //Invoke("DeactivateGiveFlame", 1.1f);
-                Invoke("DeactivateGiveFlame", 0f);
+                DeactivateGiveFlame();
             }
             else if (takeFlame.activeSelf)
             {
-                //takeFlame.GetComponent<UI>().FadeOut();
-                //Invoke("DeactivateTakeFlame", 1.1f);
-                Invoke("DeactivateTakeFlame", 0f);
+                DeactivateTakeFlame();
             }
             else if (giveOrTakeFlame.activeSelf)
             {
-                //giveOrTakeFlame.GetComponent<UI>().FadeOut();
-                //Invoke("GiveOrTakeFlameDeactivate", 1.1f);
-                Invoke("GiveOrTakeFlameDeactivate", 0f);
+                GiveOrTakeFlameDeactivate();
             }
 
             if (pedestal.GetCurrLevel() == 0)
