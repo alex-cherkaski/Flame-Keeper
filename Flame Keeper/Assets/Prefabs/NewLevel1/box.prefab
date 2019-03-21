@@ -119,12 +119,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 894706c97a409614185357bdad441015, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  warmTime: 1
+  warmTime: 0.5
   burnTime: 1
   resetDelay: 0
+  useStartPositionOffetOnReset: 0
+  localOffset: {x: 0, y: 0, z: 0}
+  useWorldPositionOnReset: 0
+  resetTransform: {x: 0, y: 0, z: 0}
   automaticReset: 0
   resetObject: {fileID: 614130703066126706}
-  resetTransform: {x: 0, y: 0, z: 0}
   resetRotation: {x: 0, y: 0, z: 0, w: 0}
   heatedColor: {r: 0, g: 0, b: 0, a: 0}
   burnObjectCollider: {fileID: 614130703066126719}

@@ -3,8 +3,9 @@
 public class CameraController : MonoBehaviour
 {
     public Camera mainCamera;
+    public Vector2 anchorView = Vector2.left;
     public float rotateSpeed = 1.0f;
-    public float maxAngularOffset = 45.0f; // The most you can rotate the camera from the starting position in degrees
+    public float rotationalDegrees = 90.0f; // The most you can rotate the camera from the anchor in degrees
 
     private Quaternion startingRotation;
     private Vector3 startingViewDirection;
@@ -15,12 +16,7 @@ public class CameraController : MonoBehaviour
     {
         player = FlameKeeper.Get().levelController.GetPlayer();
 
-        float xDist = (player.transform.position.x - mainCamera.transform.position.x);
-        float zDist = (player.transform.position.z - mainCamera.transform.position.z);
-        viewRadius = Mathf.Sqrt((xDist * xDist) + (zDist * zDist));
-
         startingRotation = this.transform.rotation;
-        startingViewDirection = Vector3.Normalize(this.transform.position - mainCamera.transform.position);
     }
 
     // Late update so we know that player has already calculated their position
@@ -34,13 +30,14 @@ public class CameraController : MonoBehaviour
         float viewInput = Input.GetAxisRaw(StringConstants.Input.CameraView);
         if (player.IsInputEnabled() && Mathf.Abs(viewInput) > 0.15f) // A little buffer for numerical stability, otherwise camera will drift
         {
-            // Rotate camera
-            float currentAngle = Vector3.SignedAngle(startingViewDirection, Vector3.Normalize(this.transform.position - mainCamera.transform.position), Vector3.up);
+            Vector3 toCamera = mainCamera.transform.position - player.transform.position;
+            float cameraAngle = Vector2.SignedAngle(new Vector2(toCamera.x, toCamera.z), Vector2.left);
+            float inputAngle = rotateSpeed * -viewInput * Time.deltaTime;
 
             // Don't let them rotate past the max angular offset
-            if (Mathf.Abs(currentAngle) <= maxAngularOffset || Mathf.Sign(currentAngle) != Mathf.Sign(-viewInput))
+            if (Mathf.Sign(inputAngle) != Mathf.Sign(cameraAngle) || Mathf.Abs(cameraAngle + inputAngle) <= rotationalDegrees)
             {
-                this.transform.Rotate(Vector3.up, rotateSpeed * -viewInput * Time.deltaTime);
+                this.transform.Rotate(Vector3.up, inputAngle);
             }
 
 

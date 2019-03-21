@@ -76,12 +76,9 @@ public class BurnableObject : MonoBehaviour
     void Update()
     {
         // It's in world space so I have to calculate this every frame, damn
-        if (!isBurning || timer < burnTime)
-        {
-            startBurnHeight = burnObjectCollider.bounds.center.y - (burnObjectCollider.bounds.size.y / 2.0f) - burnBoundsPadding;
-            endBurnHeight = burnObjectCollider.bounds.center.y + (burnObjectCollider.bounds.size.y / 2.0f) + burnBoundsPadding;
-            burnMaterial.SetFloat("_BurnHeight", startBurnHeight);
-        }
+        startBurnHeight = burnObjectCollider.bounds.center.y - (burnObjectCollider.bounds.size.y / 2.0f) - burnBoundsPadding;
+        endBurnHeight = burnObjectCollider.bounds.center.y + (burnObjectCollider.bounds.size.y / 2.0f) + burnBoundsPadding;
+        burnMaterial.SetFloat("_BurnHeight", startBurnHeight);
 
         if (!isBurning && currBurner != null && currBurner.IsBurning())
         {
@@ -94,8 +91,6 @@ public class BurnableObject : MonoBehaviour
 
         if (isWarming && timer <= warmTime)
         {
-            Debug.Log("im warming");
-
             timer += Time.deltaTime;
             burnMaterial.color = Color.Lerp(colorStart, colorEnd, timer / warmTime);
 
@@ -108,11 +103,9 @@ public class BurnableObject : MonoBehaviour
         }
         else if (isBurning && timer <= burnTime + resetDelay)
         {
-            Debug.Log("im burning"); // https://www.youtube.com/watch?v=ZQMJHZ3y8A8&feature=youtu.be&t=33
-
             timer += Time.deltaTime;
             float percent = Mathf.Clamp((timer / burnTime), 0.0f, 1.0f);
-            burnMaterial.SetFloat("_BurnHeight", Mathf.Lerp(startBurnHeight, endBurnHeight, percent*percent));
+            burnMaterial.SetFloat("_BurnHeight", Mathf.Lerp(startBurnHeight, endBurnHeight, percent));
 
             if (timer > burnTime)
             {
@@ -187,7 +180,6 @@ public class BurnableObject : MonoBehaviour
         BurnerObject burner = other.gameObject.GetComponent<BurnerObject>();
         if (burner != null)
         {
-            Debug.Log("i found a burner"); // https://www.youtube.com/watch?v=8uGVZoqJjn4&feature=youtu.be&t=60
             currBurner = burner;
         }
     }

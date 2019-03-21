@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 public class MenuLevelConfig : LevelConfig
 {
     private bool m_allowInput = false;
+
+    public Animator storyAnimator;
     public GameObject pressStartText;
 
     protected override void OnLevelStart()
@@ -24,6 +26,11 @@ public class MenuLevelConfig : LevelConfig
         {
             pressStartText.SetActive(false);
             SceneManager.LoadScene(StringConstants.SceneNames.TutorialSceneName);
+        }
+
+        if (Input.GetButton(StringConstants.Input.SkipButton))
+        {
+            storyAnimator.SetTrigger("SkipCutscene");
         }
     }
 }
