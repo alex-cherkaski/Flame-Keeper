@@ -11,6 +11,9 @@ public class TempleLevelConfig : LevelConfig
     public int startingLanternUses;
     public int maxLanternUses;
 
+    [Header("Turn cutscenes off (Testing)")]
+    public bool cutscenesOff;
+
     [Header("Datamining parameters")]
     public DataminingController.DataScenes scene;
 

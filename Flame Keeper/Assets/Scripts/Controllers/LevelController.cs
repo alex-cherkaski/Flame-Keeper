@@ -78,4 +78,17 @@ public class LevelController : BaseController
             return null;
         }
     }
+
+    public bool CutscenesDisabled()
+    {
+        TempleLevelConfig level = (m_currentLevelConfig as TempleLevelConfig);
+        if (level != null)
+        {
+            return level.cutscenesOff;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }

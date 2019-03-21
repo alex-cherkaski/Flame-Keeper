@@ -15,7 +15,13 @@ public class ExampleAnim : MonoBehaviour
 
     void Start()
     {
-       
+        if (FlameKeeper.Get().levelController.CutscenesDisabled())
+        {
+            foreach (ActivatableObject comp in objectsToPlay)
+            {
+                comp.enabled = true;
+            }
+        }
     }
 
     void Update()
@@ -25,7 +31,10 @@ public class ExampleAnim : MonoBehaviour
 
     public void PlayExample()
     {
-        StartCoroutine(ShowExample());
+        if (!FlameKeeper.Get().levelController.CutscenesDisabled())
+        {
+            StartCoroutine(ShowExample());
+        }
     }
 
     IEnumerator ShowExample()

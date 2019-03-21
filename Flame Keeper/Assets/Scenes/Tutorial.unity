@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18154176, g: 0.227184, b: 0.3074043, a: 1}
+  m_IndirectSpecularColor: {r: 0.18154222, g: 0.22718474, b: 0.30740482, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1283,7 +1283,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh36900
+  m_Name: pb_Mesh72432
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -1653,6 +1653,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1037366095284323601, guid: 69a9735127ff18340b163b8d337cca79,
+        type: 3}
+      propertyPath: nextSceneName
+      value: Level1
       objectReference: {fileID: 0}
     - target: {fileID: 8281101516696006931, guid: 69a9735127ff18340b163b8d337cca79,
         type: 3}
@@ -4284,7 +4289,7 @@ PlayableDirector:
   m_Enabled: 1
   serializedVersion: 3
   m_PlayableAsset: {fileID: 11400000, guid: a122ab41895e9614e95b1eb3fb5631dc, type: 2}
-  m_InitialState: 1
+  m_InitialState: 0
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
@@ -4499,6 +4504,7 @@ MonoBehaviour:
   playerStartingPosition: {x: 0, y: 0, z: 0}
   startingLanternUses: 1
   maxLanternUses: 3
+  cutscenesOff: 0
   scene: 0
 --- !u!4 &1673866664
 Transform:

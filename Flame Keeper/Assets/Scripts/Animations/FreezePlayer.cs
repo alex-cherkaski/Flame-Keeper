@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Timeline;
+using UnityEngine.Playables;
 
 public class FreezePlayer : MonoBehaviour
 {
@@ -12,8 +13,13 @@ public class FreezePlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        duration = (float)timeline.duration;
-        StartCoroutine(Freeze());
+        PlayableDirector pd = this.gameObject.GetComponent<PlayableDirector>();
+        if (!FlameKeeper.Get().levelController.CutscenesDisabled())
+        {
+            pd.Play();
+            duration = (float)timeline.duration;
+            StartCoroutine(Freeze());
+        }
     }
 
     IEnumerator Freeze()

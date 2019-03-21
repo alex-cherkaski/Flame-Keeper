@@ -21,7 +21,7 @@ public abstract class PuzzleFinish : MonoBehaviour
 
     void Update()
     {
-        if (CheckIfFinished() && !played)
+        if (CheckIfFinished() && !played && !(FlameKeeper.Get().levelController.CutscenesDisabled()))
         {
             StartCoroutine(OnFinish());
             played = true;
