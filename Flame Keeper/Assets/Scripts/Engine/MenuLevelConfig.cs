@@ -6,31 +6,50 @@ using UnityEngine.SceneManagement;
 
 public class MenuLevelConfig : LevelConfig
 {
-    private bool m_allowInput = false;
+    private bool m_transitionInProgress = false;
+    private bool m_storyFinished = false;
 
     public Animator storyAnimator;
+    public AudioController audioController;
     public GameObject pressStartText;
 
     protected override void OnLevelStart()
     {
         base.OnLevelStart();
 
-        m_allowInput = true;
+        // Link references to our state behaviours for animation callbacks
+        StoryStateBehaviour storyStateBehaviour = storyAnimator.GetBehaviour<StoryStateBehaviour>();
+        storyStateBehaviour.mainMenuConfig = this;
+
+        WipeOutStateBehaviour wipeOutStateBehaviour = storyAnimator.GetBehaviour<WipeOutStateBehaviour>();
+        wipeOutStateBehaviour.mainMenuConfig = this;
 
         FlameKeeper.Get().musicController.PlayTrack(MusicController.MusicTracks.MainTheme);
     }
 
     public void Update()
     {
-        if (m_allowInput && Input.GetButton(StringConstants.Input.Start))
-        {
-            pressStartText.SetActive(false);
-            SceneManager.LoadScene(StringConstants.SceneNames.TutorialSceneName);
-        }
-
         if (Input.GetButton(StringConstants.Input.SkipButton))
         {
             storyAnimator.SetTrigger("SkipCutscene");
         }
+
+        if (m_storyFinished && Input.GetButton(StringConstants.Input.Start) && !m_transitionInProgress)
+        {
+            Destroy(pressStartText);
+            audioController.PlayAudioClip(AudioController.AudioClips.menuFire);
+            storyAnimator.SetTrigger("WipeOut");
+            m_transitionInProgress = true;
+        }
+    }
+
+    public void OnStoryFinished()
+    {
+        m_storyFinished = true;
+    }
+
+    public void OnWipeOutFinished()
+    {
+        SceneManager.LoadScene(StringConstants.SceneNames.TutorialSceneName);
     }
 }
