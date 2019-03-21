@@ -20,12 +20,17 @@ public class PlayerOrbitals : MonoBehaviour
         public Transform orbital;
         public Vector3 target;
         public Action onComplete;
+        public Vector3 startToPlayer;
+
+        public float duration; //ie, how long its been playing for
 
         public OrbitalOutAnimation(Transform orbital, Vector3 target, Action onComplete = null)
         {
             this.orbital = orbital;
             this.target = target;
             this.onComplete = onComplete;
+            this.duration = 0.0f;
+            this.startToPlayer = orbital.transform.position - FlameKeeper.Get().levelController.GetPlayer().transform.position;
         }
     }
 
@@ -93,13 +98,18 @@ public class PlayerOrbitals : MonoBehaviour
         List<OrbitalOutAnimation> completedAnimations = new List<OrbitalOutAnimation>();
         foreach (OrbitalOutAnimation anim in outAnimations)
         {
-            anim.orbital.position = Vector3.Slerp(anim.orbital.position, anim.target, Time.deltaTime * lerpSpeed);
+            float xSlerpOffset = anim.startToPlayer.x > 0.0f ? Mathf.Cos(anim.duration) : -Mathf.Cos(anim.duration);
+            float ySlerpOffset = Mathf.Cos(anim.duration);
+            float zSlerpOffset = anim.startToPlayer.z > 0.0f ? Mathf.Cos(anim.duration) : -Mathf.Cos(anim.duration);
+            Vector3 slerpStart = anim.orbital.position + new Vector3(xSlerpOffset, ySlerpOffset, zSlerpOffset) * (0.4f-anim.duration);
+            anim.orbital.position = Vector3.Slerp(slerpStart, anim.target, Time.deltaTime * lerpSpeed + anim.duration * 0.7f);
             if (Vector3.Distance(anim.orbital.position, anim.target) < 0.1f)
             {
                 anim.orbital.position = anim.target;
                 anim.onComplete?.Invoke();
                 completedAnimations.Add(anim);
             }
+            anim.duration += Time.deltaTime;
         }
         foreach (OrbitalOutAnimation anim in completedAnimations)
         {
