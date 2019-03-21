@@ -19,22 +19,29 @@
 		_FlowTex ("Flow Map", 2D) = "clear" {}
 		_CloudTex ("Could Map", 2D) = "clear" {}
 
+		_EmissionIntensity ("Emission Intensity", float) = 1.0
+
         _Glossiness ("Smoothness", Range(0,1)) = 0.5
         _Metallic ("Metallic", Range(0,1)) = 0.0
+
     }
     SubShader
     {
         Tags 
 		{ 
-			"RenderType"="Transparent" 
-			"RenderQueue"="Opaque"
+			"RenderType"="Transparent"
+			"Queue"="Transparent"
 		}
+
 		Cull Off
         LOD 200
 
         CGPROGRAM
         // Physically based Standard lighting model, and enable shadows on all light types
-        #pragma surface surf Standard fullforwardshadows addshadow
+        #pragma surface surf RampByDistance fullforwardshadows addshadow
+		#include "UnityPBSLighting.cginc"
+		#include "AutoLight.cginc"
+		#include "FlameKeeperInclude.cginc"
 
         // Use shader model 3.0 target, to get nicer looking lighting
         #pragma target 3.0
@@ -61,12 +68,13 @@
 		float _BurnHeight;
 		float _DissolveOffset;
 
+		float _EmissionIntensity;
+
         half _Glossiness;
         half _Metallic;
         fixed4 _Color;
 
-
-        void surf (Input IN, inout SurfaceOutputStandard o)
+        void surf (Input IN, inout SurfaceOutputCustom o)
         {
             // Albedo comes from a texture tinted by color
             fixed4 c = tex2D(_MainTex, IN.uv_MainTex) * _Color;
@@ -91,7 +99,9 @@
 			half4 clouds = tex2D(_CloudTex, cloudUV + flowDistortion);
 			float4 fireColor = lerp(_LowColor, _HighColor, clouds);
 			fireColor = pow(fireColor, _Contrast) * _Contrast;
-			o.Emission = fireColor * burn;
+			o.Emission = fireColor * burn * _EmissionIntensity;
+
+			o.WorldPosition = IN.worldPos;
 
             // Metallic and smoothness come from slider variables
             o.Metallic = _Metallic;
