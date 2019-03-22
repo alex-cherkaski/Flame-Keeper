@@ -168,7 +168,7 @@ public class MovingObject : ActivatableObject
             {
                 currentColor = deactivatedColor;
             }
-            meshRenderer.material.color = Color.Lerp(meshRenderer.material.color, currentColor, Time.deltaTime);
+            meshRenderer.material.color = Color.Lerp(meshRenderer.material.color, currentColor, Time.deltaTime * 3);
         }
     }
 }
