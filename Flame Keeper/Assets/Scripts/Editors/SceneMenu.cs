@@ -32,6 +32,12 @@ public static class SceneMenu
         EditorSceneManager.OpenScene("Assets/Scenes/Level1.unity");
     }
 
+    [MenuItem("Scenes/Level 1 v2", false, 1)]
+    public static void GoToLevelOneV2()
+    {
+        EditorSceneManager.OpenScene("Assets/Scenes/Level1v2.unity");
+    }
+
     [MenuItem("Scenes/New Level 1", false, 1)]
     public static void GoToNewLevelOne()
     {
