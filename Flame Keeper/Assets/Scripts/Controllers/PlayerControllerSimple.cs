@@ -431,12 +431,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
 
         if (collision.gameObject.CompareTag(StringConstants.Tags.Platform) && hit.collider.CompareTag(StringConstants.Tags.Platform))
         {
-            /*
-            Debug.Log("hit.collider.tag = " + hit.collider.tag);
-            Debug.Log(hit.ToString());
-            Debug.Log(layerMask.value);
-            */
-            transform.parent = collision.gameObject.transform;
+            transform.SetParent(collision.gameObject.transform, true);
         }
     }
 
@@ -452,12 +447,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
 
         if (collision.gameObject.CompareTag(StringConstants.Tags.Platform) && hit.collider.CompareTag(StringConstants.Tags.Platform))
         {
-            /*
-            Debug.Log("hit.collider.tag = " + hit.collider.tag);
-            Debug.Log(hit.ToString());
-            Debug.Log(layerMask.value);
-            */
-            transform.parent = collision.gameObject.transform;
+            transform.SetParent(collision.gameObject.transform, true);
         }
     }
 
