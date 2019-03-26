@@ -82,6 +82,12 @@ public class MovingObject : ActivatableObject
         if (this.CompareTag(StringConstants.Tags.Platform))
         {
             meshRenderer = GetComponent<MeshRenderer>();
+            if (meshRenderer == null)
+            {
+                meshRenderer = GetComponentInChildren<MeshRenderer>();
+            }
+
+
             if (GetLevel() > 0)
             {
                 meshRenderer.material.color = activatedColor;
@@ -110,7 +116,7 @@ public class MovingObject : ActivatableObject
         }
 
         //checks if positions are approximately the same
-        if (Vector3.Distance(moveableObject.transform.position, targetPosition) < 0.01 && waitDelay <= 0.0)
+        if (Vector3.Distance(moveableObject.transform.position, targetPosition) < 0.1 && waitDelay <= 0.0)
         {
             moveableObject.transform.position = targetPosition;
 
