@@ -11,10 +11,9 @@ GameObject:
   - component: {fileID: 7394420938880404808}
   - component: {fileID: 7394420938880404811}
   - component: {fileID: 7394420938880404810}
-  - component: {fileID: 7394420938880404813}
   m_Layer: 0
   m_Name: pCube3
-  m_TagString: Untagged
+  m_TagString: ActivatableWire
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -78,21 +77,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &7394420938880404813
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7394420938880404812}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8cbb7010950e8e4ca0627e9f2e0d2e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  activatedColor: {r: 0.8862746, g: 0.22352943, b: 0.43529415, a: 0}
-  deactivatedColor: {r: 0.23137254, g: 0.57254905, b: 0.6784314, a: 1}
-  pedestal: {fileID: 0}
 --- !u!1 &7394420939043458766
 GameObject:
   m_ObjectHideFlags: 0
