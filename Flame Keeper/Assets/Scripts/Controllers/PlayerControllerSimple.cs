@@ -71,7 +71,8 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     private float lockMovementTime = 0.0f;
     private Rigidbody rb;
     private CapsuleCollider capsuleCollider;
-    public List<MeshRenderer> renderers;
+    private List<MeshRenderer> renderers;
+    private List<SkinnedMeshRenderer> skinRenderers;
     private Vector3 checkpointPosition;
 
     private bool enableInput;
@@ -137,6 +138,8 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         capsuleCollider = GetComponent<CapsuleCollider>();
         levelCamera = Camera.main.transform;
         enableInput = true;
+        renderers = new List<MeshRenderer>(GetComponentsInChildren<MeshRenderer>());
+        skinRenderers = new List<SkinnedMeshRenderer>(GetComponentsInChildren<SkinnedMeshRenderer>());
 
         //water collision setup
         playerTouchingWater = false;
@@ -219,8 +222,16 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
 
             lockMovementTime -= Time.deltaTime;
 
+            renderers.RemoveAll(item => item == null);
+            skinRenderers.RemoveAll(item => item == null);
+
             // Blink character, uncomment when player is in
             foreach (MeshRenderer rend in renderers)
+            {
+                rend.enabled = (Time.time % 0.35f < 0.175) || lockMovementTime < 0.0f;
+            }
+
+            foreach (SkinnedMeshRenderer rend in skinRenderers)
             {
                 rend.enabled = (Time.time % 0.35f < 0.175) || lockMovementTime < 0.0f;
             }
