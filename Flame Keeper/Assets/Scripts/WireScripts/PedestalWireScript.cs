@@ -60,7 +60,7 @@ public class PedestalWireScript : ActivatableObject
         Debug.Log(childObjects.Count);
         foreach (GameObject child in childObjects)
         {
-            if (child.CompareTag("ActivatableWire"))
+            if (child.CompareTag(StringConstants.Tags.ActivatableWire))
             {
                 meshRenderer = child.GetComponent<MeshRenderer>();
                 meshRenderer.material.color = Color.Lerp(meshRenderer.material.color, currentColor, Time.deltaTime);
