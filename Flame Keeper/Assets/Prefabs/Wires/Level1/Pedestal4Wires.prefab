@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5651073831837062900}
+  - component: {fileID: 38457502085122706}
   m_Layer: 0
   m_Name: Pedestal4Wires
   m_TagString: Untagged
@@ -35,6 +36,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &38457502085122706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5651073831837062907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c22137393a189846be7dcb20bee59d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activatedColor: {r: 0.8862746, g: 0.22352943, b: 0.43529415, a: 0}
+  deactivatedColor: {r: 0.23137254, g: 0.57254905, b: 0.6784314, a: 1}
+  pedestal: {fileID: 0}
 --- !u!1001 &5651073832298186327
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -117,16 +133,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 20
       objectReference: {fileID: 0}
-    - target: {fileID: 4231646252214944870, guid: c14ebe6d6fbaff740984585972760a23,
-        type: 3}
-      propertyPath: pedestal
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4231646252214944865, guid: c14ebe6d6fbaff740984585972760a23,
-        type: 3}
-      propertyPath: pedestal
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 4231646252215082730, guid: c14ebe6d6fbaff740984585972760a23,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -137,7 +143,17 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 4.2484446
       objectReference: {fileID: 0}
+    - target: {fileID: 4231646252214944870, guid: c14ebe6d6fbaff740984585972760a23,
+        type: 3}
+      propertyPath: pedestal
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4231646252214944864, guid: c14ebe6d6fbaff740984585972760a23,
+        type: 3}
+      propertyPath: pedestal
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4231646252214944865, guid: c14ebe6d6fbaff740984585972760a23,
         type: 3}
       propertyPath: pedestal
       value: 
@@ -161,6 +177,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Wire (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985077565832779813, guid: 75b899e94cae0a1428cfc3fbd132b977,
+        type: 3}
+      propertyPath: m_TagString
+      value: ActivatableWire
       objectReference: {fileID: 0}
     - target: {fileID: 6704646671183394873, guid: 75b899e94cae0a1428cfc3fbd132b977,
         type: 3}
@@ -317,12 +338,12 @@ PrefabInstance:
       propertyPath: pedestal
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 4231646252214944865, guid: c14ebe6d6fbaff740984585972760a23,
+    - target: {fileID: 4231646252214944864, guid: c14ebe6d6fbaff740984585972760a23,
         type: 3}
       propertyPath: pedestal
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 4231646252214944864, guid: c14ebe6d6fbaff740984585972760a23,
+    - target: {fileID: 4231646252214944865, guid: c14ebe6d6fbaff740984585972760a23,
         type: 3}
       propertyPath: pedestal
       value: 
@@ -436,6 +457,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Wire
+      objectReference: {fileID: 0}
+    - target: {fileID: 8985077565832779813, guid: 75b899e94cae0a1428cfc3fbd132b977,
+        type: 3}
+      propertyPath: m_TagString
+      value: ActivatableWire
       objectReference: {fileID: 0}
     - target: {fileID: 6704646671183394873, guid: 75b899e94cae0a1428cfc3fbd132b977,
         type: 3}
