@@ -7,16 +7,29 @@ using UnityEngine.Playables;
 public class FreezePlayer : MonoBehaviour
 {
     public TimelineAsset timeline;
+    public bool startOnAwake = true;
+
+    private PlayableDirector director;
     private PlayerControllerSimple player;
     private float duration;
 
     // Start is called before the first frame update
     void Start()
     {
-        PlayableDirector pd = this.gameObject.GetComponent<PlayableDirector>();
+        director = this.gameObject.GetComponent<PlayableDirector>();
+        if (!FlameKeeper.Get().levelController.CutscenesDisabled() && startOnAwake)
+        {
+            director.Play();
+            duration = (float)timeline.duration;
+            StartCoroutine(Freeze());
+        }
+    }
+
+    public void PlayTimeline()
+    {
         if (!FlameKeeper.Get().levelController.CutscenesDisabled())
         {
-            pd.Play();
+            director.Play();
             duration = (float)timeline.duration;
             StartCoroutine(Freeze());
         }
