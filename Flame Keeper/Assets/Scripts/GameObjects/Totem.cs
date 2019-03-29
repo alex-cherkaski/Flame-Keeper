@@ -38,7 +38,9 @@ public class Totem : MonoBehaviour
             whiteOutAnimator.SetBool("WhiteOut", true);
 
             player.DisableInput();
-            startingCamera.Priority = 100; // Start on the cutscene camera, but don't play it just yet
+
+            if (startingCutscene != null && startingCamera != null)
+                startingCamera.Priority = 100; // Start on the cutscene camera, but don't play it just yet
         }
 
         foreach (ParticleSystem particleSystem in particleSystems)
@@ -97,7 +99,15 @@ public class Totem : MonoBehaviour
     public void OnWhiteOutComplete()
     {
         whiteOutAnimator.SetBool("StartWhite", false);
-        startingCutscene.PlayTimeline();
-        startingCamera.Priority = 1;
+
+        if (startingCutscene != null && startingCamera != null)
+        {
+            startingCutscene.PlayTimeline();
+            startingCamera.Priority = 1;
+        }
+        else
+        {
+            player.EnableInput();
+        }
     }
 }

@@ -75,7 +75,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     private List<SkinnedMeshRenderer> skinRenderers;
     private Vector3 checkpointPosition;
 
-    private bool enableInput;
+    private bool enableInput = true;
 
     [Header("Water Collision")]
     public float waitTime = 1f;
@@ -147,7 +147,6 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         rb = GetComponent<Rigidbody>();
         capsuleCollider = GetComponent<CapsuleCollider>();
         levelCamera = Camera.main;
-        enableInput = true;
         renderers = new List<MeshRenderer>(GetComponentsInChildren<MeshRenderer>());
         skinRenderers = new List<SkinnedMeshRenderer>(GetComponentsInChildren<SkinnedMeshRenderer>());
 
