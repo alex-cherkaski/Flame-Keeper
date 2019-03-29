@@ -8,6 +8,7 @@ public class FreezePlayer : MonoBehaviour
 {
     public TimelineAsset timeline;
     public bool startOnAwake = true;
+    public bool burnInPlayer = false;
 
     private PlayableDirector director;
     private PlayerControllerSimple player;
