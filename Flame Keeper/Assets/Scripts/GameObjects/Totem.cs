@@ -6,14 +6,98 @@ using UnityEngine.SceneManagement;
 
 public class Totem : MonoBehaviour
 {
+    public Animator endAnimator;
+    public Animator whiteOutAnimator;
     public string nextSceneName;
+    public Transform endPoint;
+    public bool startWhite = false;
+    public FreezePlayer startingCutscene;
+    public Cinemachine.CinemachineVirtualCamera startingCamera;
+
+    [HideInInspector]
+    public float burnPercent = 0.0f; // To be controlled in the animation controller
+
+    private List<ParticleSystem> particleSystems;
+    private PlayerControllerSimple player;
+
+    private void Start()
+    {
+        player = FlameKeeper.Get().levelController.GetPlayer();
+        particleSystems = new List<ParticleSystem>(GetComponentsInChildren<ParticleSystem>());
+
+        WhiteOutBehaviour whiteOutBehaviour = whiteOutAnimator.GetBehaviour<WhiteOutBehaviour>();
+        whiteOutBehaviour.totemController = this;
+
+        WhiteInBehaviour whiteInBehaviour = whiteOutAnimator.GetBehaviour<WhiteInBehaviour>();
+        whiteInBehaviour.totemController = this;
+
+        if (startWhite)
+        {
+            whiteOutAnimator.SetBool("StartWhite", true);
+            whiteOutAnimator.SetBool("WhiteIn", false);
+            whiteOutAnimator.SetBool("WhiteOut", true);
+
+            player.DisableInput();
+            startingCamera.Priority = 100; // Start on the cutscene camera, but don't play it just yet
+        }
+
+        foreach (ParticleSystem particleSystem in particleSystems)
+        {
+            particleSystem.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {
+        FlameKeeper.Get().dataminingController.StopTrackingScene();
         if (other.CompareTag(StringConstants.Tags.Player))
         {
-            FlameKeeper.Get().dataminingController.StopTrackingScene();
-            SceneManager.LoadScene(nextSceneName);
+            player.DisableInput();
+            player.MoveToPoint(endPoint.position, OnPlayerFinishMove);
         }
+    }
+
+    private void OnPlayerFinishMove()
+    {
+        player.RotateToPoint(endPoint.position + this.transform.forward, OnPlayerFinishRotate);
+    }
+
+    private void OnPlayerFinishRotate()
+    {
+        endAnimator.SetTrigger("EndAnimation");
+        foreach (ParticleSystem particleSystem in particleSystems)
+        {
+            particleSystem.Play(false);
+        }
+        StartCoroutine(ExecuteAfterTime(3.0f));
+    }
+
+    /// <summary>
+    /// yeah i hate this but its fast to implements
+    /// </summary>
+    /// <param name="time"></param>
+    IEnumerator ExecuteAfterTime(float time)
+    {
+        yield return new WaitForSeconds(time);
+
+        whiteOutAnimator.SetBool("WhiteIn", true);
+        whiteOutAnimator.SetBool("WhiteOut", false);
+    }
+
+    private void Update()
+    {
+        player.SetBurnPercent(burnPercent);
+    }
+
+    public void OnWhiteInComplete()
+    {
+        SceneManager.LoadScene(nextSceneName);
+    }
+
+    public void OnWhiteOutComplete()
+    {
+        whiteOutAnimator.SetBool("StartWhite", false);
+        startingCutscene.PlayTimeline();
+        startingCamera.Priority = 1;
     }
 }

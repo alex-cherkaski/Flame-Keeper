@@ -35,7 +35,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     private Vector2 input;
     private float angle;
     private Quaternion targetRotation;
-    private Transform levelCamera;
+    private Camera levelCamera;
     private Vector3 startingScale;
 
     [Space]
@@ -94,6 +94,16 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     private bool pastGroundedState;
 
     /// <summary>
+    /// Variables to override where the character is going
+    /// </summary>
+    private bool isCustomTargetPositionSet = false;
+    private Vector3 customTargetPosition = Vector3.zero;
+    private Action customTargetOnComplete = null;
+    private bool isCustomTargetRotationSet = false;
+    private Vector3 customRotationPosition = Vector3.zero; // Point the player is suppose to look at
+    private Action customRotateOnComplete = null;
+
+    /// <summary>
     /// Draws the box check for jumping
     /// </summary>
     void OnDrawGizmosSelected()
@@ -136,7 +146,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     {
         rb = GetComponent<Rigidbody>();
         capsuleCollider = GetComponent<CapsuleCollider>();
-        levelCamera = Camera.main.transform;
+        levelCamera = Camera.main;
         enableInput = true;
         renderers = new List<MeshRenderer>(GetComponentsInChildren<MeshRenderer>());
         skinRenderers = new List<SkinnedMeshRenderer>(GetComponentsInChildren<SkinnedMeshRenderer>());
@@ -205,17 +215,44 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         {
             lastJumpPress = Time.fixedTime;
         }
-        /*
-        Debug.DrawRay(transform.position, Vector3.down * 2, Color.green);
-        */
     }
 
+    public void MoveToPoint(Vector3 point, Action onComplete)
+    {
+        isCustomTargetPositionSet = true;
+        customTargetPosition = point;
+        customTargetOnComplete = onComplete;
+    }
+
+    public void RotateToPoint(Vector3 point, Action onComplete)
+    {
+        isCustomTargetRotationSet = true;
+        customRotationPosition = point;
+        customRotateOnComplete = onComplete;
+    }
+
+    public void SetBurnPercent(float percent)
+    {
+        float playerHeight = 4.0f; // estimate, close enough, need to update if player size changes for whatever reason
+        float burnHeight = percent == 0.0f ? -1000.0f : (this.transform.position.y - playerHeight / 2.0f) + percent * playerHeight;
+        renderers.RemoveAll(item => item == null);
+        skinRenderers.RemoveAll(item => item == null);
+        foreach (MeshRenderer renderer in renderers)
+        {
+            renderer.material.SetFloat("_BurnHeight", burnHeight);
+        }
+        foreach (SkinnedMeshRenderer renderer in skinRenderers)
+        {
+            renderer.material.SetFloat("_BurnHeight", burnHeight);
+        }
+    }
 
     /// <summary>
     /// Physics based update
     /// </summary>
     void FixedUpdate()
     {
+
         if (lockMovementTime > 0.0f)
         {
             animator.SetBool(runParameter, false);
@@ -297,7 +334,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         GetInput();
 
         bool isMoving = !(Mathf.Abs(input.x) == 0 && Mathf.Abs(input.y) == 0);
-        animator.SetBool(runParameter, isMoving);
+        animator.SetBool(runParameter, isMoving && !isCustomTargetRotationSet);
 
         if (!isMoving)
         {
@@ -306,7 +343,22 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
 
         CalculateDirection();
         Rotate();
-        Move();
+
+        if (!isCustomTargetRotationSet)
+            Move();
+
+        if (isCustomTargetPositionSet && Vector3.Distance(this.transform.position, customTargetPosition) < 0.1f)
+        {
+            isCustomTargetPositionSet = false;
+            customTargetOnComplete?.Invoke();
+        }
+
+        float angleToTarget = Vector3.Angle(this.transform.forward, customRotationPosition - this.transform.position);
+        if (isCustomTargetRotationSet && angleToTarget < 30.0f)
+        {
+            isCustomTargetRotationSet = false;
+            customRotateOnComplete?.Invoke();
+        }
     }
 
     /// <summary>
@@ -394,6 +446,18 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
             input.x = Input.GetAxisRaw(StringConstants.Input.HorizontalMovement);
             input.y = Input.GetAxisRaw(StringConstants.Input.VerticalMovement);
         }
+        else if (isCustomTargetPositionSet)
+        {
+            Vector3 screenDirection = levelCamera.WorldToScreenPoint(customTargetPosition) - levelCamera.WorldToScreenPoint(this.transform.position);
+            input = new Vector2(screenDirection.x, screenDirection.y);
+            input.Normalize();
+        }
+        else if (isCustomTargetRotationSet)
+        {
+            Vector3 screenDirection = levelCamera.WorldToScreenPoint(customRotationPosition) - levelCamera.WorldToScreenPoint(this.transform.position);
+            input = new Vector2(screenDirection.x, screenDirection.y);
+            input.Normalize();
+        }
         else
         {
             input.x = 0.0f;
@@ -409,7 +473,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     {
         angle = Mathf.Atan2(input.x, input.y);
         angle = Mathf.Rad2Deg * angle;
-        angle += levelCamera.eulerAngles.y;
+        angle += levelCamera.transform.eulerAngles.y;
     }
 
     /// <summary>
