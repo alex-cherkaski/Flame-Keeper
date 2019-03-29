@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Cloak
-  m_Shader: {fileID: 4800000, guid: d6931dad76431b24e84a59fd61bda65e, type: 3}
+  m_Shader: {fileID: 4800000, guid: d901c54ab7e01a24faed027f3491a3c0, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -21,6 +21,10 @@ Material:
     m_TexEnvs:
     - _BumpMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _CloudTex:
+        m_Texture: {fileID: 2800000, guid: f4b2693a12a99ed41a7244d2785e9add, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -37,6 +41,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FlowTex:
+        m_Texture: {fileID: 2800000, guid: d7b1eabd6ef2eea488583b6393ca69c9, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -61,17 +69,23 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BumpScale: 1
+    - _BurnHeight: -100
+    - _ColorDistortion: 2.87
+    - _Contrast: 4.67
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
+    - _DissolveOffset: 0.8
     - _DstBlend: 0
-    - _EmissionIntensity: 1
+    - _EmissionIntensity: 30
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _HeatDistortion: 3.87
     - _Metallic: 0
     - _Mode: 0
     - _NormalMapIntensity: 1
     - _OcclusionStrength: 1
+    - _PanSpeed: 6
     - _Parallax: 0.02
     - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
@@ -83,3 +97,5 @@ Material:
     - _Color: {r: 0.9811321, g: 0.6006092, b: 0.46742615, a: 1}
     - _Emission: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _HighColor: {r: 0.6901961, g: 0, b: 0, a: 1}
+    - _LowColor: {r: 1, g: 0.76862746, b: 0, a: 1}
