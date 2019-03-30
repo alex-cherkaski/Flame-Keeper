@@ -39,7 +39,7 @@ public class Totem : MonoBehaviour
 
             player.DisableInput();
 
-            if (startingCutscene != null && startingCamera != null)
+            if (!FlameKeeper.Get().levelController.CutscenesDisabled() && startingCutscene != null && startingCamera != null)
                 startingCamera.Priority = 100; // Start on the cutscene camera, but don't play it just yet
         }
 
@@ -100,7 +100,7 @@ public class Totem : MonoBehaviour
     {
         whiteOutAnimator.SetBool("StartWhite", false);
 
-        if (startingCutscene != null && startingCamera != null)
+        if (!FlameKeeper.Get().levelController.CutscenesDisabled() && startingCutscene != null && startingCamera != null)
         {
             startingCutscene.PlayTimeline();
             startingCamera.Priority = 1;

@@ -28025,7 +28025,7 @@ PlayableDirector:
   m_Enabled: 1
   serializedVersion: 3
   m_PlayableAsset: {fileID: 11400000, guid: 627053a1818cf284990997c101d70797, type: 2}
-  m_InitialState: 1
+  m_InitialState: 0
   m_WrapMode: 0
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
@@ -32974,7 +32974,7 @@ MonoBehaviour:
   playerStartingPosition: {x: -7.27, y: 6.4, z: 43.95}
   startingLanternUses: 1
   maxLanternUses: 3
-  cutscenesOff: 0
+  cutscenesOff: 1
   scene: 1
 --- !u!4 &1692969294
 Transform:
