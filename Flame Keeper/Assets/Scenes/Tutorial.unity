@@ -2575,6 +2575,11 @@ PrefabInstance:
       propertyPath: connectedTriggers.Array.data[31]
       value: 
       objectReference: {fileID: 1496979102}
+    - target: {fileID: 5740675015672901768, guid: 26fe0d098554ae4449e239bac04fa5fe,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 26fe0d098554ae4449e239bac04fa5fe, type: 3}
 --- !u!114 &576481495 stripped
@@ -4407,6 +4412,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5740675015672901768, guid: 26fe0d098554ae4449e239bac04fa5fe,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 26fe0d098554ae4449e239bac04fa5fe, type: 3}
@@ -9119,6 +9129,11 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 972267032}
+    - target: {fileID: 5740675015672901768, guid: 26fe0d098554ae4449e239bac04fa5fe,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 26fe0d098554ae4449e239bac04fa5fe, type: 3}
 --- !u!1001 &5748776097420141104
