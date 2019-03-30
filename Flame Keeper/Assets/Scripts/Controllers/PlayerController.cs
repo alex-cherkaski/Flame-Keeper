@@ -149,7 +149,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Crystal"))
         {
             currentLanternUses++;
-            warmth += other.gameObject.GetComponent<CrystalScript>().GetWarmth();
+            warmth += other.gameObject.GetComponent<CrystalScript>().GetCharge();
             other.gameObject.SetActive(false);
         }
     }

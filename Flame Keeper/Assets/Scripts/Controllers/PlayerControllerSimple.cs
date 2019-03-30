@@ -562,7 +562,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
             CrystalScript crystalScript = other.gameObject.GetComponent<CrystalScript>();
             if (crystalScript != null)
             {
-                lanternUses += (int)crystalScript.GetWarmth();
+                lanternUses += (int)crystalScript.GetCharge();
                 playerOrbitals.OnLanternUsesChanged(lanternUses, crystalScript.transform.position);
                 other.gameObject.SetActive(false);
             }
