@@ -42,7 +42,7 @@ public class CrystalScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag(StringConstants.Tags.Player))
         {
             ParticleSystem.ExternalForcesModule efm = crystalParticles.externalForces;
             efm.enabled = true;
@@ -56,7 +56,7 @@ public class CrystalScript : MonoBehaviour
         crystalParticles.Stop();
         foreach(Transform child in crystalFlame.GetComponentsInChildren<Transform>())
         {
-            if (child.gameObject.CompareTag("FireComponent"))
+            if (child.gameObject.CompareTag(StringConstants.Tags.FireComponent))
             {
                 child.gameObject.GetComponent<ParticleSystem>().Stop();
             }
