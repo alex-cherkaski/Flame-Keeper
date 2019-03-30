@@ -1,31 +1,65 @@
 ﻿using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public class CrystalScript : MonoBehaviour
 {
-    public float warmth = 10;
-    public float rotateSpeed = 1.0f;
-    public ParticleSystem particles;
+    [Header("Transform Values")]
+    public float degreesPerSecond = 25.0f;
+    public float amplitude = 0.1f;
+    public float frequency = 1.0f;
 
-    // Update is called once per frame
-    void Update()
+    [Header("Charge")]
+    public float charge = 3;
+
+    [Header("Particle Systems")]
+    public ParticleSystem crystalParticles;
+    public GameObject crystalFlame;
+
+    private Vector3 positionOffset;
+    private Vector3 temporaryPosition;
+
+    private void Start()
     {
-        float angle = 45 * Time.deltaTime * rotateSpeed;
-        this.transform.Rotate(0, angle, 0, Space.Self);
+        positionOffset = transform.position;
+        temporaryPosition = new Vector3();
     }
 
-    public float GetWarmth()
+    void Update()
     {
-        return warmth;
+        transform.Rotate(0.0f, degreesPerSecond * Time.deltaTime, 0.0f, Space.World);
+
+        temporaryPosition = positionOffset;
+        temporaryPosition.y += Mathf.Sin(Mathf.PI * frequency * Time.fixedTime) * amplitude;
+
+        transform.position = temporaryPosition;
+    }
+
+    public float GetCharge()
+    {
+        return charge;
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            ParticleSystem.ExternalForcesModule efm = particles.externalForces;
+            ParticleSystem.ExternalForcesModule efm = crystalParticles.externalForces;
             efm.enabled = true;
 
-            particles.Stop();
+            DisableParticleSystems();
         }   
+    }
+
+    private void DisableParticleSystems()
+    {
+        crystalParticles.Stop();
+        foreach(Transform child in crystalFlame.GetComponentsInChildren<Transform>())
+        {
+            if (child.gameObject.CompareTag("FireComponent"))
+            {
+                child.gameObject.GetComponent<ParticleSystem>().Stop();
+            }
+        }
     }
 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18154222, g: 0.22718474, b: 0.30740482, a: 1}
+  m_IndirectSpecularColor: {r: 0.18154176, g: 0.227184, b: 0.3074043, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5201,6 +5201,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: NewCrystal
       objectReference: {fileID: 0}
+    - target: {fileID: 2877350464312631162, guid: cd2ebbf243c60b34e99396c1fa2a594e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2877350464312631141, guid: cd2ebbf243c60b34e99396c1fa2a594e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6237,6 +6242,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeline: {fileID: 11400000, guid: a122ab41895e9614e95b1eb3fb5631dc, type: 2}
   startOnAwake: 0
+  burnInPlayer: 0
 --- !u!95 &1573152068
 Animator:
   serializedVersion: 3
@@ -6342,9 +6348,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4081df2300c882048bc0e01c8f718d0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  warmth: 3
-  rotateSpeed: 1
-  particles: {fileID: 0}
+  degreesPerSecond: 15
+  amplitude: 0.1
+  frequency: 1
+  charge: 10
+  crystalParticles: {fileID: 0}
+  crystalFlame: {fileID: 0}
 --- !u!64 &1583227134
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -6585,7 +6594,7 @@ MonoBehaviour:
   playerStartingPosition: {x: 0, y: 0, z: 0}
   startingLanternUses: 1
   maxLanternUses: 3
-  cutscenesOff: 0
+  cutscenesOff: 1
   scene: 0
 --- !u!4 &1673866664
 Transform:
@@ -8537,6 +8546,75 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5042342148222849556}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2549463579707631421
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2549463580215470832, guid: 6bd588002d1c8d84dad14afa22938e87,
+        type: 3}
+      propertyPath: m_Name
+      value: CrystalParent
+      objectReference: {fileID: 0}
+    - target: {fileID: 2549463580215470835, guid: 6bd588002d1c8d84dad14afa22938e87,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 7.49
+      objectReference: {fileID: 0}
+    - target: {fileID: 2549463580215470835, guid: 6bd588002d1c8d84dad14afa22938e87,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 2549463580215470835, guid: 6bd588002d1c8d84dad14afa22938e87,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -20.96
+      objectReference: {fileID: 0}
+    - target: {fileID: 2549463580215470835, guid: 6bd588002d1c8d84dad14afa22938e87,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2549463580215470835, guid: 6bd588002d1c8d84dad14afa22938e87,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2549463580215470835, guid: 6bd588002d1c8d84dad14afa22938e87,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2549463580215470835, guid: 6bd588002d1c8d84dad14afa22938e87,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2549463580215470835, guid: 6bd588002d1c8d84dad14afa22938e87,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 2549463580215470835, guid: 6bd588002d1c8d84dad14afa22938e87,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2549463580215470835, guid: 6bd588002d1c8d84dad14afa22938e87,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2549463580215470835, guid: 6bd588002d1c8d84dad14afa22938e87,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6bd588002d1c8d84dad14afa22938e87, type: 3}
 --- !u!1 &2691719202033661800 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5998382741011160165, guid: 8063d3fdfeefd7f4ca26935de5be5198,
@@ -8713,6 +8791,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: JumpCollider
+      objectReference: {fileID: 0}
+    - target: {fileID: 4256581579437020202, guid: 98f54360f8a0cce4183b8baa6333936e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4256581579437020199, guid: 98f54360f8a0cce4183b8baa6333936e,
         type: 3}
