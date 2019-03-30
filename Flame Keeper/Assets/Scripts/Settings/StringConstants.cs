@@ -40,6 +40,7 @@ public class StringConstants
         public const string Water = "Water";
         public const string Platform = "Platform";
         public const string ActivatableWire = "ActivatableWire";
+        public const string FireComponent = "FireComponent";
     }
 
     public class PrefabPaths
