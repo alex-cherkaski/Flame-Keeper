@@ -26,12 +26,6 @@ public static class SceneMenu
         EditorSceneManager.OpenScene("Assets/Scenes/Tutorial.unity");
     }
 
-    [MenuItem("Scenes/Level 1", false, 1)]
-    public static void GoToLevelOne()
-    {
-        EditorSceneManager.OpenScene("Assets/Scenes/Level1.unity");
-    }
-
     [MenuItem("Scenes/Level 1 v2", false, 1)]
     public static void GoToLevelOneV2()
     {
@@ -48,6 +42,12 @@ public static class SceneMenu
     public static void GoToLevelTwo()
     {
         EditorSceneManager.OpenScene("Assets/Scenes/Level2.unity");
+    }
+
+    [MenuItem("Scenes/Final Level", false, 1)]
+    public static void GoToFinalLevel()
+    {
+        EditorSceneManager.OpenScene("Assets/Scenes/FinalLevel.unity");
     }
 }
 #endif
