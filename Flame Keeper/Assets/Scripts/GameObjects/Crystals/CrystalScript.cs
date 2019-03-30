@@ -47,6 +47,9 @@ public class CrystalScript : MonoBehaviour
             ParticleSystem.ExternalForcesModule efm = crystalParticles.externalForces;
             efm.enabled = true;
 
+            ParticleSystem.ColorOverLifetimeModule colm = crystalParticles.colorOverLifetime;
+            colm.enabled = true;
+
             DisableParticleSystems();
         }   
     }
