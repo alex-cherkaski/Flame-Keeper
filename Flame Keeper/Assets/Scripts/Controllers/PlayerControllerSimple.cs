@@ -83,7 +83,11 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
 
     [Header("Animations")]
     public Animator animator;
-    private const string runParameter = "Running";
+    private const string runAnimBool = "Running";
+    private const string drownAnimBool = "Drowning";
+    private const string groundedAnimBool = "Grounded";
+    private const string lightAnimTrigger = "Light";
+    private const string jumpAnimTrigger = "Jump";
 
     private bool playerTouchingWater;
     private bool checkWaterStatus = false;
@@ -126,7 +130,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
 
         playerOrbitals.OnLanternUsesChanged(startingLanternUses, this.transform.position);
 
-        animator.SetBool(runParameter, false);
+        animator.SetBool(runAnimBool, false);
 
         RecordCheckpoint();
 
@@ -170,6 +174,9 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         Shader.SetGlobalFloat("_PlayerMaxLightRange", 15.0f);
         Shader.SetGlobalFloat("_PlayerCurrentLightRange", playerLightController.pointLight.range);
         Shader.SetGlobalVector("_PlayerLightPosition", playerLightController.pointLight.transform.position);
+
+        animator.SetBool(groundedAnimBool, Grounded());
+        animator.SetBool(drownAnimBool, playerTouchingWater);
 
         // Check if player has fallen out of the world
         if (transform.position.y < -25)
@@ -254,7 +261,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
 
         if (lockMovementTime > 0.0f)
         {
-            animator.SetBool(runParameter, false);
+            animator.SetBool(runAnimBool, false);
 
             lockMovementTime -= Time.deltaTime;
 
@@ -287,6 +294,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
                 audioController.GetComponent<AudioController>().PlayAudioClip(AudioController.AudioClips.jumpNormal);
             }
 
+            animator.SetTrigger(jumpAnimTrigger);
             lastJumpExecute = Time.fixedTime;
             validHighJump = true;
             trackApexTime = true;
@@ -333,7 +341,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         GetInput();
 
         bool isMoving = !(Mathf.Abs(input.x) == 0 && Mathf.Abs(input.y) == 0);
-        animator.SetBool(runParameter, isMoving && !isCustomTargetRotationSet);
+        animator.SetBool(runAnimBool, isMoving && !isCustomTargetRotationSet);
 
         if (!isMoving)
         {
@@ -416,6 +424,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         }
 
         lanternUses--;
+        animator.SetTrigger(lightAnimTrigger);
         playerOrbitals.OnLanternUsesChanged(lanternUses, source, onComplete);
         return true;
     }
@@ -431,6 +440,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         }
 
         lanternUses++;
+        animator.SetTrigger(lightAnimTrigger);
         playerOrbitals.OnLanternUsesChanged(lanternUses, source, onComplete);
         return true;
     }
