@@ -132,7 +132,14 @@ public class BurnableObject : MonoBehaviour
 
     private void FinishBurn()
     {
-        this.transform.position = resetTransform;
+        if (useStartPositionOffetOnReset)
+        {
+            this.transform.localPosition = startingLocalPosition + localOffset;
+        }
+        else
+        {
+            this.transform.position = resetTransform;
+        }
         this.transform.rotation = resetRotation;
         isWarming = false;
         isBurning = false;
