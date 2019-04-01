@@ -47,7 +47,7 @@ public static class SceneMenu
     [MenuItem("Scenes/Final Level", false, 1)]
     public static void GoToFinalLevel()
     {
-        EditorSceneManager.OpenScene("Assets/Scenes/FinalLevel.unity");
+        EditorSceneManager.OpenScene("Assets/Scenes/FinalRevision.unity");
     }
 }
 #endif
