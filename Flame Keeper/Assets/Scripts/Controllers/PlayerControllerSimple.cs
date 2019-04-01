@@ -76,6 +76,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     private Vector3 checkpointPosition;
 
     private bool enableInput = true;
+    private bool enableRotation = true;
 
     [Header("Water Collision")]
     public float waitTime = 1f;
@@ -656,11 +657,35 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     }
 
     /// <summary>
+    /// Enables player controlled camera rotation
+    /// </summary>
+    public void EnableRotation()
+    {
+        enableRotation = true;
+    }
+
+    /// <summary>
+    /// Disables player controlled camera rotation
+    /// </summary>
+    public void DisableRotation()
+    {
+        enableRotation = false;
+    }
+
+    /// <summary>
     /// Returns value of enableInput
     /// </summary>
     public bool IsInputEnabled()
     {
         return enableInput;
+    }
+
+    /// <summary>
+    /// Returns value of enableRotations
+    /// </summary>
+    public bool IsCameraRotationEnabled()
+    {
+        return enableRotation;
     }
 
     /// <summary>

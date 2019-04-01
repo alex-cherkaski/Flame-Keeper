@@ -22,13 +22,12 @@ public class CameraController : MonoBehaviour
     // Late update so we know that player has already calculated their position
     void LateUpdate()
     {
-
         // Keep the Camera holder where the player is.
         this.transform.position = player.transform.position;
 
         // Check if we are allowing input
         float viewInput = Input.GetAxisRaw(StringConstants.Input.CameraView);
-        if (player.IsInputEnabled() && Mathf.Abs(viewInput) > 0.15f) // A little buffer for numerical stability, otherwise camera will drift
+        if (player.IsInputEnabled() && player.IsCameraRotationEnabled() && Mathf.Abs(viewInput) > 0.15f) // A little buffer for numerical stability, otherwise camera will drift
         {
             Vector3 toCamera = mainCamera.transform.position - player.transform.position;
             float cameraAngle = Vector2.SignedAngle(new Vector2(toCamera.x, toCamera.z), Vector2.left);
