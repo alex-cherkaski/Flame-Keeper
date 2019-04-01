@@ -31,6 +31,8 @@ public class StringConstants
         public const string ResetOne = "LeftBumper";
         public const string ResetTwo = "RightBumper";
         public const string CameraView = "CameraView";
+        public const string PauseConfirm = "Controller_A";
+        public const string PauseBack = "Controller_B";
     }
 
     public class Tags

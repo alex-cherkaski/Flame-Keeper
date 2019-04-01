@@ -93,7 +93,7 @@ public class FlameKeeper : MonoBehaviour
     /// Destroys the game manager and returns to the root scene
     /// used in case we need to reset the game while running or whatever
     /// </summary>
-    private void ResetGame()
+    public void ResetGame()
     {
         foreach (BaseController controller in controllersList)
         {
@@ -108,9 +108,17 @@ public class FlameKeeper : MonoBehaviour
     /// <summary>
     /// Reload the current level
     /// </summary>
-    private void RestartLevel()
+    public void RestartLevel()
     {
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
+    }
+
+    /// <summary>
+    /// Closes the application
+    /// </summary>
+    public void CloseApplication()
+    {
+        Application.Quit();
     }
 }
