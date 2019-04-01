@@ -36,8 +36,9 @@ public class FlameKeeper : MonoBehaviour
             // Game didn't start from root or the game manager got deleted.
             // Warn that the game is in "simulator" mode and wasn't created organically
             Debug.LogError("No game manager, creating one now (Simulation Mode)");
-            _instance = Resources.Load<FlameKeeper>(StringConstants.PrefabPaths.ManagerPath);
-            DontDestroyOnLoad(_instance);
+            GameObject gob = Instantiate(Resources.Load<GameObject>(StringConstants.PrefabPaths.ManagerPath));
+            DontDestroyOnLoad(gob);
+            _instance = gob.GetComponent<FlameKeeper>();
             _instance.SetupControllers();
             _instance.levelController.StartSimulationMode();
         }
@@ -87,6 +88,9 @@ public class FlameKeeper : MonoBehaviour
         {
             RestartLevel();
         }
+
+        // Set global system-wide variables for shaders
+        Shader.SetGlobalFloat("_GlobalTime", Time.time);
     }
 
     /// <summary>

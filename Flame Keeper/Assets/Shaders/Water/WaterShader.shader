@@ -78,6 +78,7 @@ Shader "Fluids/Water"
 			float4 _PlayerLightPosition;
 			float _PlayerCurrentLightRange;
 			sampler2D _PlayerRampTex;
+			float _GlobalTime;
 
 			sampler2D _GrabTexture;
 			sampler2D _CameraDepthTexture; // Pre-set by unity
@@ -127,15 +128,14 @@ Shader "Fluids/Water"
                 fragInput o;
 				UNITY_INITIALIZE_OUTPUT(fragInput, o); // Initializes everything to 0
 
-
-				// Raises each vertex in a wavy pattern
-				float3 up = mul(unity_WorldToObject, float3(0,1,0));
-				v.vertex.xyz += up * (sin((_Time.y * _WaveSpeed) + (v.vertex.x + v.vertex.z) * _WaveFrequency) * _WaveHeight);
-
 				o.vertex = UnityObjectToClipPos(v.vertex); // Transform from object space to camera space
 				o.worldPos = mul(unity_ObjectToWorld, v.vertex); // Transform from object space to world space
 				o.screenPos = ComputeScreenPos(o.vertex); // Compute position of vertex on the screen
 				COMPUTE_EYEDEPTH(o.screenPos.w); // I'm storing z-depth of vertex in the last component of the screen position
+
+				// Raises each vertex in a wavy pattern
+				float3 up = mul(unity_WorldToObject, float3(0,1,0));
+				v.vertex.xyz += up * (sin((_GlobalTime * _WaveSpeed) + (o.worldPos.x + o.worldPos.z) * _WaveFrequency) * _WaveHeight);
 
                 UNITY_TRANSFER_FOG(o, o.vertex); // Sets the fog coordinates that unity uses
 

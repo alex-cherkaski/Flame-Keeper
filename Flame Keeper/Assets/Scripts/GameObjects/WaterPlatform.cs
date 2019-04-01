@@ -14,7 +14,7 @@ public class WaterPlatform : MonoBehaviour
     private Vector3 startingPosition;
     private Vector3 targetPosition;
     private PlayerControllerSimple player;
-    private bool playerInContact;
+    private bool playerInContact = false;
     private float startingWaterHeight;
     private float yOffset = 0.0f;
 
@@ -31,9 +31,6 @@ public class WaterPlatform : MonoBehaviour
         if (other.CompareTag(StringConstants.Tags.Player))
         {
             playerInContact = true;
-
-            // Set the correct target position, should sink a little bit since there is mass on it
-            targetPosition = new Vector3(startingPosition.x, startingPosition.y - heightDecrease + yOffset, startingPosition.z);
         }
     }
 
@@ -42,9 +39,6 @@ public class WaterPlatform : MonoBehaviour
         if (other.CompareTag(StringConstants.Tags.Player))
         {
             playerInContact = true;
-
-            // Set the correct target position, should sink a little bit since there is mass on it
-            targetPosition = new Vector3(startingPosition.x, startingPosition.y - heightDecrease + yOffset, startingPosition.z);
         }
     }
 
@@ -53,9 +47,20 @@ public class WaterPlatform : MonoBehaviour
         if (other.CompareTag(StringConstants.Tags.Player))
         {
             playerInContact = false;
+        }
+    }
 
-            // Set the correct target position, which is the starting resting position
-            targetPosition = startingPosition;
+    private void Update()
+    {
+        yOffset = Mathf.Sin(Time.time * 1.54f + this.transform.position.x + this.transform.position.z) * 0.2f;
+
+        if (!playerInContact)
+        {
+            targetPosition = new Vector3(startingPosition.x, startingPosition.y + yOffset, startingPosition.z);
+        }
+        else
+        {
+            targetPosition = new Vector3(startingPosition.x, startingPosition.y - heightDecrease + yOffset, startingPosition.z);
         }
     }
 
