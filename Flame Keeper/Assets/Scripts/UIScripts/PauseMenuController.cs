@@ -19,6 +19,7 @@ public class PauseMenuController : MonoBehaviour
     public List<PauseOptionElement> options;
     public float moveCursorDelay = 0.1f; // How long we wait before accepting another input
 
+    private bool didPauseStopInput = false;
     private int selectedIndex = 0;
     private bool isPaused = false;
     private float lastCursorMoveTime = 0.0f;
@@ -102,12 +103,14 @@ public class PauseMenuController : MonoBehaviour
             options[i].SetState(i == selectedIndex);
         }
 
-        if (isPaused)
+        if (isPaused && FlameKeeper.Get().levelController.GetPlayer().IsInputEnabled())
         {
+            didPauseStopInput = true;
             FlameKeeper.Get().levelController.GetPlayer().DisableInput();
         }
-        else
+        else if (!isPaused && didPauseStopInput)
         {
+            didPauseStopInput = false;
             FlameKeeper.Get().levelController.GetPlayer().EnableInput();
         }
     }
