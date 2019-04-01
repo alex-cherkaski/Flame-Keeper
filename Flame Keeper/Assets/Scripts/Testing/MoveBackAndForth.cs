@@ -31,13 +31,13 @@ public class MoveBackAndForth : MonoBehaviour
         switch (moveAxis)
         {
             case (Axis.X):
-                pos.x += Mathf.Sin(Time.realtimeSinceStartup * speed) * distance;
+                pos.x += Mathf.Sin(Time.time * speed) * distance;
                 break;
             case (Axis.Y):
-                pos.y += Mathf.Sin(Time.realtimeSinceStartup * speed) * distance;
+                pos.y += Mathf.Sin(Time.time * speed) * distance;
                 break;
             case (Axis.Z):
-                pos.z += Mathf.Sin(Time.realtimeSinceStartup * speed) * distance;
+                pos.z += Mathf.Sin(Time.time * speed) * distance;
                 break;
         }
 
