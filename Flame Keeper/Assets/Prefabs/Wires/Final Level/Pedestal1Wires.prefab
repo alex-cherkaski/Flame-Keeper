@@ -136,8 +136,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2447742605697676458}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.15512, y: -0.00073244295, z: 0.0002756583}
-  m_LocalScale: {x: 1.2, y: 0.29999995, z: 29.481886}
+  m_LocalPosition: {x: -0.15863, y: -0.00073244295, z: 0.0002756583}
+  m_LocalScale: {x: 1.2, y: 0.29999995, z: 30.183556}
   m_Children: []
   m_Father: {fileID: 2447742605697837188}
   m_RootOrder: 2
@@ -244,7 +244,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0067a1ddbaeba0541a24c5914823adba, type: 3}
+  - {fileID: 2100000, guid: ec9a61c7c73015d40a8eebc918ccabc8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -321,7 +321,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0067a1ddbaeba0541a24c5914823adba, type: 3}
+  - {fileID: 2100000, guid: ec9a61c7c73015d40a8eebc918ccabc8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1012,12 +1012,12 @@ PrefabInstance:
     - target: {fileID: 7394420939043458767, guid: 47a5111cabf6c7140adabfde0667613f,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.6087605
+      value: 0.70710576
       objectReference: {fileID: 0}
     - target: {fileID: 7394420939043458767, guid: 47a5111cabf6c7140adabfde0667613f,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.79335415
+      value: 0.70710784
       objectReference: {fileID: 0}
     - target: {fileID: 7394420939043458767, guid: 47a5111cabf6c7140adabfde0667613f,
         type: 3}
@@ -1037,7 +1037,7 @@ PrefabInstance:
     - target: {fileID: 7394420939043458767, guid: 47a5111cabf6c7140adabfde0667613f,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 75
+      value: 90.00001
       objectReference: {fileID: 0}
     - target: {fileID: 7394420939043458767, guid: 47a5111cabf6c7140adabfde0667613f,
         type: 3}
