@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
@@ -13,6 +14,8 @@ public class Totem : MonoBehaviour
     public bool startWhite = false;
     public FreezePlayer startingCutscene;
     public Cinemachine.CinemachineVirtualCamera startingCamera;
+    public AudioController flamesAudioController;
+    public AudioController burnAudioController;
 
     [HideInInspector]
     public float burnPercent = 0.0f; // To be controlled in the animation controller
@@ -71,19 +74,27 @@ public class Totem : MonoBehaviour
         {
             particleSystem.Play(false);
         }
-        StartCoroutine(ExecuteAfterTime(3.0f));
+        flamesAudioController.PlayAudioClip(AudioController.AudioClips.fire4);
+        StartCoroutine(ExecuteAfterTime(1.33f, () =>
+        {
+            burnAudioController.PlayAudioClip(AudioController.AudioClips.fire1);
+        }));
+        StartCoroutine(ExecuteAfterTime(3.0f, () =>
+        {
+            whiteOutAnimator.SetBool("WhiteIn", true);
+            whiteOutAnimator.SetBool("WhiteOut", false);
+        }));
     }
 
     /// <summary>
     /// yeah i hate this but its fast to implements
     /// </summary>
     /// <param name="time"></param>
-    IEnumerator ExecuteAfterTime(float time)
+    IEnumerator ExecuteAfterTime(float time, Action onComplete = null)
     {
         yield return new WaitForSeconds(time);
 
-        whiteOutAnimator.SetBool("WhiteIn", true);
-        whiteOutAnimator.SetBool("WhiteOut", false);
+        onComplete?.Invoke();
     }
 
     private void Update()

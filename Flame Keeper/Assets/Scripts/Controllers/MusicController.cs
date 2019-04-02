@@ -24,6 +24,52 @@ public class MusicController : BaseController
         musicSource.Play();
     }
 
+
+    public void FadeOut(float fadeTime)
+    {
+        StartCoroutine(FadeOutCoroutine(fadeTime));
+    }
+    private IEnumerator FadeOutCoroutine(float fadeTime)
+    {
+        float startVolume = musicSource.volume;
+        float totalTime = 0.0f;
+
+        while (musicSource.volume > 0)
+        {
+            totalTime += Time.deltaTime;
+            musicSource.volume = startVolume * (1.0f - totalTime / fadeTime);
+
+            yield return null;
+        }
+
+        musicSource.Stop();
+        musicSource.volume = startVolume;
+        musicSource.gameObject.SetActive(false);
+    }
+
+    public void FadeIn(MusicTracks track, float fadeTime)
+    {
+        StartCoroutine(FadeInCoroutine(track, fadeTime));
+    }
+    private IEnumerator FadeInCoroutine(MusicTracks track, float fadeTime)
+    {
+        float startVolume = musicSource.volume;
+        float totalTime = 0.0f;
+
+        musicSource.gameObject.SetActive(true);
+        musicSource.clip = musicTracks[(int)track];
+        musicSource.volume = 0.0f;
+        musicSource.Play();
+
+        while (musicSource.volume < startVolume)
+        {
+            totalTime += Time.deltaTime;
+            musicSource.volume = startVolume * totalTime / fadeTime;
+
+            yield return null;
+        }
+    }
+
     public void PauseCurrentTrack()
     {
         musicSource.Pause();

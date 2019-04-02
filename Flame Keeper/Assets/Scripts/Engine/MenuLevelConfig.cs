@@ -24,7 +24,7 @@ public class MenuLevelConfig : LevelConfig
         WipeOutStateBehaviour wipeOutStateBehaviour = storyAnimator.GetBehaviour<WipeOutStateBehaviour>();
         wipeOutStateBehaviour.mainMenuConfig = this;
 
-        FlameKeeper.Get().musicController.PlayTrack(MusicController.MusicTracks.MainTheme);
+        FlameKeeper.Get().musicController.FadeIn(MusicController.MusicTracks.MainTheme, 5.0f);
     }
 
     public void Update()
