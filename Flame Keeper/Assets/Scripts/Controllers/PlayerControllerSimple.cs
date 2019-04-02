@@ -633,10 +633,12 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     {
         FlameKeeper.Get().dataminingController.OnPlayerRespawn();
 
+        animator.SetBool(drownAnimBool, false);
+        animator.SetTrigger("StopDrown");
+
         this.transform.position = checkpointPosition;
         this.rb.velocity = Vector3.zero;
 
-        // TODO: Either don't lock movement or have the player blink like a normal respawn mechanic
         lockMovementTime = 1.0f;
     }
 
