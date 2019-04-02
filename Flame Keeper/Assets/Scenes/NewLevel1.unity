@@ -23920,7 +23920,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 461100747}
   m_LocalRotation: {x: 0.50000006, y: 0.49999997, z: -0.49999997, w: 0.50000006}
-  m_LocalPosition: {x: -8.53001, y: 6.5517216, z: 47.968735}
+  m_LocalPosition: {x: -8.72, y: 6.5517216, z: 47.968735}
   m_LocalScale: {x: 15.88759, y: 11.027283, z: 0.85147274}
   m_Children: []
   m_Father: {fileID: 461130893}
@@ -30191,7 +30191,7 @@ PrefabInstance:
     - target: {fileID: 614130703066126706, guid: 8efbae87c1872a04b91dc83ecebfd43a,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 614130703066285394, guid: 8efbae87c1872a04b91dc83ecebfd43a,
         type: 3}
@@ -33614,6 +33614,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  eventsToPlayOnCutsceneEnd: []
 --- !u!114 &1814461989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36182,7 +36183,7 @@ PrefabInstance:
     - target: {fileID: 2707454634638632786, guid: 1540c496c7646774ea679d1a9f3014e3,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2707454634638632785, guid: 1540c496c7646774ea679d1a9f3014e3,
         type: 3}
