@@ -4440,6 +4440,11 @@ PrefabInstance:
       propertyPath: startingCamera
       value: 
       objectReference: {fileID: 1447067582}
+    - target: {fileID: 1037366095284323601, guid: 69a9735127ff18340b163b8d337cca79,
+        type: 3}
+      propertyPath: nextSceneName
+      value: Level1v2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 69a9735127ff18340b163b8d337cca79, type: 3}
 --- !u!114 &818125256 stripped
@@ -7800,6 +7805,8 @@ MonoBehaviour:
   startWhite: 0
   startingCutscene: {fileID: 0}
   startingCamera: {fileID: 0}
+  flamesAudioController: {fileID: 0}
+  burnAudioController: {fileID: 0}
   burnPercent: 0
 --- !u!114 &2133883605
 MonoBehaviour:
@@ -9459,6 +9466,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: UIOverlay
+      objectReference: {fileID: 0}
+    - target: {fileID: 7784422528280254693, guid: e7ff4cd878c0df944ab0a0fa596d0b4d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7784422528139170219, guid: e7ff4cd878c0df944ab0a0fa596d0b4d,
         type: 3}
