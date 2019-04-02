@@ -16,6 +16,8 @@ public class StringConstants
 
         public const string TutorialSceneName = "Tutorial";
         public const string Level1 = "Level1";
+
+        public const string ThankYou = "Thanks";
     }
 
     public class Input

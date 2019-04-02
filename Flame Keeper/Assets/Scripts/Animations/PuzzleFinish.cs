@@ -9,6 +9,7 @@ public abstract class PuzzleFinish : MonoBehaviour
 
     [Header("Events")]
     public List<UnityEvent> eventsToPlay;
+    public List<UnityEvent> eventsToPlayOnCutsceneEnd;
 
     private bool played;
     private PlayerControllerSimple player;
@@ -31,7 +32,7 @@ public abstract class PuzzleFinish : MonoBehaviour
     IEnumerator OnFinish()
     {
         player.DisableInput();
-        foreach (UnityEvent events in eventsToPlay) 
+        foreach (UnityEvent events in eventsToPlay)
         {
             if (events != null)
             {
@@ -39,6 +40,13 @@ public abstract class PuzzleFinish : MonoBehaviour
             }
         }
         yield return new WaitForSeconds(waitTime);
+        foreach (UnityEvent events in eventsToPlayOnCutsceneEnd)
+        {
+            if (events != null)
+            {
+                events.Invoke();
+            }
+        }
         player.GetComponent<PlayerControllerSimple>().EnableInput();
     }
 
