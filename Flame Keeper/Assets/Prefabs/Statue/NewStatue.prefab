@@ -1454,7 +1454,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7074807726167354905}
-  - component: {fileID: 7074807726176600525}
   m_Layer: 11
   m_Name: Priest_Animated
   m_TagString: Untagged
@@ -1490,25 +1489,6 @@ Transform:
   m_Father: {fileID: 6392024084639791611}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &7074807726176600525
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7074807726167257721}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 1c16fe76cbda62441a9eeb08d349f3ae, type: 3}
-  m_Controller: {fileID: 9100000, guid: f78ab11c89e9af14fa8b76f76ee521d1, type: 2}
-  m_CullingMode: 1
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7074807726167257723
 GameObject:
   m_ObjectHideFlags: 0
