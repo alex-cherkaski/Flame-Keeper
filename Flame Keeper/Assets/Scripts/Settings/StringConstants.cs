@@ -45,6 +45,9 @@ public class StringConstants
         public const string Platform = "Platform";
         public const string ActivatableWire = "ActivatableWire";
         public const string FireComponent = "FireComponent";
+        public const string SlidingDoor = "SlidingDoor";
+        public const string StoneBridge = "StoneBridge";
+        public const string TutorialTotem = "TutorialTotem";
     }
 
     public class PrefabPaths

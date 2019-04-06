@@ -26,7 +26,7 @@ public class ChangePositionAO : ActivatableObject
         level = newLevel;
         targetPosition = startingPosition + (incrementPosition * level);
 
-        if (audioController != null && this.CompareTag("StoneBridge"))
+        if (audioController != null && this.CompareTag(StringConstants.Tags.StoneBridge))
         {
             if (level == 1)
             {
@@ -37,9 +37,13 @@ public class ChangePositionAO : ActivatableObject
                 audioController.GetComponent<AudioController>().PlayAudioClip(AudioController.AudioClips.water1);
             }
         }
-        else if (audioController != null && this.CompareTag("SlidingDoor"))
+        else if (audioController != null && this.CompareTag(StringConstants.Tags.SlidingDoor))
         {
             audioController.GetComponent<AudioController>().PlayAudioClip(AudioController.AudioClips.Scrape1);
+        }
+        else if (audioController != null && this.CompareTag(StringConstants.Tags.TutorialTotem))
+        {
+            audioController.GetComponent<AudioController>().PlayAudioClip(AudioController.AudioClips.Scrape2);
         }
     }
 
@@ -50,9 +54,13 @@ public class ChangePositionAO : ActivatableObject
             targetPosition = startingPosition;
         }
 
-        if (audioController != null && this.CompareTag("SlidingDoor"))
+        if (audioController != null && this.CompareTag(StringConstants.Tags.SlidingDoor))
         {
             audioController.GetComponent<AudioController>().PlayAudioClip(AudioController.AudioClips.Scrape1);
+        }
+        else if (audioController != null && this.CompareTag(StringConstants.Tags.TutorialTotem))
+        {
+            audioController.GetComponent<AudioController>().PlayAudioClip(AudioController.AudioClips.Scrape2);
         }
     }
 
