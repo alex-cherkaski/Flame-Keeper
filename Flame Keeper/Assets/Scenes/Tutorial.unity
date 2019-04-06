@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18154176, g: 0.227184, b: 0.3074043, a: 1}
+  m_IndirectSpecularColor: {r: 0.18154222, g: 0.22718474, b: 0.30740482, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6801,7 +6801,7 @@ MonoBehaviour:
   playerStartingPosition: {x: 0, y: 0, z: 0}
   startingLanternUses: 1
   maxLanternUses: 3
-  cutscenesOff: 0
+  cutscenesOff: 1
   scene: 0
 --- !u!4 &1673866664
 Transform:
@@ -7800,6 +7800,8 @@ MonoBehaviour:
   startWhite: 0
   startingCutscene: {fileID: 0}
   startingCamera: {fileID: 0}
+  flamesAudioController: {fileID: 0}
+  burnAudioController: {fileID: 0}
   burnPercent: 0
 --- !u!114 &2133883605
 MonoBehaviour:

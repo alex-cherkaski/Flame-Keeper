@@ -40,7 +40,6 @@ public class ChangePositionAO : ActivatableObject
         else if (audioController != null && this.CompareTag("SlidingDoor"))
         {
             audioController.GetComponent<AudioController>().PlayAudioClip(AudioController.AudioClips.Scrape1);
-            audioController.GetComponent<AudioController>().PlayAudioClip(AudioController.AudioClips.Scrape2);
         }
     }
 
@@ -54,7 +53,6 @@ public class ChangePositionAO : ActivatableObject
         if (audioController != null && this.CompareTag("SlidingDoor"))
         {
             audioController.GetComponent<AudioController>().PlayAudioClip(AudioController.AudioClips.Scrape1);
-            audioController.GetComponent<AudioController>().PlayAudioClip(AudioController.AudioClips.Scrape2);
         }
     }
 
