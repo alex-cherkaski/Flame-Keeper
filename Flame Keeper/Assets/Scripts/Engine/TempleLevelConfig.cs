@@ -17,7 +17,7 @@ public class TempleLevelConfig : LevelConfig
     [Header("Datamining parameters")]
     public DataminingController.DataScenes scene;
 
-    [Header("Cursor Statues")]
+    [Header("Cursor Statues At Play Time")]
     public bool cursorVisible = true;
 
     private List<Pedestal> levelPedestals;
