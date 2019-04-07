@@ -17,6 +17,9 @@ public class TempleLevelConfig : LevelConfig
     [Header("Datamining parameters")]
     public DataminingController.DataScenes scene;
 
+    [Header("Cursor Statues")]
+    public bool cursorVisible = true;
+
     private List<Pedestal> levelPedestals;
     //private Totem levelTotem; or whatever, link this when we have the script
 
@@ -49,6 +52,11 @@ public class TempleLevelConfig : LevelConfig
     public List<Pedestal> GetAllPedestals()
     {
         return levelPedestals;
+    }
+
+    public void Start()
+    {
+        Cursor.visible = cursorVisible;
     }
 }
 
