@@ -7,6 +7,9 @@ using UnityEngine.SceneManagement;
 
 public class FlameKeeper : MonoBehaviour
 {
+    [Header("Cursor Statues At Play Time")]
+    public bool cursorVisible = true;
+
     private FlameKeeper() {} // Ensures private constructor
 
     protected static FlameKeeper _instance;
@@ -22,6 +25,8 @@ public class FlameKeeper : MonoBehaviour
         _instance = this;
         DontDestroyOnLoad(this);
         SetupControllers();
+
+        Cursor.visible = cursorVisible;
     }
 
     /// <summary>
