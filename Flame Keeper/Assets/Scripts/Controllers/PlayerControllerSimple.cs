@@ -11,6 +11,9 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     private float currVelocity;
     public float turnSpeed = 10;
 
+    public float targetVelocity = 0.0f;
+    public float targetAngular = 0.0f;
+
     [Space]
     [Header("Child Controllers")]
     public DynamicLightController playerLightController;
@@ -179,6 +182,12 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
         animator.SetBool(groundedAnimBool, Grounded());
         animator.SetBool(drownAnimBool, playerTouchingWater);
 
+        float curAnimVelocity = animator.GetFloat("Velocity");
+        animator.SetFloat("Velocity", Mathf.Lerp(curAnimVelocity, targetVelocity, Time.deltaTime * 10.0f));
+
+        float curAnimAngular = animator.GetFloat("Angular");
+        animator.SetFloat("Angular", Mathf.Lerp(curAnimAngular, targetAngular, Time.deltaTime * 2.5f));
+
         // Check if player has fallen out of the world
         if (transform.position.y < -25)
         {
@@ -259,6 +268,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     /// </summary>
     void FixedUpdate()
     {
+        targetAngular = 0.0f;
 
         if (lockMovementTime > 0.0f)
         {
@@ -492,6 +502,12 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     private void Rotate()
     {
         targetRotation = Quaternion.Euler(0, angle, 0);
+        Vector3 vecA = transform.rotation * Vector3.forward;
+        Vector3 vecB = targetRotation * Vector3.forward;
+        var angleA = Mathf.Atan2(vecA.x, vecA.z) * Mathf.Rad2Deg;
+        var angleB = Mathf.Atan2(vecB.x, vecB.z) * Mathf.Rad2Deg;
+        float angleBetween = Mathf.DeltaAngle(angleA, angleB);
+        targetAngular = Mathf.Clamp(angleBetween / 30.0f, -1.0f, 1.0f);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
     }
 
@@ -559,6 +575,7 @@ public class PlayerControllerSimple : MonoBehaviour, DynamicLightSource
     public void SetVelocity(float newVelocity)
     {
         currVelocity = newVelocity;
+        targetVelocity = currVelocity / maxVelocity;
     }
 
 
