@@ -20,7 +20,7 @@ public class CameraController : MonoBehaviour
     }
 
     // Late update so we know that player has already calculated their position
-    void LateUpdate()
+    void Update()
     {
         // Keep the Camera holder where the player is.
         this.transform.position = player.transform.position;
