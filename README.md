@@ -1,3 +1,5 @@
 # Flame Keeper
 
-A semester long project across two universities and three faculties involving a multidisciplinary team of students tasked with developing a complete game in the Unity3D engine. In game logic and cinematics were scripted via the Unity3D API. Custom lighting and rendering algorithms that ran on the GPU were introduced on top of the existing rendering pipeline to drive the graphical fidelity of the game. Support for mouse and keyboard controls as well as other external peripherals (Xbox controller) is also included.
+A semester long capstone project ran across two universities and three different faculties with the aim of producing a complete game ready for public and media consumption at the annual LevelUp! Show case in Toronto.
+
+This project was built on top of the Unity3D engine with all in game logic, cinematics, and gameplay being scripted through the Unity API in C#. Additional lighting and rendering shaders were written on top Unity’s own scriptable graphics pipeline to further drive the graphical fidelity of the game.
