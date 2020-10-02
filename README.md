@@ -1,4 +1,3 @@
-# FlameKeeper
-CSC404 / DIGF3006 Project
+# Flame Keeper
 
-An archeologist wanders an ancient cavern with only a magical flame to guide them. the flame acts as both a light source and a key, and its power dwindles upon usage. complete the puzzles by burning obstacles and protecting the flame from harm.
+A semester long project across two universities and three faculties involving a multidisciplinary team of students tasked with developing a complete game in the Unity3D engine. In game logic and cinematics were scripted via the Unity3D API. Custom lighting and rendering algorithms that ran on the GPU were introduced on top of the existing rendering pipeline to drive the graphical fidelity of the game. Support for mouse and keyboard controls as well as other external peripherals (Xbox controller) is also included.
